@@ -34,15 +34,15 @@ Zuno equips hiring teams, founders, and recruiters with an enterprise-grade port
 
 ---
 
-## ⚡ Core Features
+## ⚡ Core Platform Capabilities
 
-### 📊 Partner Dashboard (/partner.html)
+### 📊 Partner Dashboard (partner.html)
 - **6-Metric Real-Time Analytics**: Dynamic metrics calculating live database numbers without static placeholders.
 - **Opportunity Management**: Create and manage job openings with stipend ranges, responsibilities, and skill tags.
 - **Floating Applicant Pipeline**: Interactive modal displaying candidate snapshots in FIFO order.
 - **Candidate Evaluation Modal**: High-fidelity structured resume view with verified project links and recruiter details sharing.
 
-### 💼 Candidate Dashboard (/dashboard.html)
+### 💼 Candidate Portal (dashboard.html)
 - **Profile Customizer**: Modular profile manager with editable fields for education, branch, college, skills, and social handles.
 - **Searchable Goals & Skills**: Interactive multi-select tags picker for career goals and domain specializations.
 - **Opportunity Discovery**: Filter opportunities by category (Software, Video Editing, UI/UX, IT/DevOps) and location.
@@ -58,8 +58,8 @@ Zuno equips hiring teams, founders, and recruiters with an enterprise-grade port
 
 `mermaid
 graph TD
-    A[Frontend: Candidate Portal /dashboard.html] <--> C[Unified API Layer: api.js]
-    B[Frontend: Partner Platform /partner.html] <--> C
+    A[Frontend: Candidate Portal] <--> C[Unified API Layer: api.js]
+    B[Frontend: Partner Platform] <--> C
     C <--> D[(Supabase Cloud Database - PostgreSQL)]
     C <--> E[Local Storage Datastore - Offline Fallback]
     F[Backend: Spring Boot Microservices] <--> D
@@ -69,32 +69,6 @@ graph TD
 - **Database**: Supabase PostgreSQL Cloud Database (profiles, opportunities, pplications).
 - **Backend Services**: Java 17, Spring Boot, Spring MVC REST Controllers, Maven.
 - **Real-Time Sync**: Storage Events, Custom Dispatchers, Supabase Realtime Channels.
-
----
-
-## 🚀 Quickstart & Setup
-
-### Prerequisites
-- Python 3.x (for static server) OR Java 17+ and Maven (for Spring Boot backend).
-
-### Running the Static Platform
-`ash
-# Clone the repository
-git clone https://github.com/shdileep/Zuno.git
-cd Zuno
-
-# Start local server
-python -m http.server 8080
-`
-- **Candidate Dashboard**: http://localhost:8080/dashboard.html
-- **Partner Platform**: http://localhost:8080/partner.html
-- **Landing Page**: http://localhost:8080/index.html
-
-### Running the Spring Boot Backend
-`ash
-# Build and run with Maven
-mvn clean spring-boot:run
-`
 
 ---
 
