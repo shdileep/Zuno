@@ -1,0 +1,798 @@
+/* ==========================================================================
+   ZUNO PARTNER (RECRUITER) PLATFORM STYLESHEET
+   ========================================================================== */
+
+:root {
+  --partner-primary: #0E1114;
+  --partner-accent: #2B59FF;
+  --partner-accent-glow: rgba(43, 89, 255, 0.25);
+  --partner-coral: #FF4D2E;
+  --partner-lime: #D8FF38;
+  --partner-green: #00C875;
+  --partner-red: #E53935;
+  --partner-amber: #FFB400;
+  --partner-purple: #8A2BE2;
+}
+
+/* Partner badge */
+.partner-tag {
+  background: var(--partner-accent);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.partner-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--partner-lime);
+  display: inline-block;
+}
+
+/* Portal Switcher Button */
+.portal-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper-muted);
+  border: 1.5px solid var(--paper-line);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: var(--radius-m);
+  text-decoration: none;
+  transition: all 0.2s var(--ease);
+}
+
+.portal-switcher-btn:hover {
+  background: var(--ink);
+  color: #FFFFFF;
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   BILLION-DOLLAR LUXURY ANALYTICS CARDS (CLEAN, MINIMALIST, UNIFIED)
+   ========================================================================== */
+.partner-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1400px) {
+  .partner-analytics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.partner-analytics-grid .metric-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E8E5DF !important;
+  border-radius: 14px !important;
+  padding: 22px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+  position: relative !important;
+}
+
+.partner-analytics-grid .metric-card:hover {
+  border-color: #111827 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+.partner-analytics-grid .metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.partner-analytics-grid .metric-title {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  color: #71717A !important;
+  line-height: 1.3 !important;
+}
+
+.partner-analytics-grid .metric-value {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #09090B !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+  margin: 0 0 10px 0 !important;
+  font-family: var(--font-display, inherit) !important;
+}
+
+.partner-analytics-grid .metric-subtext {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #A1A1AA !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Post Job Form Styling */
+.post-job-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .post-job-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.job-preview-sticky {
+  position: sticky;
+  top: 90px;
+  background: var(--paper);
+  border: 2px dashed var(--paper-line);
+  border-radius: var(--radius-l);
+  padding: 24px;
+}
+
+.job-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--paper-line);
+}
+
+/* FIFO Applicant Table Styling */
+.applicant-table-wrap {
+  background: var(--paper);
+  border: 1.5px solid var(--paper-line);
+  border-radius: var(--radius-m);
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.fifo-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.fifo-table th {
+  background: var(--paper-soft);
+  color: var(--ink-soft);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 18px;
+  border-bottom: 1.5px solid var(--paper-line);
+  white-space: nowrap;
+}
+
+.fifo-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--paper-line);
+  vertical-align: middle;
+  transition: background 0.15s ease;
+}
+
+.fifo-table tr:last-child td {
+  border-bottom: none;
+}
+
+.fifo-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Shortlisted row in green */
+/* Shortlisted row in green */
+.fifo-table tr.row-shortlisted {
+  background: rgba(0, 200, 117, 0.08) !important;
+}
+
+.fifo-table tr.row-shortlisted td {
+  border-bottom-color: rgba(0, 200, 117, 0.25);
+}
+
+/* Rejected row with full red highlight */
+.fifo-table tr.row-rejected, tr.row-rejected {
+  background: #FFF0F0 !important;
+  border-left: 4px solid var(--partner-red) !important;
+}
+
+.fifo-table tr.row-rejected td, tr.row-rejected td {
+  border-bottom-color: #FFCDD2 !important;
+  color: #C62828 !important;
+}
+
+.fifo-table tr.row-rejected td.candidate-name-cell, .candidate-name-cell.rejected {
+  color: #D32F2F !important;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+/* Red column highlight for rejection */
+.col-rejected {
+  background: rgba(229, 57, 53, 0.12) !important;
+  color: #D32F2F !important;
+  font-weight: 800 !important;
+}
+
+/* Hired row */
+.fifo-table tr.row-hired {
+  background: rgba(216, 255, 56, 0.15) !important;
+}
+
+/* Partner Main Jobs Table */
+.partner-jobs-table-wrap {
+  background: var(--paper);
+  border: 1.5px solid var(--paper-line);
+  border-radius: var(--radius-m);
+  overflow-x: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.partner-jobs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.partner-jobs-table th {
+  background: var(--paper-soft);
+  color: var(--ink-soft);
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 16px 20px;
+  border-bottom: 2px solid var(--paper-line);
+  white-space: nowrap;
+}
+
+.partner-jobs-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--paper-line);
+  vertical-align: middle;
+  transition: background 0.15s ease;
+}
+
+.partner-jobs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.partner-jobs-table tbody tr:hover {
+  background: rgba(43, 89, 255, 0.02);
+}
+
+.partner-jobs-table tr.job-row-closed {
+  background: #FAFAFA;
+  opacity: 0.85;
+}
+
+.partner-jobs-table tr.job-row-closed td {
+  color: var(--ink-soft);
+}
+
+/* Applicant Count Pill / Number Button */
+.applicant-count-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #EEF2FF;
+  color: var(--partner-accent);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 7px 15px;
+  border-radius: 20px;
+  border: 1.5px solid #C7D7FE;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.applicant-count-pill:hover {
+  background: var(--partner-accent);
+  color: #FFFFFF;
+  border-color: var(--partner-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--partner-accent-glow);
+}
+
+.applicant-count-pill.has-applicants {
+  background: #0E1114;
+  color: #D8FF38;
+  border-color: #0E1114;
+}
+
+.applicant-count-pill.has-applicants:hover {
+  background: var(--partner-accent);
+  color: #FFFFFF;
+  border-color: var(--partner-accent);
+}
+
+/* Action Buttons for Job Table */
+.btn-close-job {
+  background: #FFF5F5;
+  color: #D32F2F;
+  border: 1.5px solid #FFCDD2;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.btn-close-job:hover {
+  background: #D32F2F;
+  color: #FFFFFF;
+  border-color: #D32F2F;
+}
+
+.btn-reopen-job {
+  background: #F0FDF4;
+  color: #15803D;
+  border: 1.5px solid #BBF7D0;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.btn-reopen-job:hover {
+  background: #15803D;
+  color: #FFFFFF;
+  border-color: #15803D;
+}
+
+/* Action Icon Buttons */
+.action-eye-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--paper-soft);
+  border: 1.5px solid var(--paper-line);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s var(--ease);
+}
+
+.action-eye-btn:hover {
+  background: var(--partner-accent);
+  color: #FFFFFF;
+  border-color: var(--partner-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--partner-accent-glow);
+}
+
+/* Status Badges */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 14px;
+  text-transform: capitalize;
+}
+
+.status-pill.applied {
+  background: rgba(43, 89, 255, 0.1);
+  color: var(--partner-accent);
+}
+
+.status-pill.open, .status-pill.active {
+  background: rgba(0, 200, 117, 0.12);
+  color: #00874F;
+  border: 1px solid rgba(0, 200, 117, 0.3);
+}
+
+.status-pill.closed {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+
+.status-pill.under_review {
+  background: rgba(255, 180, 0, 0.15);
+  color: #B27B00;
+}
+
+.status-pill.shortlisted {
+  background: rgba(0, 200, 117, 0.15);
+  color: #00874F;
+  border: 1px solid rgba(0, 200, 117, 0.3);
+}
+
+.status-pill.hired, .status-pill.selected {
+  background: #D8FF38;
+  color: #0E1114;
+  border: 1px solid #C4EC2A;
+}
+
+.status-pill.rejected, .status-pill.rejected_screening, .status-pill.rejected_shortlist {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1.5px solid #FCA5A5;
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   APPLICANTS FLOATING MODAL & RESUME MODAL STACKING
+   ========================================================================== */
+#job-applicants-floating-modal {
+  z-index: 1000 !important;
+}
+
+#candidate-resume-modal {
+  z-index: 1050 !important;
+}
+
+.floating-pipeline-modal-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-l);
+  max-width: 860px;
+  width: 95%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid var(--paper-line);
+  position: relative;
+  animation: modalPop 0.25s var(--ease) forwards;
+  padding: 28px;
+}
+
+.floating-pipeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid var(--paper-line);
+}
+
+/* ==========================================================================
+   STRUCTURED PDF / RESUME MODAL (EYE ICON CLICK)
+   ========================================================================== */
+.resume-modal-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-l);
+  max-width: 720px;
+  width: 95%;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+  border: 1.5px solid var(--paper-line);
+  position: relative;
+  animation: modalPop 0.25s var(--ease) forwards;
+}
+
+/* PDF Paper Document Style Top Header - Name at Middle */
+.pdf-resume-header-center {
+  background: #FFFFFF;
+  border-bottom: 2px solid #0E1114;
+  padding: 32px 36px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.pdf-center-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.pdf-center-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid var(--partner-accent);
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-center-name {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0E1114;
+  margin-bottom: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pdf-center-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--partner-accent);
+  margin-bottom: 6px;
+}
+
+.pdf-center-meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+/* PDF Contact Information Bar */
+.pdf-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 18px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--paper-line);
+  font-size: 12.5px;
+}
+
+.pdf-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #0E1114;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.pdf-contact-link:hover {
+  color: var(--partner-accent);
+  text-decoration: underline;
+}
+
+.pdf-contact-link.linkedin {
+  color: #0A66C2;
+}
+
+.pdf-contact-link.github {
+  color: #24292E;
+}
+
+.pdf-contact-link.portfolio {
+  color: var(--partner-coral);
+}
+
+/* PDF Resume Sections */
+.pdf-resume-body {
+  padding: 26px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #FCFCFA;
+}
+
+.pdf-section {
+  background: #FFFFFF;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-s);
+  padding: 16px 20px;
+}
+
+.pdf-section-heading {
+  font-size: 12.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0E1114;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1.5px solid var(--paper-muted);
+  padding-bottom: 6px;
+}
+
+.pdf-bio-text {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #1A202C;
+}
+
+.pdf-edu-card {
+  background: var(--paper-soft);
+  border-radius: var(--radius-s);
+  padding: 14px 16px;
+  border-left: 3.5px solid var(--partner-accent);
+}
+
+.pdf-edu-degree {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0E1114;
+}
+
+.pdf-edu-college {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.pdf-edu-timeline {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+.pdf-tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pdf-tag {
+  background: #EEF2F6;
+  color: #0E1114;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #D2D6DC;
+}
+
+/* Share Recruiter Details Box inside Resume Footer */
+.recruiter-share-box {
+  background: #F0F5FF;
+  border: 1.5px dashed #B8D0FF;
+  border-radius: var(--radius-s);
+  padding: 14px 18px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.recruiter-share-box label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--partner-accent);
+  cursor: pointer;
+}
+
+.recruiter-share-box input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--partner-accent);
+  cursor: pointer;
+}
+
+/* Resume Footer Actions */
+.resume-modal-footer {
+  background: #FFFFFF;
+  border-top: 1.5px solid var(--paper-line);
+  padding: 20px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-bottom-left-radius: var(--radius-l);
+  border-bottom-right-radius: var(--radius-l);
+}
+
+.resume-modal-footer-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Green Shortlist Button */
+.btn-shortlist-green, .btn-shortlist {
+  background: #00C875 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 800 !important;
+  font-size: 13.5px !important;
+  padding: 10px 24px !important;
+  border-radius: var(--radius-m) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-shadow: 0 4px 14px rgba(0, 200, 117, 0.3) !important;
+  transition: all 0.2s var(--ease) !important;
+}
+
+.btn-shortlist-green:hover, .btn-shortlist:hover {
+  background: #00A862 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Red Reject Text Button */
+.btn-reject-red, .btn-reject {
+  background: #FFF5F5 !important;
+  color: #DC2626 !important;
+  border: 1.5px solid #FCA5A5 !important;
+  font-weight: 800 !important;
+  font-size: 13.5px !important;
+  padding: 10px 20px !important;
+  border-radius: var(--radius-m) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.2s var(--ease) !important;
+}
+
+.btn-reject-red:hover, .btn-reject:hover {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border-color: #DC2626 !important;
+}
+
+.btn-hire {
+  background: var(--partner-lime);
+  color: var(--ink);
+  border: 1.5px solid #C5EA26;
+  font-weight: 900;
+  padding: 8px 18px;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.btn-hire:hover {
+  background: #C5EA26;
+  transform: scale(1.03);
+}
+
+/* Empty pipeline placeholder */
+.pipeline-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--ink-soft);
+}
+
+.pipeline-empty-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}

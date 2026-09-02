@@ -1,0 +1,3869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZUNO — Find your path. Build your income.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800;1,900&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-soft:#F8F8F5;
+    --paper-muted:#F1EFEA;
+    --paper-line:#E5E2D8;
+    --ink:#0E1114;
+    --ink-dark:#06080A;
+    --ink-soft:#525860;
+    --ink-faint:#8E959E;
+    --coral:#FF4D2E;
+    --coral-glow:rgba(255, 77, 46, 0.4);
+    --lime:#D8FF38;
+    --lime-glow:rgba(216, 255, 56, 0.5);
+    --orange:#FF8A00;
+    --blue:#2B59FF;
+    --gold:#FFB400;
+    --green:#00C875;
+    --radius-s:12px;
+    --radius-m:20px;
+    --radius-l:32px;
+    --radius-xl:40px;
+    --maxw:1260px;
+    --ease:cubic-bezier(.16,.84,.44,1);
+    --bounce:cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  *, *::before, *::after{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    scrollbar-width:none !important; /* Firefox */
+    -ms-overflow-style:none !important; /* IE & Edge */
+  }
+  *::-webkit-scrollbar,
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  div::-webkit-scrollbar,
+  section::-webkit-scrollbar{
+    display:none !important; /* Chrome, Safari, Chromium Edge */
+    width:0 !important;
+    height:0 !important;
+    background:transparent !important;
+    -webkit-appearance:none !important;
+  }
+  html{
+    scroll-behavior:smooth;
+    scrollbar-width:none !important;
+    -ms-overflow-style:none !important;
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    scrollbar-width:none !important;
+    -ms-overflow-style:none !important;
+  }
+  ::selection{background:var(--lime); color:var(--ink);}
+
+  /* Grain texture */
+  .grain{
+    position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.024; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Spotlight Follower */
+  .spotlight{
+    position:fixed; top:0; left:0; width:650px; height:650px; border-radius:50%;
+    background:radial-gradient(circle, rgba(216,255,56,.18), rgba(255,77,46,.12) 35%, rgba(43,89,255,.06) 65%, transparent 78%);
+    transform:translate(-50%,-50%); pointer-events:none; z-index:1; filter:blur(24px);
+    transition:opacity .3s; will-change:transform;
+  }
+
+  /* Scroll Progress */
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3.5px; width:100%; z-index:10001;
+    background:linear-gradient(90deg, var(--lime), var(--coral), var(--blue));
+    transform-origin:left; transform:scaleX(0); will-change:transform;
+  }
+
+  /* Typography */
+  h1,h2,h3,h4,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.03em;
+    line-height:1.06;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+
+  /* ---------- CRISP, SHARP, ATHLETIC ZUNO LOGO ---------- */
+  .zuno-brand{
+    display:inline-flex;
+    align-items:center;
+    text-decoration:none;
+    cursor:pointer;
+    user-select:none;
+    transition:transform .28s var(--bounce);
+  }
+  .zuno-brand:hover{
+    transform:scale(1.04) translateY(-1px);
+  }
+  .zuno-logo-wrap{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:stretch;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:900;
+    font-style:italic;
+    transform:skewX(-9deg);
+    transform-origin:center bottom;
+  }
+  .zuno-text-row{
+    display:inline-flex;
+    align-items:baseline;
+    line-height:0.95;
+    font-size:28px;
+    letter-spacing:-0.04em;
+  }
+  .zuno-text-black{
+    color:#0E1114;
+    font-weight:900;
+  }
+  .zuno-text-coral{
+    color:#FF4D2E;
+    font-weight:900;
+    margin-left:0.5px;
+  }
+  .zuno-slash-accent{
+    display:inline-block;
+    width:12px;
+    height:22px;
+    margin-left:5px;
+    background:linear-gradient(135deg, #FFC700 0%, #FF8A00 45%, #FF4D2E 100%);
+    border-radius:2px;
+    box-shadow:0 2px 8px rgba(255,77,46,0.22);
+    position:relative;
+    top:0px;
+  }
+  .zuno-underline-bar{
+    width:100%;
+    height:3.5px;
+    background:#0E1114;
+    border-radius:2px;
+    margin-top:4px;
+  }
+
+  /* Nav container */
+  header.nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(229,226,216,0.6);
+    transition:all .35s;
+  }
+  header.nav.scrolled{
+    background:rgba(255,255,255,.98);
+    border-bottom-color:var(--paper-line);
+    box-shadow:0 12px 36px -16px rgba(14,17,20,.08);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-center{
+    display:flex; align-items:center; gap:32px;
+  }
+  .nav-link{
+    font-size:14.5px; font-weight:600; color:var(--ink-soft);
+    position:relative; padding:6px 0; transition:color .2s;
+  }
+  .nav-link:after{
+    content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+    background:var(--ink); transition:width .25s var(--ease);
+  }
+  .nav-link:hover{color:var(--ink);}
+  .nav-link:hover:after{width:100%;}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+
+  /* ---------- Action Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    gap:10px; padding:14px 28px; border-radius:999px;
+    font-weight:700; font-size:15px; cursor:pointer;
+    border:1.5px solid transparent; position:relative; overflow:hidden;
+    transition:all .3s var(--ease); white-space:nowrap;
+  }
+  .btn:focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
+  .btn-primary{
+    background:var(--ink); color:#fff;
+    box-shadow:0 8px 20px -6px rgba(14,17,20,.3);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 16px 32px -8px rgba(14,17,20,.45);
+    background:#000;
+  }
+  .btn-coral{
+    background:linear-gradient(135deg, #FF5B3B 0%, #FF3311 100%);
+    color:#fff;
+    box-shadow:0 10px 26px -8px rgba(255,77,46,.55);
+  }
+  .btn-coral:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 18px 36px -8px rgba(255,77,46,.7);
+    filter:brightness(1.06);
+  }
+  .btn-lime{
+    background:var(--lime); color:var(--ink);
+    box-shadow:0 10px 24px -8px rgba(216,255,56,.6);
+  }
+  .btn-lime:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 16px 32px -8px rgba(216,255,56,.8);
+    background:#E2FF4D;
+  }
+  .btn-outline{
+    background:rgba(255,255,255,0.9);
+    border-color:var(--paper-line);
+    color:var(--ink);
+    backdrop-filter:blur(8px);
+  }
+  .btn-outline:hover{
+    border-color:var(--ink);
+    background:#fff;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px -6px rgba(14,17,20,.12);
+  }
+  .btn .shine{
+    position:absolute; top:0; left:-100%; width:60%; height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,.5), transparent);
+    transform:skewX(-20deg); transition:left .75s var(--ease);
+    pointer-events:none;
+  }
+  .btn:hover .shine{ left:140%; }
+
+  /* ---------- HERO SECTION ---------- */
+  .hero{
+    padding:110px 0 90px; position:relative; overflow:hidden;
+  }
+  .hero-bg-mesh{
+    position:absolute; inset:0; pointer-events:none; z-index:0;
+  }
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(75px); will-change:transform;
+  }
+  .blob1{
+    width:520px; height:520px; top:-180px; right:-60px;
+    background:radial-gradient(circle, rgba(216,255,56,.35) 0%, rgba(255,77,46,.25) 50%, transparent 70%);
+  }
+  .blob2{
+    width:420px; height:420px; top:160px; right:340px;
+    background:radial-gradient(circle, rgba(43,89,255,.22) 0%, rgba(216,255,56,.15) 60%, transparent 70%);
+  }
+  .blob3{
+    width:380px; height:380px; bottom:-120px; left:-80px;
+    background:radial-gradient(circle, rgba(255,180,0,.26) 0%, rgba(255,77,46,.15) 60%, transparent 70%);
+  }
+  .hero-inner{
+    position:relative; z-index:1; max-width:980px;
+  }
+  .hero h1{
+    font-size:clamp(46px, 7vw, 86px);
+    font-weight:800;
+    line-height:1.02;
+    letter-spacing:-0.035em;
+  }
+  .hero h1 .highlight{
+    background:linear-gradient(135deg, #FF4D2E 0%, #FF8A00 50%, #D8FF38 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    display:inline-block;
+  }
+  .hero-sub{
+    margin-top:28px; font-size:21px; line-height:1.55;
+    color:var(--ink-soft); max-width:640px; font-weight:500;
+  }
+  .hero-ctas{
+    margin-top:40px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+
+  /* ---------- CLEAN, UNIQUE WHITE JIGSAW PUZZLE SECTION (ONE PERFECT VIEWPORT PAGE) ---------- */
+  .clean-puzzle-section{
+    min-height:100vh;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:clamp(20px, 3.5vh, 44px) clamp(16px, 3vw, 32px);
+    background:radial-gradient(ellipse at 50% 20%, #FFFFFF 0%, #F5F4EE 100%);
+    color:var(--ink);
+    position:relative;
+    overflow:hidden;
+    border-top:1px solid var(--paper-line);
+    border-bottom:1px solid var(--paper-line);
+    box-sizing:border-box;
+  }
+  .clean-puzzle-section > .wrap{
+    width:100%;
+    max-width:min(1100px, 94vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .puzzle-header{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto clamp(12px, 2vh, 26px);
+    position:relative;
+    z-index:2;
+  }
+  .puzzle-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#FFF0EB;
+    color:var(--coral);
+    padding:4px 14px;
+    border-radius:999px;
+    font-size:clamp(11px, 1.2vw, 12.5px);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:clamp(6px, 1.2vh, 12px);
+    border:1px solid rgba(255,77,46,0.2);
+  }
+  .puzzle-header h2{
+    font-size:clamp(26px, 3.8vw, 48px);
+    font-weight:900;
+    line-height:1.06;
+    color:var(--ink);
+    letter-spacing:-0.03em;
+  }
+  .puzzle-header p{
+    font-size:clamp(13.5px, 1.5vw, 16.5px);
+    color:var(--ink-soft);
+    margin-top:clamp(6px, 1vh, 10px);
+    line-height:1.5;
+    font-weight:500;
+    max-width:620px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* Frameless, elevated rectangular puzzle canvas (Tightly wraps puzzle with zero extra margins) */
+  .puzzle-box-wrapper{
+    width:100%;
+    margin:0 auto;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  /* Pure Floating Puzzle Canvas (Zero background card, zero extra borders) */
+  .puzzle-canvas-frame{
+    position:relative;
+    width:min(880px, calc(48vh * 1.8333), 88vw);
+    aspect-ratio:880/480;
+    height:auto;
+    background:transparent;
+    border:none;
+    box-shadow:none;
+    overflow:visible;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .puzzle-canvas-frame:hover{
+    box-shadow:none;
+    transform:none;
+  }
+  .puzzle-svg{
+    width:100%;
+    height:100%;
+    display:block;
+    overflow:visible;
+  }
+
+  /* Clean Interlocking Jigsaw Piece */
+  .jigsaw-piece{
+    cursor:pointer;
+    will-change:transform, opacity;
+  }
+  .jigsaw-piece path{
+    stroke:rgba(255,255,255,0.85);
+    stroke-width:1.5;
+    filter:drop-shadow(0 4px 12px rgba(14,17,20,0.18));
+    transition:stroke 0.3s, stroke-width 0.3s, filter 0.3s;
+  }
+  .jigsaw-piece.snapped path{
+    stroke:rgba(255,255,255,0.9);
+    stroke-width:1.2;
+    filter:drop-shadow(0 2px 8px rgba(14,17,20,0.12));
+  }
+  .jigsaw-piece:hover path{
+    stroke:#FF4D2E !important;
+    stroke-width:2.5 !important;
+    filter:drop-shadow(0 6px 20px rgba(255,77,46,0.5)) !important;
+  }
+
+  /* Pure Caption Beneath */
+  .puzzle-bottom-caption{
+    margin-top:clamp(12px, 2vh, 22px);
+    text-align:center;
+    position:relative;
+    z-index:2;
+  }
+  .puzzle-bottom-caption .powerful-title{
+    font-size:clamp(17px, 2.2vw, 25px);
+    font-weight:900;
+    color:var(--ink);
+    font-family:'Space Grotesk';
+    letter-spacing:-0.03em;
+  }
+  .puzzle-bottom-caption .powerful-sub{
+    font-size:clamp(12px, 1.3vw, 14.5px);
+    color:var(--ink-soft);
+    margin-top:clamp(3px, 0.6vh, 6px);
+    font-weight:600;
+    max-width:580px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* ---------- MODERN BENTO GRID FOR "WHY ZUNO" ---------- */
+  .why{
+    padding:120px 0; background:#FFFFFF; position:relative; overflow:hidden;
+  }
+  .why .section-head{
+    max-width:720px; margin-bottom:64px;
+  }
+  .why .section-head h2{
+    font-size:clamp(36px, 5vw, 60px); font-weight:800;
+  }
+  .why .section-head p{
+    font-size:18px; color:var(--ink-soft); margin-top:16px; line-height:1.6;
+  }
+
+  .bento-grid{
+    display:grid;
+    grid-template-columns:repeat(12, 1fr);
+    grid-gap:24px;
+  }
+  .bento-card{
+    background:var(--paper-soft);
+    border:1px solid var(--paper-line);
+    border-radius:var(--radius-l);
+    padding:36px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s;
+  }
+  .bento-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 30px 60px -20px rgba(14,17,20,0.12);
+    border-color:rgba(14,17,20,0.3);
+  }
+
+  .bento-card.card-trust{ grid-column:span 7; background:linear-gradient(135deg, #FFF6F3 0%, #FFFFFF 100%); }
+  .bento-card.card-discover{ grid-column:span 5; background:linear-gradient(135deg, #F0F4FF 0%, #FFFFFF 100%); }
+  .bento-card.card-build{ grid-column:span 4; }
+  .bento-card.card-earn{ grid-column:span 4; background:linear-gradient(135deg, #F5FFF8 0%, #FFFFFF 100%); }
+  .bento-card.card-grow{ grid-column:span 4; background:var(--ink-dark); color:#FFFFFF; }
+
+  .bento-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em;
+    margin-bottom:14px;
+  }
+  .bento-card.card-trust .bento-tag{ color:var(--coral); }
+  .bento-card.card-discover .bento-tag{ color:var(--blue); }
+  .bento-card.card-build .bento-tag{ color:var(--gold); }
+  .bento-card.card-earn .bento-tag{ color:var(--green); }
+  .bento-card.card-grow .bento-tag{ color:var(--lime); }
+
+  .bento-title{
+    font-size:26px; font-weight:800; line-height:1.2; margin-bottom:12px;
+  }
+  .bento-desc{
+    font-size:15px; color:var(--ink-soft); line-height:1.55; margin-bottom:24px;
+  }
+  .bento-card.card-grow .bento-desc{ color:rgba(255,255,255,0.7); }
+
+  /* Bento UI Components */
+  .trust-mock{
+    background:#FFFFFF; border:1px solid var(--paper-line); border-radius:var(--radius-m);
+    padding:20px; display:flex; flex-direction:column; gap:12px;
+    box-shadow:0 12px 28px -10px rgba(255,77,46,0.12);
+  }
+  .trust-row{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .trust-user{
+    display:flex; align-items:center; gap:12px;
+  }
+  .trust-avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--coral);
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .trust-badge-pill{
+    background:#E6F8EF; color:#00A862; padding:6px 12px; border-radius:999px;
+    font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:6px;
+  }
+
+  .match-mock{
+    background:#fff; border:1px solid var(--paper-line); border-radius:var(--radius-m);
+    padding:18px; display:flex; flex-direction:column; gap:12px;
+  }
+  .match-tags{
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .mtag{
+    font-size:12px; font-weight:700; padding:6px 12px; border-radius:999px;
+    background:#EEF3FF; color:var(--blue);
+  }
+
+  .build-mock{
+    background:#fff; border:1px solid var(--paper-line); border-radius:var(--radius-m);
+    padding:18px; display:flex; flex-direction:column; gap:10px;
+  }
+  .build-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px; background:var(--paper-soft); border-radius:10px; font-size:13px; font-weight:700;
+  }
+
+  .earn-mock{
+    background:#fff; border:1px solid var(--paper-line); border-radius:var(--radius-m);
+    padding:18px; display:flex; flex-direction:column; gap:8px;
+  }
+  .earn-type-row{
+    display:flex; justify-content:space-between; align-items:center; font-size:13.5px; font-weight:700;
+    padding:8px 0; border-bottom:1px solid var(--paper-line);
+  }
+  .earn-type-row:last-child{ border-bottom:none; }
+
+  .grow-mock{
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+    border-radius:var(--radius-m); padding:20px; display:flex; flex-direction:column; gap:12px;
+  }
+  .grow-step{
+    display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:700;
+  }
+
+  /* ---------- STORIES: PINNED CARD STACK ---------- */
+  .stories{padding:60px 0 0; position:relative;}
+  .stories-head{padding:0 32px 40px; max-width:var(--maxw); margin:0 auto;}
+  .stories-head h2{font-size:clamp(34px,4.8vw,56px); font-weight:800; max-width:680px;}
+  .stack-pin{height:380vh; position:relative;}
+  .stack-sticky{position:sticky; top:0; height:100vh; overflow:hidden;}
+  .stack-frame{
+    position:absolute; top:50%; left:50%; width:min(800px,90vw); height:min(480px,64vh);
+    transform:translate(-50%,-50%); transform-style:preserve-3d; perspective:1400px;
+  }
+  .stack-card{
+    position:absolute; inset:0; border-radius:var(--radius-xl); padding:clamp(34px,4vw,56px);
+    box-shadow:0 40px 90px -28px rgba(14,17,20,.35), 0 10px 30px -10px rgba(14,17,20,.15);
+    display:flex; flex-direction:column; justify-content:space-between; overflow:hidden;
+    transform-style:preserve-3d; backface-visibility:hidden; border:1.5px solid rgba(255,255,255,0.6);
+  }
+  .stack-card .story-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .stack-card .story-avatar{
+    width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:22px; color:#fff; flex:0 0 auto; box-shadow:0 8px 20px -6px rgba(0,0,0,0.3);
+  }
+  .stack-card .story-amt{
+    font-family:'Space Grotesk'; font-weight:900; font-size:20px;
+    background:#fff; padding:10px 20px; border-radius:999px; box-shadow:0 6px 16px -6px rgba(0,0,0,0.12);
+  }
+  .stack-card .story-name{font-size:28px; font-weight:800; margin-top:20px; font-family:'Space Grotesk';}
+  .stack-card .story-role{font-size:15.5px; color:var(--ink-soft); margin-top:4px; font-weight:600;}
+  .stack-card .story-quote{font-size:22px; line-height:1.45; margin-top:24px; font-weight:600;}
+  .stack-card .story-tag{font-size:13.5px; color:var(--ink-faint); margin-top:28px; font-weight:700;}
+  .stack-progress{
+    position:absolute; right:40px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:12px; z-index:20;
+  }
+  .stack-progress .dot{width:8px; height:8px; border-radius:50%; background:var(--paper-line); transition:all .3s;}
+  .stack-progress .dot.active{background:var(--coral); transform:scale(1.5); box-shadow:0 0 10px var(--coral);}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{padding:120px 0; background:var(--paper-soft); border-top:1px solid var(--paper-line);}
+  .step-grid{
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:20px; margin-top:54px;
+  }
+  .step-col{
+    background:#fff; border:1px solid var(--paper-line); border-radius:var(--radius-l);
+    padding:32px 24px; display:flex; flex-direction:column; gap:16px;
+    transition:all .35s var(--ease);
+  }
+  .step-col:hover{
+    transform:translateY(-8px); border-color:var(--coral);
+    box-shadow:0 20px 40px -15px rgba(255,77,46,0.2);
+  }
+  .step-badge{
+    width:42px; height:42px; border-radius:12px; background:var(--ink);
+    color:var(--lime); display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk'; font-weight:900; font-size:16px;
+  }
+  .step-col h3{font-size:22px; font-weight:800;}
+  .step-col p{font-size:14.5px; color:var(--ink-soft); line-height:1.55;}
+
+  /* ---------- CHALLENGE ---------- */
+  .challenge{padding:120px 0;}
+  .challenge-card{
+    background:radial-gradient(ellipse at 80% 20%, #1F252E 0%, #0E1114 100%);
+    color:#fff; border-radius:var(--radius-xl); padding:64px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,0.6);
+  }
+  .challenge h2{font-size:clamp(34px,4.5vw,52px); font-weight:800; color:#fff;}
+  .challenge-copy{font-size:16.5px; color:rgba(255,255,255,.7); margin-top:16px; line-height:1.55;}
+  .challenge-stats{display:flex; gap:36px; margin-top:36px; flex-wrap:wrap;}
+  .stat b{font-size:32px; font-family:'Space Grotesk'; display:block; font-weight:900; color:var(--lime);}
+  .stat span{font-size:13px; color:rgba(255,255,255,.6); font-weight:600;}
+  .leaderboard{display:flex; flex-direction:column; gap:14px; justify-content:center;}
+  .lb-row{
+    display:flex; align-items:center; justify-content:space-between; padding:18px 24px;
+    background:rgba(255,255,255,.05); border-radius:16px; border:1px solid rgba(255,255,255,.1);
+    transition:all .3s;
+  }
+  .lb-row:hover{background:rgba(255,255,255,.1); transform:translateX(6px);}
+  .lb-left{display:flex; align-items:center; gap:16px;}
+  .lb-rank{font-family:'Space Grotesk'; font-weight:900; font-size:18px; color:var(--gold); width:28px;}
+  .lb-name{font-weight:700; font-size:16px;}
+  .lb-amt{font-family:'Space Grotesk'; font-weight:800; font-size:17px; color:var(--lime);}
+
+  /* ---------- AMBASSADOR ---------- */
+  .ambassador{padding:0 0 120px;}
+  .amb-card{
+    border-radius:var(--radius-xl);
+    background:linear-gradient(135deg, #FFF5ED 0%, #FFFFFF 100%);
+    border:1.5px solid var(--paper-line); padding:64px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:52px; align-items:center;
+    box-shadow:0 30px 60px -25px rgba(255,77,46,0.15);
+  }
+  .amb-card h2{font-size:clamp(32px,4.2vw,48px); font-weight:800;}
+  .amb-benefits{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:16px 24px;}
+  .amb-benefits li{font-size:15.5px; font-weight:700; display:flex; gap:12px; align-items:center;}
+  .amb-benefits li:before{content:''; width:9px; height:9px; border-radius:3px; background:var(--coral); transform:rotate(45deg); flex:0 0 auto;}
+
+  /* ---------- TWO PATHS ---------- */
+  .two-paths{padding:0 0 120px;}
+  .paths-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .path-card{
+    border-radius:var(--radius-xl); padding:52px; min-height:340px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:all .35s var(--ease);
+    cursor:pointer;
+  }
+  .path-card.partner{background:var(--paper-soft); border:1.5px solid var(--paper-line);}
+  .path-card.work{background:var(--ink); color:#fff; border:1.5px solid rgba(255,255,255,0.1);}
+  .path-card:hover{transform:translateY(-8px); box-shadow:0 30px 60px -20px rgba(14,17,20,0.25);}
+  .path-card .for-tag{font-size:13px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; text-transform:uppercase;}
+  .path-card.work .for-tag{color:var(--lime);}
+  .path-card h3{font-size:32px; font-weight:800; margin-top:14px;}
+  .path-card p{margin-top:14px; font-size:16px; color:var(--ink-soft); max-width:380px; line-height:1.5;}
+  .path-card.work p{color:rgba(255,255,255,.7);}
+  .path-card .for-list{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
+  .for-chip{
+    font-size:13px; font-weight:700; padding:8px 18px; border-radius:999px;
+    background:#fff; border:1px solid var(--paper-line); color:var(--ink);
+    cursor:pointer; transition:all 0.22s var(--bounce); font-family:inherit;
+    border:1.5px solid var(--paper-line);
+  }
+  .for-chip:hover{
+    transform:translateY(-2px) scale(1.05);
+    border-color:var(--ink);
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  }
+  .path-card.work .for-chip{
+    background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.18); color:#fff;
+  }
+  .path-card.work .for-chip:hover{
+    background:#D8FF38; color:#0E1114; border-color:#D8FF38;
+    box-shadow:0 0 16px rgba(216,255,56,0.4);
+  }
+  .path-card .btn{margin-top:32px; align-self:flex-start;}
+
+  /* ---------- COMMUNITY ---------- */
+  .community{padding:0 0 120px; text-align:center;}
+  .community h2{font-size:clamp(34px,4.8vw,56px); font-weight:800; max-width:680px; margin:0 auto;}
+  .community .idea-copy{margin:20px auto 0; max-width:520px; text-align:center; font-size:17px; color:var(--ink-soft);}
+  .community-tags{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:44px;}
+  .ctag{
+    padding:16px 30px; border-radius:999px; border:1.5px solid var(--paper-line);
+    background:#fff; font-weight:800; font-size:15.5px;
+    display:flex; align-items:center; gap:10px;
+    box-shadow:0 8px 20px -8px rgba(14,17,20,0.08);
+    transition:all .3s var(--bounce);
+  }
+  .ctag:hover{transform:translateY(-4px) scale(1.05); border-color:var(--ink);}
+  .ctag .dot{width:8px; height:8px; border-radius:50%;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final{padding:80px 0 140px; text-align:center; position:relative;}
+  .final h2{font-size:clamp(42px,6.5vw,78px); font-weight:900;}
+  .final .idea-copy{margin:22px auto 0; max-width:500px; text-align:center; font-size:18px; color:var(--ink-soft);}
+  .final .hero-ctas{justify-content:center; margin-top:38px;}
+
+  /* ---------- FAQ ---------- */
+  .faq{padding:0 0 140px;}
+  .faq-item{border-top:1px solid var(--paper-line); padding:28px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--paper-line);}
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+    font-size:19px; font-weight:700; font-family:'Space Grotesk';
+  }
+  .faq-plus{font-size:24px; color:var(--ink-faint); transition:transform .35s var(--ease); font-weight:400;}
+  .faq-item.open .faq-plus{transform:rotate(45deg); color:var(--coral);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .4s var(--ease), opacity .3s;
+    font-size:15.5px; color:var(--ink-soft); line-height:1.6; opacity:0;
+  }
+  .faq-item.open .faq-a{max-height:200px; opacity:1; margin-top:16px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#fff; border-top:1px solid var(--paper-line); padding:80px 0 36px;}
+  .foot-top{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px;}
+  .foot-col h4{font-size:13px; color:var(--ink-faint); font-weight:800; margin-bottom:18px; text-transform:uppercase; letter-spacing:0.06em;}
+  .foot-col a{display:block; font-size:14.5px; color:var(--ink-soft); margin-bottom:12px; transition:color .2s; font-weight:600;}
+  .foot-col a:hover{color:var(--ink);}
+  .foot-divider{height:1px; background:var(--paper-line); margin:56px 0 28px;}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-legal{display:flex; gap:24px; font-size:13.5px; color:var(--ink-faint); font-weight:600;}
+  .foot-copy{font-size:13.5px; color:var(--ink-faint); font-weight:600;}
+
+  /* Comprehensive Responsive System for All Device Form Factors */
+  @media (max-width:1024px){
+    .bento-card.card-trust{ grid-column:span 12; }
+    .bento-card.card-discover{ grid-column:span 12; }
+    .bento-card.card-build{ grid-column:span 6; }
+    .bento-card.card-earn{ grid-column:span 6; }
+    .bento-card.card-grow{ grid-column:span 12; }
+    .step-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:768px){
+    .wrap{padding:0 20px;}
+    .nav-center{display:none;}
+    .nav-inner{padding:12px 20px;}
+    .hero{padding:70px 0 50px;}
+    .challenge-card{grid-template-columns:1fr; padding:28px 20px;}
+    .amb-card{grid-template-columns:1fr; padding:28px 20px;}
+    .amb-benefits{grid-template-columns:1fr;}
+    .paths-grid{grid-template-columns:1fr; gap:24px;}
+    .foot-top{grid-template-columns:1fr 1fr; gap:32px;}
+    .bento-card.card-build, .bento-card.card-earn{ grid-column:span 12; }
+    .step-grid{ grid-template-columns:1fr; }
+    .why{padding:80px 0;}
+    .community{padding:0 0 80px;}
+    .final{padding:60px 0 90px;}
+    .faq{padding:0 0 90px;}
+  }
+  @media (max-width:480px){
+    .wrap{padding:0 16px;}
+    .hero-sub{font-size:16px;}
+    .hero-ctas{flex-direction:column; width:100%;}
+    .hero-ctas .btn{width:100%;}
+    .foot-top{grid-template-columns:1fr; gap:28px;}
+    .foot-bottom{flex-direction:column; align-items:flex-start; gap:12px;}
+    .ctag{padding:12px 20px; font-size:13.5px;}
+    .puzzle-canvas-frame{border-radius:14px;}
+  }
+
+  /* ---------- FULL-SCREEN JOIN PORTAL VIEW ---------- */
+  .join-portal{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#F9F8F3;
+    background-image:radial-gradient(circle at 20% 15%, rgba(216, 255, 56, 0.15) 0%, transparent 45%),
+                     radial-gradient(circle at 80% 85%, rgba(255, 77, 46, 0.12) 0%, transparent 45%),
+                     radial-gradient(circle at 50% 50%, #FAF9F5 0%, #F3F2EB 100%);
+    overflow-y:auto;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(16px) scale(0.985);
+    transition:opacity 0.38s cubic-bezier(.16,.84,.44,1), transform 0.38s cubic-bezier(.16,.84,.44,1);
+    display:flex;
+    flex-direction:column;
+  }
+  .join-portal.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
+  }
+  .portal-top-bar{
+    max-width:1240px;
+    width:100%;
+    margin:0 auto;
+    padding:24px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .portal-back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:#FFFFFF;
+    border:1.5px solid var(--paper-line);
+    padding:11px 22px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,0.06);
+    transition:all 0.25s var(--bounce);
+    text-decoration:none;
+  }
+  .portal-back-btn:hover{
+    transform:translateX(-4px);
+    border-color:var(--ink);
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  }
+  .portal-back-btn svg{
+    width:18px;
+    height:18px;
+    stroke-width:2.5;
+    transition:transform 0.25s ease;
+  }
+  .portal-back-btn:hover svg{
+    transform:translateX(-3px);
+  }
+  .portal-content{
+    flex:1;
+    max-width:1200px;
+    width:100%;
+    margin:0 auto;
+    padding:20px 32px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .portal-header{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 42px;
+  }
+  .portal-header h1{
+    font-size:clamp(34px, 4.5vw, 54px);
+    font-weight:900;
+    letter-spacing:-0.035em;
+    color:var(--ink);
+    line-height:1.08;
+  }
+  .portal-header p{
+    font-size:18px;
+    color:var(--ink-soft);
+    margin-top:12px;
+    font-weight:500;
+    line-height:1.5;
+  }
+  .portal-cards-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:stretch;
+  }
+
+  /* Left Light Card */
+  .pcard-light{
+    background:#F6F5F0;
+    border:1.5px solid #E6E3D8;
+    border-radius:36px;
+    padding:48px 44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow:0 24px 60px -24px rgba(0,0,0,0.08);
+    transition:transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .pcard-light:hover{
+    transform:translateY(-6px);
+    box-shadow:0 34px 80px -20px rgba(0,0,0,0.14);
+  }
+
+  /* Right Dark Card */
+  .pcard-dark{
+    background:#0E1114;
+    border:1.5px solid rgba(255,255,255,0.1);
+    border-radius:36px;
+    padding:48px 44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    color:#FFFFFF;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.45);
+    transition:transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .pcard-dark:hover{
+    transform:translateY(-6px);
+    box-shadow:0 40px 100px -20px rgba(0,0,0,0.65);
+  }
+
+  .pcard-eyebrow{
+    font-size:12.5px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:18px;
+  }
+  .pcard-light .pcard-eyebrow{
+    color:#6C7480;
+  }
+  .pcard-dark .pcard-eyebrow{
+    color:#D8FF38;
+  }
+
+  .pcard-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(32px, 3.6vw, 44px);
+    font-weight:900;
+    line-height:1.06;
+    letter-spacing:-0.035em;
+    margin-bottom:16px;
+  }
+  .pcard-light .pcard-title{
+    color:#0E1114;
+  }
+  .pcard-dark .pcard-title{
+    color:#FFFFFF;
+  }
+
+  .pcard-desc{
+    font-size:17px;
+    line-height:1.55;
+    font-weight:500;
+    margin-bottom:32px;
+  }
+  .pcard-light .pcard-desc{
+    color:#525860;
+  }
+  .pcard-dark .pcard-desc{
+    color:#9DA6B2;
+  }
+
+  .pcard-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:36px;
+  }
+  .pcard-light .ptag{
+    background:#FFFFFF;
+    color:#0E1114;
+    border:1px solid #DFDCD0;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:700;
+    box-shadow:0 2px 6px rgba(0,0,0,0.03);
+  }
+  .pcard-dark .ptag{
+    background:#1E232B;
+    color:#E6EDF3;
+    border:1px solid rgba(255,255,255,0.08);
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:700;
+  }
+
+  .pcard-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px 36px;
+    border-radius:999px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    text-decoration:none;
+    transition:all 0.3s var(--ease);
+    width:fit-content;
+    border:1.5px solid transparent;
+  }
+  .pcard-btn-light{
+    background:#FFFFFF;
+    color:#0E1114;
+    border-color:#DFDCD0;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  }
+  .pcard-btn-light:hover{
+    background:#0E1114;
+    color:#FFFFFF;
+    border-color:#0E1114;
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(0,0,0,0.18);
+  }
+  .pcard-btn-dark{
+    background:#D8FF38;
+    color:#0E1114;
+    border-color:#D8FF38;
+    box-shadow:0 0 28px rgba(216, 255, 56, 0.45);
+  }
+  .pcard-btn-dark:hover{
+    background:#E5FF5E;
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 0 40px rgba(216, 255, 56, 0.7);
+  }
+
+  @media (max-width:880px){
+    .portal-cards-grid{
+      grid-template-columns:1fr;
+    }
+    .pcard-light, .pcard-dark{
+      padding:36px 28px;
+    }
+    .portal-content{
+      padding:16px 20px 48px;
+    }
+  }
+
+  /* ---------- DOMAIN-SPECIFIC AUTH VIEWS ---------- */
+  .auth-view{
+    position:fixed;
+    inset:0;
+    z-index:100000;
+    overflow-y:auto;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(16px) scale(0.985);
+    transition:opacity 0.38s cubic-bezier(.16,.84,.44,1), transform 0.38s cubic-bezier(.16,.84,.44,1);
+    display:flex;
+    flex-direction:column;
+  }
+  .auth-view.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
+  }
+
+  /* Partner Auth Light Theme */
+  .auth-partner{
+    background:#F8F7F2;
+    background-image:radial-gradient(circle at 10% 20%, rgba(43,89,255,0.06) 0%, transparent 45%),
+                     radial-gradient(circle at 90% 80%, rgba(255,77,46,0.08) 0%, transparent 45%);
+    color:var(--ink);
+  }
+
+  /* Work / Talent Auth Dark Theme */
+  .auth-work{
+    background:#0B0E12;
+    background-image:radial-gradient(circle at 15% 15%, rgba(216,255,56,0.12) 0%, transparent 50%),
+                     radial-gradient(circle at 85% 85%, rgba(43,89,255,0.09) 0%, transparent 50%);
+    color:#FFFFFF;
+  }
+
+  .auth-top-bar{
+    max-width:1240px;
+    width:100%;
+    margin:0 auto;
+    padding:24px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .auth-back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 22px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.25s var(--bounce);
+    text-decoration:none;
+  }
+  .auth-partner .auth-back-btn{
+    background:#FFFFFF;
+    border:1.5px solid var(--paper-line);
+    color:var(--ink);
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  }
+  .auth-partner .auth-back-btn:hover{
+    transform:translateX(-4px);
+    border-color:var(--ink);
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  }
+  .auth-work .auth-back-btn{
+    background:#161B22;
+    border:1.5px solid rgba(255,255,255,0.15);
+    color:#FFFFFF;
+    box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  }
+  .auth-work .auth-back-btn:hover{
+    transform:translateX(-4px);
+    border-color:#D8FF38;
+    color:#D8FF38;
+    box-shadow:0 6px 24px rgba(216,255,56,0.25);
+  }
+  .auth-back-btn svg{
+    width:18px;
+    height:18px;
+    stroke-width:2.5;
+    transition:transform 0.25s ease;
+  }
+  .auth-back-btn:hover svg{
+    transform:translateX(-3px);
+  }
+
+  .auth-container{
+    flex:1;
+    max-width:1160px;
+    width:100%;
+    margin:0 auto;
+    padding:16px 32px 64px;
+    display:flex;
+    align-items:center;
+  }
+  .auth-grid{
+    display:grid;
+    grid-template-columns:1.05fr 1fr;
+    gap:48px;
+    width:100%;
+    align-items:center;
+  }
+
+  /* Left Rich Info Column */
+  .auth-info{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .auth-badge-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    width:fit-content;
+  }
+  .auth-partner .auth-badge-tag{
+    background:#EEF3FF;
+    color:var(--blue);
+    border:1px solid rgba(43,89,255,0.2);
+  }
+  .auth-work .auth-badge-tag{
+    background:rgba(216,255,56,0.12);
+    color:#D8FF38;
+    border:1px solid rgba(216,255,56,0.3);
+  }
+  .auth-info h2{
+    font-size:clamp(32px, 3.8vw, 48px);
+    font-weight:900;
+    line-height:1.08;
+    letter-spacing:-0.035em;
+  }
+  .auth-info-sub{
+    font-size:17.5px;
+    line-height:1.6;
+    font-weight:500;
+  }
+  .auth-partner .auth-info-sub{ color:var(--ink-soft); }
+  .auth-work .auth-info-sub{ color:#A2ACB8; }
+
+  .auth-perks-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top:12px;
+  }
+  .auth-perk-item{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    font-size:15.5px;
+    font-weight:600;
+    line-height:1.45;
+  }
+  .auth-perk-icon{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:900;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .auth-partner .auth-perk-icon{
+    background:#E6F8EF;
+    color:#00A862;
+  }
+  .auth-work .auth-perk-icon{
+    background:rgba(216,255,56,0.2);
+    color:#D8FF38;
+  }
+
+  /* Right Auth Card Box */
+  .auth-card-box{
+    border-radius:32px;
+    padding:40px 36px;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.15);
+  }
+  .auth-partner .auth-card-box{
+    background:#FFFFFF;
+    border:1.5px solid #E6E3D8;
+  }
+  .auth-work .auth-card-box{
+    background:#12171E;
+    border:1.5px solid rgba(255,255,255,0.12);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+  }
+
+  /* Tabs */
+  .auth-tab-switch{
+    display:flex;
+    background:var(--paper-soft);
+    border-radius:999px;
+    padding:5px;
+    margin-bottom:26px;
+    border:1px solid var(--paper-line);
+  }
+  .auth-work .auth-tab-switch{
+    background:#1B2028;
+    border-color:rgba(255,255,255,0.08);
+  }
+  .auth-tab-btn{
+    flex:1;
+    text-align:center;
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:700;
+    cursor:pointer;
+    border:none;
+    background:transparent;
+    transition:all 0.25s var(--ease);
+    color:var(--ink-soft);
+  }
+  .auth-work .auth-tab-btn{ color:#9DA6B2; }
+  .auth-tab-btn.active{
+    background:#FFFFFF;
+    color:var(--ink);
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  }
+  .auth-work .auth-tab-btn.active{
+    background:#D8FF38;
+    color:#0E1114;
+    box-shadow:0 0 16px rgba(216,255,56,0.35);
+  }
+
+  /* Google Button */
+  .btn-google{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:14px 24px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.25s var(--ease);
+    border:1.5px solid;
+  }
+  .auth-partner .btn-google{
+    background:#FFFFFF;
+    border-color:#E0DCD0;
+    color:#0E1114;
+    box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  }
+  .auth-partner .btn-google:hover{
+    background:#F9F8F5;
+    border-color:var(--ink);
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  }
+  .auth-work .btn-google{
+    background:#1E242D;
+    border-color:rgba(255,255,255,0.12);
+    color:#FFFFFF;
+  }
+  .auth-work .btn-google:hover{
+    background:#252D38;
+    border-color:rgba(255,255,255,0.3);
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  }
+  .btn-google svg{ width:20px; height:20px; flex-shrink:0; }
+
+  /* Auth Divider */
+  .auth-divider{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:20px 0;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .auth-partner .auth-divider{ color:var(--ink-faint); }
+  .auth-partner .auth-divider:before, .auth-partner .auth-divider:after{
+    content:''; flex:1; height:1px; background:#E5E2D8;
+  }
+  .auth-work .auth-divider{ color:#6E7784; }
+  .auth-work .auth-divider:before, .auth-work .auth-divider:after{
+    content:''; flex:1; height:1px; background:rgba(255,255,255,0.1);
+  }
+
+  /* Form Fields */
+  .auth-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+  }
+  .auth-field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .auth-label{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .auth-partner .auth-label{ color:var(--ink); }
+  .auth-work .auth-label{ color:#DFE5EC; }
+
+  .auth-input, .auth-select{
+    width:100%;
+    padding:13px 16px;
+    border-radius:12px;
+    font-size:14.5px;
+    font-family:inherit;
+    font-weight:600;
+    transition:all 0.25s ease;
+    border:1.5px solid;
+    outline:none;
+  }
+  .auth-partner .auth-input, .auth-partner .auth-select{
+    background:#FAF9F5;
+    border-color:#E0DDD2;
+    color:var(--ink);
+  }
+  .auth-partner .auth-input:focus, .auth-partner .auth-select:focus{
+    background:#FFFFFF;
+    border-color:var(--ink);
+    box-shadow:0 0 0 3px rgba(14,17,20,0.08);
+  }
+  .auth-work .auth-input, .auth-work .auth-select{
+    background:#1A2028;
+    border-color:rgba(255,255,255,0.12);
+    color:#FFFFFF;
+  }
+  .auth-work .auth-input:focus, .auth-work .auth-select:focus{
+    border-color:#D8FF38;
+    box-shadow:0 0 0 3px rgba(216,255,56,0.15);
+  }
+
+  .auth-submit-btn{
+    width:100%;
+    padding:15px 24px;
+    border-radius:999px;
+    font-size:15.5px;
+    font-weight:800;
+    cursor:pointer;
+    border:none;
+    margin-top:6px;
+    transition:all 0.3s var(--ease);
+  }
+  .auth-partner .auth-submit-btn{
+    background:var(--ink);
+    color:#FFFFFF;
+    box-shadow:0 8px 20px -6px rgba(14,17,20,0.3);
+  }
+  .auth-partner .auth-submit-btn:hover{
+    background:#000000;
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px -6px rgba(14,17,20,0.45);
+  }
+  .auth-work .auth-submit-btn{
+    background:#D8FF38;
+    color:#0E1114;
+    box-shadow:0 0 24px rgba(216,255,56,0.4);
+  }
+  .auth-work .auth-submit-btn:hover{
+    background:#E5FF5E;
+    transform:translateY(-2px) scale(1.015);
+    box-shadow:0 0 36px rgba(216,255,56,0.65);
+  }
+
+  .auth-footnote{
+    font-size:12px;
+    line-height:1.5;
+    text-align:center;
+    margin-top:12px;
+  }
+  .auth-partner .auth-footnote{ color:var(--ink-faint); }
+  .auth-work .auth-footnote{ color:#798390; }
+  .auth-footnote a{ text-decoration:underline; color:inherit; }
+
+  .auth-alert-box{
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:13.5px;
+    font-weight:700;
+    margin-bottom:14px;
+    display:none;
+    align-items:center;
+    gap:10px;
+  }
+  .auth-alert-box.success{
+    display:flex;
+    background:#E6F8EF;
+    color:#008A4F;
+    border:1px solid #B8E8D0;
+  }
+  .auth-work .auth-alert-box.success{
+    background:rgba(216,255,56,0.15);
+    color:#D8FF38;
+    border:1px solid rgba(216,255,56,0.3);
+  }
+
+  @media (max-width:920px){
+    .auth-grid{ grid-template-columns:1fr; gap:32px; }
+    .auth-card-box{ padding:28px 20px; }
+    .auth-container{ padding:12px 20px 48px; }
+  }
+
+  /* ---------- FLOATING LEGAL MODAL ---------- */
+  .legal-floating-overlay{
+    position:fixed;
+    inset:0;
+    z-index:200000;
+    background:rgba(10, 13, 16, 0.68);
+    backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.28s ease;
+  }
+  .legal-floating-overlay.active{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .legal-floating-card{
+    background:#FFFFFF;
+    color:var(--ink);
+    border-radius:28px;
+    max-width:680px;
+    width:100%;
+    max-height:86vh;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 30px 90px -20px rgba(0,0,0,0.35);
+    border:1.5px solid var(--paper-line);
+    transform:translateY(18px) scale(0.96);
+    transition:transform 0.3s cubic-bezier(0.16, 0.84, 0.44, 1);
+    overflow:hidden;
+  }
+  .legal-floating-overlay.active .legal-floating-card{
+    transform:translateY(0) scale(1);
+  }
+  .legal-card-header{
+    padding:24px 28px;
+    border-bottom:1px solid var(--paper-line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#FAF9F5;
+  }
+  .legal-title-wrap{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .legal-badge{
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:4px 10px;
+    border-radius:999px;
+    background:#EEF3FF;
+    color:var(--blue);
+  }
+  .legal-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:22px;
+    font-weight:800;
+    color:var(--ink);
+    margin:0;
+  }
+  .legal-close-btn{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:1.5px solid var(--paper-line);
+    background:#FFFFFF;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    cursor:pointer;
+    transition:all 0.2s var(--bounce);
+  }
+  .legal-close-btn:hover{
+    background:var(--ink);
+    color:#FFFFFF;
+    transform:scale(1.08) rotate(90deg);
+  }
+  .legal-card-body{
+    padding:28px;
+    overflow-y:auto;
+    line-height:1.65;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .legal-card-body h4{
+    font-size:16.5px;
+    color:var(--ink);
+    font-weight:800;
+    margin:20px 0 8px;
+  }
+  .legal-card-body h4:first-child{ margin-top:0; }
+  .legal-card-body p{ margin-bottom:12px; }
+  .legal-card-body ul{ margin-left:20px; margin-bottom:14px; }
+  .legal-card-body li{ margin-bottom:6px; }
+  .legal-card-footer{
+    padding:18px 28px;
+    border-top:1px solid var(--paper-line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#FAF9F5;
+  }
+  .legal-updated{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    font-weight:600;
+  }
+  .legal-accept-btn{
+    padding:10px 24px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:800;
+    background:var(--ink);
+    color:#FFFFFF;
+    border:none;
+    cursor:pointer;
+    transition:all 0.2s var(--ease);
+  }
+  .legal-accept-btn:hover{
+    background:#000000;
+    transform:translateY(-1px);
+  }
+
+  /* ---------- DEDICATED COMMUNITY & COMPANY FULL PAGES ---------- */
+  .hub-page{
+    position:fixed;
+    inset:0;
+    z-index:99990;
+    background:#FAF9F5;
+    background-image:radial-gradient(circle at 10% 10%, rgba(255, 77, 46, 0.08) 0%, transparent 45%),
+                     radial-gradient(circle at 90% 90%, rgba(216, 255, 56, 0.12) 0%, transparent 45%);
+    overflow-y:auto;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(16px) scale(0.985);
+    transition:opacity 0.35s cubic-bezier(.16,.84,.44,1), transform 0.35s cubic-bezier(.16,.84,.44,1);
+    display:flex;
+    flex-direction:column;
+  }
+  .hub-page.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
+  }
+  .hub-top-bar{
+    max-width:1240px;
+    width:100%;
+    margin:0 auto;
+    padding:24px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .hub-back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 22px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:700;
+    background:#FFFFFF;
+    border:1.5px solid var(--paper-line);
+    color:var(--ink);
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);
+    cursor:pointer;
+    transition:all 0.25s var(--bounce);
+    text-decoration:none;
+  }
+  .hub-back-btn:hover{
+    transform:translateX(-4px);
+    border-color:var(--ink);
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  }
+  .hub-back-btn svg{
+    width:18px;
+    height:18px;
+    stroke-width:2.5;
+    transition:transform 0.25s ease;
+  }
+  .hub-back-btn:hover svg{
+    transform:translateX(-3px);
+  }
+
+  .hub-content{
+    flex:1;
+    max-width:1160px;
+    width:100%;
+    margin:0 auto;
+    padding:20px 32px 80px;
+  }
+  .hub-hero{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto 56px;
+  }
+  .hub-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:16px;
+  }
+  .hub-hero h1{
+    font-size:clamp(36px, 5vw, 58px);
+    font-weight:900;
+    line-height:1.06;
+    letter-spacing:-0.035em;
+    color:var(--ink);
+  }
+  .hub-hero p{
+    font-size:18.5px;
+    color:var(--ink-soft);
+    margin-top:16px;
+    line-height:1.6;
+    font-weight:500;
+  }
+
+  .hub-grid-3{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+    margin-bottom:48px;
+  }
+  .hub-card{
+    background:#FFFFFF;
+    border:1.5px solid var(--paper-line);
+    border-radius:28px;
+    padding:36px 32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow:0 16px 40px -16px rgba(0,0,0,0.06);
+    transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .hub-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 60px -16px rgba(0,0,0,0.12);
+  }
+  .hub-card-icon{
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:20px;
+  }
+  .hub-card h3{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+    margin-bottom:12px;
+  }
+  .hub-card p{
+    font-size:15px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .hub-card-btn{
+    align-self:flex-start;
+    padding:11px 24px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    border:1.5px solid var(--paper-line);
+    background:#FFFFFF;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all 0.2s var(--ease);
+    text-decoration:none;
+  }
+  .hub-card-btn:hover{
+    background:var(--ink);
+    color:#FFFFFF;
+    border-color:var(--ink);
+  }
+
+  /* Stories section inside community hub */
+  .story-testimonial-card{
+    background:linear-gradient(135deg, #FFF9F2 0%, #FFFFFF 100%);
+    border:1.5px solid #EFE4D6;
+    border-radius:32px;
+    padding:44px;
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:28px;
+    align-items:center;
+    margin-top:20px;
+    box-shadow:0 20px 50px -20px rgba(255,77,46,0.12);
+  }
+  .story-avatar{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:var(--coral);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:900;
+    box-shadow:0 8px 24px rgba(255,77,46,0.3);
+  }
+
+  /* Contact Form inside Company Hub */
+  .contact-box{
+    background:#FFFFFF;
+    border:1.5px solid var(--paper-line);
+    border-radius:32px;
+    padding:48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.08);
+  }
+  .contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  @media (max-width:880px){
+    .hub-grid-3{ grid-template-columns:1fr; }
+    .story-testimonial-card{ grid-template-columns:1fr; text-align:center; }
+    .story-avatar{ margin:0 auto; }
+    .contact-box{ grid-template-columns:1fr; padding:32px 24px; }
+  }
+
+  /* Cover Banner for About ZUNO & Community Hubs */
+  .hub-cover-banner{
+    position:relative;
+    width:100%;
+    border-radius:28px;
+    overflow:hidden;
+    margin:0 0 44px;
+    border:1.5px solid var(--paper-line);
+    box-shadow:0 20px 60px -15px rgba(0,0,0,0.12);
+    background:#0E1114;
+  }
+  .hub-cover-img{
+    width:100%;
+    height:340px;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    filter:contrast(1.04) saturate(1.08);
+    transition:transform 0.5s var(--ease);
+  }
+  .hub-cover-banner:hover .hub-cover-img{
+    transform:scale(1.02);
+  }
+  .hub-cover-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(14,17,20,0.92) 0%, rgba(14,17,20,0.45) 55%, rgba(14,17,20,0.15) 100%);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:32px 36px;
+    color:#FFFFFF;
+  }
+  .hub-cover-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--lime);
+    color:var(--ink);
+    font-size:11.5px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:6px 14px;
+    border-radius:999px;
+    width:fit-content;
+    margin-bottom:10px;
+  }
+  .hub-cover-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(22px, 3.2vw, 32px);
+    font-weight:900;
+    line-height:1.15;
+    margin-bottom:8px;
+    color:#FFFFFF;
+    letter-spacing:-0.02em;
+  }
+  .hub-cover-desc{
+    font-size:15px;
+    color:rgba(255,255,255,0.88);
+    max-width:720px;
+    line-height:1.5;
+    font-weight:500;
+  }
+
+  @media (max-width:768px){
+    .hub-cover-img{ height:260px; }
+    .hub-cover-overlay{ padding:20px; }
+    .hub-cover-desc{ font-size:13.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="spotlight" id="spotlight"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- HEADER / NAV WITH CRISP, SHARP VECTOR ZUNO LOGO -->
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#" class="zuno-brand" aria-label="ZUNO">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar"></div>
+      </div>
+    </a>
+    
+    <div class="nav-center">
+      <a class="nav-link" href="#puzzle">Skill Universe</a>
+      <a class="nav-link" href="#why">Why ZUNO</a>
+      <a class="nav-link" href="#how">How It Works</a>
+      <a class="nav-link" href="#challenge">2026 Challenge</a>
+      <a class="nav-link" href="#community">Community</a>
+    </div>
+
+    <div class="nav-right" style="display:flex; align-items:center; gap:10px;">
+      <a class="btn btn-outline" href="dashboard.html" style="padding:9px 16px; font-size:13.5px; font-weight:700;">👤 Candidate Portal</a>
+      <a class="btn btn-primary" href="partner.html" style="padding:9px 18px; font-size:13.5px; font-weight:700; background: #0E1114;">💼 Partner Platform ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-bg-mesh">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <h1 id="heroTitle">
+      Find your passion. <br><span class="highlight">Turn it into income.</span>
+    </h1>
+    <p class="hero-sub">
+      For students, professionals, and creators alike—ZUNO helps you explore what you truly enjoy, master in-demand skills, and turn your passions into real money.
+    </p>
+    <div class="hero-ctas">
+      <a href="#join" class="btn btn-coral">Start Earning Free</a>
+      <a href="#puzzle" class="btn btn-outline">Explore Opportunities</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLEAN, WHITE & UNIQUE JIGSAW PUZZLE SECTION (ACCORDING TO zuno.png) -->
+<section class="clean-puzzle-section" id="puzzle">
+  <div class="wrap">
+    <div class="puzzle-header">
+      <div class="puzzle-tag">OPPORTUNITY SPECTRUM</div>
+      <h2>Every skill has market value.</h2>
+      <p>Explore real-world earning tracks across software engineering, video production, UI/UX design, writing, culinary crafts, and consulting.</p>
+    </div>
+
+    <div class="puzzle-box-wrapper">
+      <!-- Frameless, elevated rectangular puzzle canvas -->
+      <div class="puzzle-canvas-frame" id="puzzleCanvasFrame">
+        <svg class="puzzle-svg" id="puzzleSvg" viewBox="0 0 880 480">
+          <defs>
+            <!-- Real zuno.png Image Pattern -->
+            <pattern id="zunoImgPattern" patternUnits="userSpaceOnUse" width="880" height="480">
+              <image href="zuno.png" x="0" y="0" width="880" height="480" preserveAspectRatio="none" />
+            </pattern>
+          </defs>
+
+          <!-- Layer of all Interlocking Jigsaw Pieces (No background base) -->
+          <g id="jigsawPiecesGroup"></g>
+        </svg>
+      </div>
+
+      <!-- Powerful Caption Beneath (Zero Clunky Boxes Blocking The Puzzle) -->
+      <div class="puzzle-bottom-caption">
+        <div class="powerful-title">Find your track. Set your rate. Get paid.</div>
+        <p class="powerful-sub">Pick projects that fit your college schedule, ship real work, and build your monthly cashflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ZUNO (AUTHENTIC BENTO GRID) -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span style="font-size:13px; font-weight:800; color:var(--coral); text-transform:uppercase; letter-spacing:0.08em;">Why Choose ZUNO</span>
+      <h2>Engineered for trust. Designed for real growth.</h2>
+      <p>A modern platform built for students and creators to discover verified client gigs, ship quality work, and get paid with zero friction.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- 1. Trust Card -->
+      <div class="bento-card card-trust">
+        <div>
+          <span class="bento-tag">🛡️ Verification Protocol</span>
+          <h3 class="bento-title">Know exactly who you're working with.</h3>
+          <p class="bento-desc">Zero spam, zero fake gigs. Every partner and client undergoes review so opportunities are verified before you commit time.</p>
+        </div>
+        <div class="trust-mock">
+          <div class="trust-row">
+            <div class="trust-user">
+              <div class="trust-avatar">✓</div>
+              <div>
+                <div style="font-weight:800; font-size:15px;">Verified Partner Opportunity</div>
+                <div style="font-size:12.5px; color:var(--ink-soft);">Escrow Funded • Clear Milestone Terms</div>
+              </div>
+            </div>
+            <div class="trust-badge-pill">
+              Escrow Protected
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Discover Card -->
+      <div class="bento-card card-discover">
+        <div>
+          <span class="bento-tag">⚡ Smart Matching</span>
+          <h3 class="bento-title">Matched to your bandwidth.</h3>
+          <p class="bento-desc">Tell us your hours, your favorite tools, and your goals. Get served curated opportunities that fit your schedule.</p>
+        </div>
+        <div class="match-mock">
+          <div class="match-tags">
+            <span class="mtag">Figma</span>
+            <span class="mtag">Video Editing</span>
+            <span class="mtag">Web Dev</span>
+            <span class="mtag">Copywriting</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; color:var(--ink-soft); margin-top:4px;">
+            <span>Filtered by Skill &amp; Availability</span>
+            <span style="color:var(--blue);">Direct Fit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Build Card -->
+      <div class="bento-card card-build">
+        <div>
+          <span class="bento-tag">🚀 Proof of Work</span>
+          <h3 class="bento-title">Build real proof of work.</h3>
+          <p class="bento-desc">Convert completed projects into authentic credentials and client reviews that speak for themselves.</p>
+        </div>
+        <div class="build-mock">
+          <div class="build-item">
+            <span>Client Project Delivery</span>
+            <span style="color:var(--green);">Verified Complete</span>
+          </div>
+          <div class="build-item">
+            <span>Portfolio Asset Showcase</span>
+            <span style="color:var(--coral);">Live Public Link</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Earn Card -->
+      <div class="bento-card card-earn">
+        <div>
+          <span class="bento-tag">💰 Multiple Income Streams</span>
+          <h3 class="bento-title">Turn ability into income.</h3>
+          <p class="bento-desc">Pick the format that works for your lifestyle and schedule.</p>
+        </div>
+        <div class="earn-mock">
+          <div class="earn-type-row">
+            <span>Freelance Deliverables</span>
+            <span style="color:var(--coral);">Per Project</span>
+          </div>
+          <div class="earn-type-row">
+            <span>Monthly Retainers</span>
+            <span style="color:var(--blue);">Recurring</span>
+          </div>
+          <div class="earn-type-row">
+            <span>Sprint Bounties</span>
+            <span style="color:var(--green);">Prizes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Grow Card -->
+      <div class="bento-card card-grow">
+        <div>
+          <span class="bento-tag">📈 Long-Term Growth</span>
+          <h3 class="bento-title" style="color:#fff;">First earning is just the beginning.</h3>
+          <p class="bento-desc">Improve your skills, build your reputation, and unlock better opportunities as your experience compounds.</p>
+        </div>
+        <div class="grow-mock">
+          <div class="grow-step">
+            <span style="color:var(--lime);">01.</span> First Paid Project Completed
+          </div>
+          <div class="grow-step">
+            <span style="color:var(--lime);">02.</span> Verified Client Testimonials
+          </div>
+          <div class="grow-step">
+            <span style="color:var(--lime);">03.</span> Direct Ongoing Retainers
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES: PINNED 3D CARD STACK -->
+<section class="stories">
+  <div class="stories-head">
+    <h2>People are already making their move.</h2>
+  </div>
+  <div class="stack-pin" id="stackPin">
+    <div class="stack-sticky">
+      <div class="stack-frame" data-idx="0">
+        <div class="stack-card" style="background:#FFF1EC;">
+          <div class="story-top">
+            <div class="story-avatar" style="background:#FF4D2E;">A</div>
+            <div class="story-amt">₹18,500 earned</div>
+          </div>
+          <div>
+            <div class="story-name">Aarav</div>
+            <div class="story-role">Video Editor</div>
+            <p class="story-quote">"I started with editing short reels for small creators and found consistent clients through my skills."</p>
+            <div class="story-tag">Video Editing pathway</div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-frame" data-idx="1">
+        <div class="stack-card" style="background:#EFF2FF;">
+          <div class="story-top">
+            <div class="story-avatar" style="background:#2B59FF;">M</div>
+            <div class="story-amt">₹12,800 earned</div>
+          </div>
+          <div>
+            <div class="story-name">Meera</div>
+            <div class="story-role">Content Writer</div>
+            <p class="story-quote">"I didn't know where to start. ZUNO helped me find a path that actually matched what I could do."</p>
+            <div class="story-tag">Content Writing pathway</div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-frame" data-idx="2">
+        <div class="stack-card" style="background:#FFF8E8;">
+          <div class="story-top">
+            <div class="story-avatar" style="background:#E19B00;">R</div>
+            <div class="story-amt">₹24,200 earned</div>
+          </div>
+          <div>
+            <div class="story-name">Rohan</div>
+            <div class="story-role">Digital Marketer</div>
+            <p class="story-quote">"Turned skills I was already learning on my own into paid freelance work with clear expectations."</p>
+            <div class="story-tag">Digital Marketing pathway</div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-frame" data-idx="3">
+        <div class="stack-card" style="background:#EBFBF3;">
+          <div class="story-top">
+            <div class="story-avatar" style="background:#00C875;">A</div>
+            <div class="story-amt">₹9,600 earned</div>
+          </div>
+          <div>
+            <div class="story-name">Ananya</div>
+            <div class="story-role">Graphic Designer</div>
+            <p class="story-quote">"Found clients who were looking for exactly what I already knew how to do without complex applications."</p>
+            <div class="story-tag">Graphic Design pathway</div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-progress" id="stackProgress">
+        <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span style="font-size:13px; font-weight:800; color:var(--coral); text-transform:uppercase; letter-spacing:0.08em;">Process</span>
+      <h2>How ZUNO Works</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step-col">
+        <div class="step-badge">01</div>
+        <h3>Discover</h3>
+        <p>Tell us what you know, what you want to learn, and what you're interested in.</p>
+      </div>
+      <div class="step-col">
+        <div class="step-badge">02</div>
+        <h3>Explore</h3>
+        <p>Discover opportunities and pathways that match your profile.</p>
+      </div>
+      <div class="step-col">
+        <div class="step-badge">03</div>
+        <h3>Choose</h3>
+        <p>Find the opportunity that makes sense for your personal goals.</p>
+      </div>
+      <div class="step-col">
+        <div class="step-badge">04</div>
+        <h3>Build</h3>
+        <p>Work, learn, and gain verified real-world experience.</p>
+      </div>
+      <div class="step-col">
+        <div class="step-badge">05</div>
+        <h3>Earn</h3>
+        <p>Turn your effort and skills into direct, dependable income.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE SECTION -->
+<section class="challenge" id="challenge">
+  <div class="wrap">
+    <div class="challenge-card">
+      <div>
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(216,255,56,0.15); color:var(--lime); padding:6px 14px; border-radius:999px; font-size:13px; font-weight:800; margin-bottom:20px;">
+          SEASON 2026
+        </div>
+        <h2>The ZUNO Challenge 2026</h2>
+        <p class="challenge-copy">An 8-week season where students turn their skills into visible, ranked earnings with structured prizes for top performers.</p>
+        <div class="challenge-stats">
+          <div class="stat"><b>8 Weeks</b><span>Duration</span></div>
+          <div class="stat"><b>₹1,00,000</b><span>Prize Pool</span></div>
+        </div>
+        <div style="margin-top:36px;">
+          <a href="#join" class="btn btn-lime">Join the Challenge</a>
+        </div>
+      </div>
+      <div class="leaderboard">
+        <div class="lb-row"><div class="lb-left"><span class="lb-rank">#1</span><span class="lb-name">Aarav</span></div><span class="lb-amt">₹30,000</span></div>
+        <div class="lb-row"><div class="lb-left"><span class="lb-rank">#2</span><span class="lb-name">Meera</span></div><span class="lb-amt">₹20,000</span></div>
+        <div class="lb-row"><div class="lb-left"><span class="lb-rank">#3</span><span class="lb-name">Rohan</span></div><span class="lb-amt">₹10,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMBASSADOR -->
+<section class="ambassador">
+  <div class="wrap">
+    <div class="amb-card">
+      <div>
+        <span style="font-size:13px; font-weight:800; color:var(--coral); text-transform:uppercase; letter-spacing:0.08em;">Campus Leaders</span>
+        <h2 style="margin-top:8px;">Want to bring ZUNO to your campus?</h2>
+        <p style="font-size:16px; color:var(--ink-soft); margin-top:14px; line-height:1.55;">Become a ZUNO Ambassador and help students around you discover skills, opportunities, and new ways to earn.</p>
+        <a href="#join" class="btn btn-coral" style="margin-top:28px;">Become an Ambassador</a>
+      </div>
+      <ul class="amb-benefits">
+        <li>Represent ZUNO</li>
+        <li>Build your community</li>
+        <li>Organize campus activities</li>
+        <li>Connect students with opportunities</li>
+        <li>Earn recognition</li>
+        <li>Grow your network</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TWO PATHS -->
+<section class="two-paths" id="pathways">
+  <div class="wrap">
+    <div class="paths-grid">
+      <!-- 1. PARTNER CARD -->
+      <div class="path-card partner" id="landingPartnerCard">
+        <div>
+          <span class="for-tag">For Companies, Startups &amp; Colleges</span>
+          <h3>Partner with ZUNO</h3>
+          <p>Bring trusted opportunities to ambitious students and builders.</p>
+          <div class="for-list">
+            <button type="button" class="for-chip" data-org="company">Companies</button>
+            <button type="button" class="for-chip" data-org="startup">Startups</button>
+            <button type="button" class="for-chip" data-org="org">Organizations</button>
+            <button type="button" class="for-chip" data-org="college">Colleges</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline" id="landingPartnerBtn">Partner With Us</button>
+      </div>
+
+      <!-- 2. WORK WITH ZUNO CARD -->
+      <div class="path-card work" id="landingWorkCard">
+        <div>
+          <span class="for-tag">For Students, Creators &amp; Builders</span>
+          <h3>Work With ZUNO</h3>
+          <p>Build with us, contribute to the platform, and help shape the future of student opportunities.</p>
+          <div class="for-list">
+            <button type="button" class="for-chip" data-skill="student">Students</button>
+            <button type="button" class="for-chip" data-skill="creator">Creators</button>
+            <button type="button" class="for-chip" data-skill="consultant">Professionals</button>
+            <button type="button" class="for-chip" data-skill="developer">Builders</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-lime" id="landingWorkBtn">Work With ZUNO</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community" id="community">
+  <div class="wrap">
+    <span style="font-size:13px; font-weight:800; color:var(--coral); text-transform:uppercase; letter-spacing:0.08em;">Community</span>
+    <h2 style="margin-top:8px;">You're not doing this alone.</h2>
+    <p class="idea-copy">Join a community of students, creators, builders, and ambitious people finding their own way forward.</p>
+    <div class="community-tags">
+      <div class="ctag"><span class="dot" style="background:var(--coral);"></span>Students</div>
+      <div class="ctag"><span class="dot" style="background:var(--blue);"></span>Creators</div>
+      <div class="ctag"><span class="dot" style="background:var(--gold);"></span>Builders</div>
+      <div class="ctag"><span class="dot" style="background:var(--green);"></span>Mentors</div>
+      <div class="ctag"><span class="dot" style="background:var(--ink);"></span>Partners</div>
+    </div>
+    <div style="margin-top:40px;">
+      <a href="#join" class="btn btn-coral">Join the Community</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="join">
+  <div class="wrap">
+    <h2>Find your path.<br><span class="highlight" style="background:linear-gradient(135deg, var(--coral), var(--orange), var(--lime)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Make your move.</span></h2>
+    <p class="idea-copy">Your first opportunity doesn't have to look like everyone else's.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-coral" style="padding:16px 36px; font-size:16px;">Join ZUNO</a>
+      <a href="#why" class="btn btn-outline" style="padding:16px 32px; font-size:16px;">Explore Opportunities</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:40px;">
+      <h2>Questions? We got you.</h2>
+    </div>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<!-- FOOTER WITH CRISP SHARP VECTOR LOGO -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-col">
+        <a href="#" class="zuno-brand" aria-label="ZUNO">
+          <div class="zuno-logo-wrap">
+            <div class="zuno-text-row">
+              <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+              <span class="zuno-slash-accent"></span>
+            </div>
+            <div class="zuno-underline-bar"></div>
+          </div>
+        </a>
+        <p style="margin-top:14px; font-size:14.5px; color:var(--ink-soft); line-height:1.5; max-width:280px;">
+          Find your path. Build your income.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#puzzle">Skill Universe</a>
+        <a href="#why">Why ZUNO</a>
+        <a href="#how">How It Works</a>
+        <a href="#challenge">ZUNO Challenge</a>
+      </div>
+      <div class="foot-col">
+        <h4>Community</h4>
+        <a href="#community-hub" class="community-trigger" data-section="ambassadors">Ambassadors</a>
+        <a href="#community-hub" class="community-trigger" data-section="overview">Community</a>
+        <a href="#community-hub" class="community-trigger" data-section="stories">Stories</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#company-hub" class="company-trigger" data-section="about">About ZUNO</a>
+        <a href="#partner-auth" class="partner-trigger">Partner with ZUNO</a>
+        <a href="#work-auth" class="work-trigger">Work with ZUNO</a>
+        <a href="#company-hub" class="company-trigger" data-section="contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-divider"></div>
+    <div class="foot-bottom">
+      <div class="foot-copy">© 2026 ZUNO. All rights reserved.</div>
+      <div class="foot-legal">
+        <a href="#privacy" class="legal-trigger" data-legal="privacy">Privacy</a>
+        <a href="#terms" class="legal-trigger" data-legal="terms">Terms</a>
+        <a href="#trust" class="legal-trigger" data-legal="trust">Trust &amp; Safety</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- DEDICATED FULL-SCREEN JOIN PORTAL (TWO CATEGORIES: PARTNER & WORK WITH ZUNO) -->
+<div class="join-portal" id="joinPortal" aria-hidden="true" role="dialog" aria-label="Join ZUNO Portal">
+  <div class="portal-top-bar">
+    <button type="button" class="portal-back-btn" id="portalBackBtn" aria-label="Go back to Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back</span>
+    </button>
+
+    <a href="#" class="zuno-brand" aria-label="ZUNO Home" style="pointer-events:none;">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar"></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="portal-content">
+    <div class="portal-header">
+      <h1>Choose your journey on ZUNO</h1>
+      <p>Whether you're looking to provide verified opportunities or build your personal income stream, select your path below.</p>
+    </div>
+
+    <div class="portal-cards-grid">
+      <!-- 1. LIGHT CARD: FOR COMPANIES, STARTUPS & COLLEGES -->
+      <div class="pcard-light">
+        <div>
+          <div class="pcard-eyebrow">For Companies, Startups &amp; Colleges</div>
+          <h2 class="pcard-title">Partner with ZUNO</h2>
+          <p class="pcard-desc">
+            Bring trusted opportunities to ambitious students and builders.
+          </p>
+          <div class="pcard-tags">
+            <button type="button" class="ptag" data-org="company">Companies</button>
+            <button type="button" class="ptag" data-org="startup">Startups</button>
+            <button type="button" class="ptag" data-org="org">Organizations</button>
+            <button type="button" class="ptag" data-org="college">Colleges</button>
+          </div>
+        </div>
+        <button type="button" class="pcard-btn pcard-btn-light" id="partnerActionBtn">
+          Partner With Us
+        </button>
+      </div>
+
+      <!-- 2. DARK CARD: FOR STUDENTS, CREATORS & BUILDERS -->
+      <div class="pcard-dark">
+        <div>
+          <div class="pcard-eyebrow">For Students, Creators &amp; Builders</div>
+          <h2 class="pcard-title">Work With ZUNO</h2>
+          <p class="pcard-desc">
+            Build with us, contribute to the platform, and help shape the future of student opportunities.
+          </p>
+          <div class="pcard-tags">
+            <button type="button" class="ptag" data-skill="student">Students</button>
+            <button type="button" class="ptag" data-skill="creator">Creators</button>
+            <button type="button" class="ptag" data-skill="consultant">Professionals</button>
+            <button type="button" class="ptag" data-skill="developer">Builders</button>
+          </div>
+        </div>
+        <button type="button" class="pcard-btn pcard-btn-dark" id="workActionBtn">
+          Work With ZUNO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. PARTNER AUTH PORTAL (COMPANIES, STARTUPS, COLLEGES)        -->
+<!-- ============================================================ -->
+<div class="auth-view auth-partner" id="partnerAuthView" aria-hidden="true" role="dialog" aria-label="Partner Login and Signup">
+  <div class="auth-top-bar">
+    <button type="button" class="auth-back-btn" id="partnerBackBtn" aria-label="Back to Pathway selection">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Pathways</span>
+    </button>
+
+    <div class="zuno-brand" style="pointer-events:none;">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-container">
+    <div class="auth-grid">
+      <!-- Left Info Column -->
+      <div class="auth-info">
+        <div class="auth-badge-tag">🏢 Verified Partner Network</div>
+        <h2>Empower talent with verified real-world projects.</h2>
+        <p class="auth-info-sub">
+          Post project milestones, scout pre-vetted creators &amp; developers, and build high-impact campus partnerships with zero friction.
+        </p>
+
+        <div class="auth-perks-list">
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Direct access to top 1% vetted student creators &amp; builders</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Dedicated partnership manager &amp; custom challenge setup</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Zero upfront listing fee with milestone escrow protection</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Trusted by 140+ high-growth startups &amp; premier institutions</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Auth Card Box -->
+      <div class="auth-card-box">
+        <div class="auth-alert-box" id="partnerAlertBox"></div>
+
+        <!-- Mode Toggle Tabs -->
+        <div class="auth-tab-switch">
+          <button type="button" class="auth-tab-btn active" id="partnerTabSignup">Partner Sign Up</button>
+          <button type="button" class="auth-tab-btn" id="partnerTabLogin">Partner Sign In</button>
+        </div>
+
+        <!-- Google OAuth Button -->
+        <button type="button" class="btn-google" id="partnerGoogleBtn">
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="partnerGoogleBtnText">Continue with Google</span>
+        </button>
+
+        <div class="auth-divider">or with work email</div>
+
+        <!-- Form -->
+        <form class="auth-form" id="partnerAuthForm" onsubmit="return false;">
+          <div class="auth-field" id="partnerOrgField">
+            <label class="auth-label">Organization / College Type</label>
+            <select class="auth-select" id="partnerOrgType">
+              <option value="company">Company / Enterprise</option>
+              <option value="startup">High-Growth Startup</option>
+              <option value="college">College / University</option>
+              <option value="org">Student Organization / NGO</option>
+            </select>
+          </div>
+
+          <div class="auth-field" id="partnerNameField">
+            <label class="auth-label">Contact Name &amp; Title</label>
+            <input type="text" class="auth-input" id="partnerName" placeholder="e.g. Alex Rivera, Head of Partnerships" required />
+          </div>
+
+          <div class="auth-field">
+            <label class="auth-label">Work / Institutional Email</label>
+            <input type="email" class="auth-input" id="partnerEmail" placeholder="name@company.com" required />
+          </div>
+
+          <div class="auth-field">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label class="auth-label">Password</label>
+              <a href="#" style="font-size:12px; font-weight:700; color:var(--blue); display:none;" id="partnerForgotLink">Forgot?</a>
+            </div>
+            <input type="password" class="auth-input" id="partnerPassword" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="partnerSubmitBtn">
+            Create Partner Account
+          </button>
+
+          <p class="auth-footnote">
+            By continuing, you agree to ZUNO's <a href="#">Terms of Service</a> and <a href="#">Partner Security Policy</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. WORK / TALENT AUTH PORTAL (STUDENTS, CREATORS, BUILDERS)   -->
+<!-- ============================================================ -->
+<div class="auth-view auth-work" id="workAuthView" aria-hidden="true" role="dialog" aria-label="Talent Login and Signup">
+  <div class="auth-top-bar">
+    <button type="button" class="auth-back-btn" id="workBackBtn" aria-label="Back to Pathway selection">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Pathways</span>
+    </button>
+
+    <div class="zuno-brand" style="pointer-events:none;">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black" style="color:#FFFFFF;">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar" style="background:#FFFFFF;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-container">
+    <div class="auth-grid">
+      <!-- Left Info Column -->
+      <div class="auth-info">
+        <div class="auth-badge-tag">⚡ 100% Free • Verified Payouts</div>
+        <h2>Turn what you know into verified income.</h2>
+        <p class="auth-info-sub">
+          Join thousands of students, creators, and developers landing paid projects, campus challenges, and high-value brand opportunities.
+        </p>
+
+        <div class="auth-perks-list">
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Direct bank payouts with guaranteed payment on completion</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Projects matched specifically to your skill level &amp; weekly hours</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Build a verified proof-of-work portfolio backed by real client reviews</div>
+          </div>
+          <div class="auth-perk-item">
+            <div class="auth-perk-icon">✓</div>
+            <div>Exclusive eligibility for monthly $10,000+ creator leaderboards</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Auth Card Box -->
+      <div class="auth-card-box">
+        <div class="auth-alert-box" id="workAlertBox"></div>
+
+        <!-- Mode Toggle Tabs -->
+        <div class="auth-tab-switch">
+          <button type="button" class="auth-tab-btn active" id="workTabSignup">Create Builder Account</button>
+          <button type="button" class="auth-tab-btn" id="workTabLogin">Sign In</button>
+        </div>
+
+        <!-- Google OAuth Button -->
+        <button type="button" class="btn-google" id="workGoogleBtn">
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="workGoogleBtnText">Continue with Google</span>
+        </button>
+
+        <div class="auth-divider">or with email</div>
+
+        <!-- Form -->
+        <form class="auth-form" id="workAuthForm" onsubmit="return false;">
+          <div class="auth-field" id="workSkillField">
+            <label class="auth-label">Primary Skill / Discipline</label>
+            <select class="auth-select" id="workSkillType">
+              <option value="student">Student / Campus Learner</option>
+              <option value="creator">Creator (Video, Content &amp; Media)</option>
+              <option value="developer">Developer &amp; Software Builder</option>
+              <option value="designer">Designer &amp; UI/UX Artist</option>
+              <option value="consultant">Consultant / Writer / Marketer</option>
+            </select>
+          </div>
+
+          <div class="auth-field" id="workNameField">
+            <label class="auth-label">Full Name</label>
+            <input type="text" class="auth-input" id="workName" placeholder="e.g. Maya Chen" required />
+          </div>
+
+          <div class="auth-field">
+            <label class="auth-label">Email Address</label>
+            <input type="email" class="auth-input" id="workEmail" placeholder="you@domain.com" required />
+          </div>
+
+          <div class="auth-field">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label class="auth-label">Password</label>
+              <a href="#" style="font-size:12px; font-weight:700; color:#D8FF38; display:none;" id="workForgotLink">Forgot?</a>
+            </div>
+            <input type="password" class="auth-input" id="workPassword" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="workSubmitBtn">
+            Start Earning with ZUNO
+          </button>
+
+          <p class="auth-footnote">
+            Free forever. By signing up, you agree to ZUNO's <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. DEDICATED COMMUNITY HUB VIEW                              -->
+<!-- ============================================================ -->
+<div class="hub-page" id="communityView" aria-hidden="true" role="dialog" aria-label="ZUNO Community Universe">
+  <div class="hub-top-bar">
+    <button type="button" class="hub-back-btn" id="communityBackBtn" aria-label="Go back to Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Home</span>
+    </button>
+
+    <div class="zuno-brand return-home-logo" aria-label="ZUNO Home (Return to Landing Page)" title="Click to return to Homepage" style="cursor:pointer;">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-content">
+    <div class="hub-hero">
+      <div class="hub-tag" style="background:#FFF0EB; color:var(--coral); border:1px solid rgba(255,77,46,0.2);">ZUNO COMMUNITY</div>
+      <h1>Learn from peers who are already earning.</h1>
+      <p>Join campus circles, team up on client projects, exchange design &amp; code feedback, and learn directly from top student earners.</p>
+    </div>
+
+    <!-- Image Cover Showcase Banner -->
+    <div class="hub-cover-banner">
+      <img src="zuno.png" alt="ZUNO Community" class="hub-cover-img" />
+      <div class="hub-cover-overlay">
+        <div class="hub-cover-badge">CREATOR ECOSYSTEM</div>
+        <div class="hub-cover-title">Learn by shipping. Earn by building.</div>
+        <div class="hub-cover-desc">A network of thousands of college builders turning side projects into reliable monthly income.</div>
+      </div>
+    </div>
+
+    <!-- 3 Pillars Grid -->
+    <div class="hub-grid-3">
+      <!-- 1. Ambassadors -->
+      <div class="hub-card" id="sec-ambassadors">
+        <div>
+          <div class="hub-card-icon" style="background:#FFF0EB; color:var(--coral);">🎓</div>
+          <h3>Campus Ambassadors</h3>
+          <p>Lead the community at your university. Host hack nights and creator meetups, scout talented peers, and earn monthly stipends.</p>
+        </div>
+        <button type="button" class="hub-card-btn" onclick="alert('Ambassador application opened! Check your inbox for orientation details.')">Apply as Ambassador →</button>
+      </div>
+
+      <!-- 2. Community Circles -->
+      <div class="hub-card" id="sec-overview">
+        <div>
+          <div class="hub-card-icon" style="background:#EEF3FF; color:var(--blue);">💬</div>
+          <h3>Builder Circles &amp; AMAs</h3>
+          <p>Join private Discord channels across software, motion design, copywriting, and media. Get direct feedback on client deliverables.</p>
+        </div>
+        <button type="button" class="hub-card-btn" onclick="alert('Redirecting to the official ZUNO Discord community...')">Join Community →</button>
+      </div>
+
+      <!-- 3. Monthly Challenges -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:#E6F8EF; color:#00A862);">🏆</div>
+          <h3>Sponsored Bounties</h3>
+          <p>Take on real product briefs sponsored by fast-growing startups. Win cash prize pools and land ongoing client retainers.</p>
+        </div>
+        <button type="button" class="hub-card-btn" onclick="document.getElementById('communityBackBtn').click(); window.location.hash='#challenge';">View Challenges →</button>
+      </div>
+    </div>
+
+    <!-- Creator Stories Section -->
+    <div class="story-testimonial-card" id="sec-stories">
+      <div class="story-avatar">P</div>
+      <div>
+        <div style="font-size:12.5px; font-weight:800; text-transform:uppercase; color:var(--coral); letter-spacing:0.08em; margin-bottom:8px;">★ Featured Student Story</div>
+        <h3 style="font-size:22px; font-weight:800; line-height:1.3; color:var(--ink); margin-bottom:8px;">
+          "I started by editing short videos in my dorm room. Through ZUNO, I connected with 3 funded startups and made $4,200 during my semester."
+        </h3>
+        <p style="font-size:15px; color:var(--ink-soft); font-weight:500;">
+          <b>Priya Sharma</b> — Sophomore &amp; Motion Designer • Active on ZUNO
+        </p>
+      </div>
+      <button type="button" class="btn btn-coral" style="padding:12px 28px; font-size:14px;" onclick="openWorkAuth('creator');">Start Earning</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. DEDICATED COMPANY / ABOUT ZUNO VIEW (HIGH CRAFT)         -->
+<!-- ============================================================ -->
+<div class="hub-page" id="companyView" aria-hidden="true" role="dialog" aria-label="About ZUNO">
+  <div class="hub-top-bar">
+    <button type="button" class="hub-back-btn" id="companyBackBtn" aria-label="Go back to Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Home</span>
+    </button>
+
+    <div class="zuno-brand return-home-logo" aria-label="ZUNO Home (Return to Landing Page)" title="Click to return to Homepage" style="cursor:pointer;">
+      <div class="zuno-logo-wrap">
+        <div class="zuno-text-row">
+          <span class="zuno-text-black">ZUN</span><span class="zuno-text-coral">O</span>
+          <span class="zuno-slash-accent"></span>
+        </div>
+        <div class="zuno-underline-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hub-content">
+    <div class="hub-hero" id="sec-about">
+      <div class="hub-tag" style="background:#EBF3FF; color:var(--blue); border:1px solid rgba(43,89,255,0.2);">ABOUT ZUNO</div>
+      <h1>Empowering students and professionals to earn from their passion.</h1>
+      <p>Whether you are a student discovering your first craft or a professional monetizing a side skill, ZUNO gives you a direct path to turn what you love into real-world income.</p>
+    </div>
+
+    <!-- Image Cover Banner -->
+    <div class="hub-cover-banner">
+      <img src="zuno.png" alt="ZUNO Skill Universe" class="hub-cover-img" />
+      <div class="hub-cover-overlay">
+        <div class="hub-cover-badge">THE TALENT NETWORK</div>
+        <div class="hub-cover-title">Where passion turns into real earnings.</div>
+        <div class="hub-cover-desc">Over 24 disciplines spanning tech, media, culinary arts, design, and consulting. Direct client payouts with zero middleman gatekeepers.</div>
+      </div>
+    </div>
+
+    <!-- 3 Real Value Pillars Grid -->
+    <div class="hub-grid-3">
+      <!-- 1. Real Skills & Work -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:#FFF9E6; color:var(--gold);">⚡</div>
+          <h3>Build What You Love</h3>
+          <p>Get hired directly for your creative and technical abilities—whether coding, video editing, design, writing, or coaching.</p>
+        </div>
+        <span style="font-size:13px; font-weight:800; color:var(--gold);">Live Portfolios</span>
+      </div>
+
+      <!-- 2. Direct Payouts -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:#E6F8EF; color:#00A862);">💳</div>
+          <h3>Guaranteed Payouts</h3>
+          <p>Client funds are escrowed before you start. Payments deposit straight to your account the moment milestones are approved.</p>
+        </div>
+        <button type="button" class="hub-card-btn" onclick="openWorkAuth();">Start Earning →</button>
+      </div>
+
+      <!-- 3. Startups & Companies -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:#EEF3FF; color:var(--blue);">🏢</div>
+          <h3>Hire Ambitious Talent</h3>
+          <p>Founders, startups, and agencies use ZUNO to post project briefs, sponsor campus challenges, and work with high-energy talent.</p>
+        </div>
+        <button type="button" class="hub-card-btn" onclick="openPartnerAuth();">Partner Portal →</button>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-box" id="sec-contact">
+      <div>
+        <div style="font-size:12.5px; font-weight:800; text-transform:uppercase; color:var(--blue); letter-spacing:0.08em; margin-bottom:8px;">📬 Get In Touch</div>
+        <h2 style="font-size:32px; font-weight:900; letter-spacing:-0.03em; margin-bottom:14px; color:var(--ink);">Have questions, ideas, or want to partner with us?</h2>
+        <p style="font-size:16px; color:var(--ink-soft); line-height:1.6; margin-bottom:24px;">
+          Whether you're a student looking for guidance, a campus organizer, or a company offering opportunities, our team would love to hear from you.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:15px; font-weight:700;">
+          <div>📍 Bangalore • Singapore • Remote Worldwide</div>
+          <div>✉️ hello@zuno.in / partnerships@zuno.in</div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to our team. We will be in touch shortly.'); this.reset();">
+        <input type="text" class="auth-input" placeholder="Your Name" required />
+        <input type="email" class="auth-input" placeholder="Your Email Address" required />
+        <select class="auth-select">
+          <option>Student / Learner Question</option>
+          <option>Partnership Inquiry (Company / College)</option>
+          <option>Campus Ambassador Program</option>
+          <option>General Feedback / Other</option>
+        </select>
+        <textarea class="auth-input" rows="4" placeholder="Tell us how we can help..." style="resize:vertical;" required></textarea>
+        <button type="submit" class="btn btn-primary" style="padding:14px 28px; width:fit-content;">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. FLOATING LEGAL MODAL (TERMS, PRIVACY, TRUST & SAFETY)    -->
+<!-- ============================================================ -->
+<div class="legal-floating-overlay" id="legalFloatingModal" aria-hidden="true" role="dialog" aria-label="Legal and Privacy Policy">
+  <div class="legal-floating-card">
+    <div class="legal-card-header">
+      <div class="legal-title-wrap">
+        <span class="legal-badge" id="legalBadge">LEGAL &amp; COMPLIANCE</span>
+        <h3 class="legal-title" id="legalModalTitle">Terms of Service</h3>
+      </div>
+      <button type="button" class="legal-close-btn" id="legalCloseBtn" aria-label="Close dialog">✕</button>
+    </div>
+
+    <div class="legal-card-body" id="legalModalBody">
+      <!-- Dynamic Legal Content injected here -->
+    </div>
+
+    <div class="legal-card-footer">
+      <span class="legal-updated">Last Updated: January 2026 • Verified ZUNO Protocol</span>
+      <button type="button" class="legal-accept-btn" id="legalAcceptBtn">I Understand &amp; Accept</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS: GSAP + REALISTIC JIGSAW PUZZLE ENGINE (ACCORDING TO zuno.png) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  // Sticky nav scroll shadow
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    nav.classList.toggle('scrolled', window.scrollY > 16);
+  });
+
+  // Spotlight follower
+  const spot = document.getElementById('spotlight');
+  window.addEventListener('pointermove', (e)=>{
+    spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+  });
+
+  // Scroll Progress
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    progressBar.style.transform = `scaleX(${pct})`;
+  });
+
+  // Button Shine
+  document.querySelectorAll('.btn').forEach(btn=>{
+    if(!btn.querySelector('.shine')){
+      const shine = document.createElement('span');
+      shine.className = 'shine';
+      btn.appendChild(shine);
+    }
+  });
+
+  // Parallax on hero blobs
+  const blobs = document.querySelectorAll('.blob');
+  window.addEventListener('pointermove', (e)=>{
+    const cx = (e.clientX / window.innerWidth - 0.5);
+    const cy = (e.clientY / window.innerHeight - 0.5);
+    blobs.forEach((b,i)=>{
+      const depth = (i+1) * 16;
+      b.style.transform = `translate(${cx*depth}px, ${cy*depth}px)`;
+    });
+  });
+
+  // ============================================================
+  // CLEAN WHITE JIGSAW PUZZLE ENGINE (5-SECOND ASSEMBLE + SCROLL/CURSOR DISPERSE)
+  // ============================================================
+  const COLS = 6;
+  const ROWS = 4;
+  const TOTAL_PIECES = COLS * ROWS; // 24 pieces
+  const BOARD_W = 880;
+  const BOARD_H = 480;
+  const PW = BOARD_W / COLS; // ~146.6
+  const PH = BOARD_H / ROWS; // 120
+
+  // Deterministic interlocking jigsaw tabs
+  const hTabs = [];
+  for(let r = 0; r <= ROWS; r++){
+    hTabs[r] = [];
+    for(let c = 0; c < COLS; c++){
+      if(r === 0 || r === ROWS) {
+        hTabs[r][c] = 0; // flat outer border
+      } else {
+        hTabs[r][c] = ((r * 3 + c * 2) % 2 === 0) ? 1 : -1;
+      }
+    }
+  }
+
+  const vTabs = [];
+  for(let r = 0; r < ROWS; r++){
+    vTabs[r] = [];
+    for(let c = 0; c <= COLS; c++){
+      if(c === 0 || c === COLS){
+        vTabs[r][c] = 0; // flat outer border
+      } else {
+        vTabs[r][c] = ((r * 2 + c * 3) % 2 === 0) ? 1 : -1;
+      }
+    }
+  }
+
+  // Realistic curved jigsaw puzzle edge
+  function makeJigsawEdge(x1, y1, x2, y2, dir){
+    if(dir === 0) return `L ${x2} ${y2}`;
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.hypot(dx, dy);
+    const nx = (-dy / len) * dir;
+    const ny = (dx / len) * dir;
+
+    const pt = (u, n) => `${(x1 + u * dx + n * len * nx).toFixed(1)},${(y1 + u * dy + n * len * ny).toFixed(1)}`;
+    
+    return `L ${pt(0.36, 0)} ` +
+           `C ${pt(0.38, 0.04)} ${pt(0.36, 0.20)} ${pt(0.44, 0.24)} ` +
+           `C ${pt(0.48, 0.28)} ${pt(0.52, 0.28)} ${pt(0.56, 0.24)} ` +
+           `C ${pt(0.64, 0.20)} ${pt(0.62, 0.04)} ${pt(0.64, 0)} ` +
+           `L ${x2},${y2}`;
+  }
+
+  function getPiecePath(c, r){
+    const x0 = c * PW, y0 = r * PH;
+    const x1 = (c + 1) * PW, y1 = (r + 1) * PH;
+
+    const topDir = hTabs[r][c];
+    const rightDir = vTabs[r][c + 1];
+    const botDir = -hTabs[r + 1][c];
+    const leftDir = -vTabs[r][c];
+
+    let d = `M ${x0} ${y0} `;
+    d += makeJigsawEdge(x0, y0, x1, y0, topDir) + ' ';
+    d += makeJigsawEdge(x1, y0, x1, y1, rightDir) + ' ';
+    d += makeJigsawEdge(x1, y1, x0, y1, botDir) + ' ';
+    d += makeJigsawEdge(x0, y1, x0, y0, leftDir) + ' Z';
+    return d;
+  }
+
+  const piecesGroup = document.getElementById('jigsawPiecesGroup');
+  const puzzleFrame = document.getElementById('puzzleCanvasFrame');
+  const pieceElements = [];
+
+  for(let r = 0; r < ROWS; r++){
+    for(let c = 0; c < COLS; c++){
+      const idx = r * COLS + c;
+      const pathD = getPiecePath(c, r);
+
+      const pieceG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      pieceG.setAttribute("class", "jigsaw-piece");
+      pieceG.setAttribute("data-index", idx);
+
+      const pathElem = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      pathElem.setAttribute("d", pathD);
+      pathElem.setAttribute("fill", "url(#zunoImgPattern)");
+      pieceG.appendChild(pathElem);
+
+      piecesGroup.appendChild(pieceG);
+
+      // Natural scattered starting positions outside
+      const angle = (idx * 47) % 360;
+      const dist = 360 + (idx % 6) * 40;
+      const startX = Math.cos(angle * Math.PI / 180) * dist;
+      const startY = Math.sin(angle * Math.PI / 180) * dist;
+      const startRot = (idx % 2 === 0 ? 1 : -1) * (18 + (idx % 20));
+
+      gsap.set(pieceG, {
+        x: startX,
+        y: startY,
+        rotation: startRot,
+        scale: 0.6,
+        opacity: 0,
+        transformOrigin: "center center"
+      });
+
+      pieceElements.push({
+        group: pieceG,
+        idx: idx,
+        startX: startX,
+        startY: startY,
+        startRot: startRot,
+        isSnapped: false
+      });
+    }
+  }
+
+  let isAssembled = false;
+
+  // 4-SECOND RANDOM SEQUENTIAL ASSEMBLY (COMPLETELY ASSEMBLED IN 4s)
+  function assemblePuzzle(){
+    if(isAssembled) return;
+    isAssembled = true;
+
+    // Create randomized order for all 24 pieces
+    const order = Array.from({length: TOTAL_PIECES}, (_, i) => i);
+    for(let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+
+    const pieceDuration = 0.75; // duration of individual snap
+    const totalAssemblyDuration = 4.0; // exact 4 seconds total
+    const maxDelay = totalAssemblyDuration - pieceDuration; // 3.25s
+
+    order.forEach((pieceIdx, step) => {
+      const p = pieceElements[pieceIdx];
+      const delay = (step / (TOTAL_PIECES - 1)) * maxDelay;
+
+      gsap.killTweensOf(p.group);
+      gsap.to(p.group, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        duration: pieceDuration,
+        delay: delay,
+        ease: 'back.out(1.25)',
+        onStart: () => {
+          p.group.classList.add('snapped');
+        },
+        onComplete: () => {
+          p.isSnapped = true;
+        }
+      });
+    });
+  }
+
+  // CLEAN GSAP DISPERSAL WHEN SCROLLING AWAY
+  function dispersePuzzle(){
+    if(!isAssembled) return;
+    isAssembled = false;
+
+    // Random order for dispersal
+    const order = Array.from({length: TOTAL_PIECES}, (_, i) => i);
+    for(let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+
+    order.forEach((pieceIdx, step) => {
+      const p = pieceElements[pieceIdx];
+      gsap.killTweensOf(p.group);
+      p.isSnapped = false;
+      gsap.to(p.group, {
+        x: p.startX,
+        y: p.startY,
+        rotation: p.startRot,
+        scale: 0.6,
+        opacity: 0,
+        duration: 0.45,
+        delay: (step / (TOTAL_PIECES - 1)) * 0.4,
+        ease: 'power2.in',
+        onComplete: () => {
+          p.group.classList.remove('snapped');
+        }
+      });
+    });
+  }
+
+  // INTERACTIVE CURSOR REACTION OVER THE ASSEMBLED PUZZLE
+  puzzleFrame.addEventListener('pointermove', (e)=>{
+    if(!isAssembled) return;
+    const rect = puzzleFrame.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) / rect.width;
+    const my = (e.clientY - rect.top) / rect.height;
+
+    pieceElements.forEach(p => {
+      if(!p.isSnapped) return;
+      const c = p.idx % COLS;
+      const r = Math.floor(p.idx / COLS);
+      const px = (c + 0.5) / COLS;
+      const py = (r + 0.5) / ROWS;
+
+      const d = Math.hypot(mx - px, my - py);
+      if(d < 0.28){
+        const force = (0.28 - d) * 20;
+        const ang = Math.atan2(py - my, px - mx);
+        gsap.to(p.group, {
+          x: Math.cos(ang) * force,
+          y: Math.sin(ang) * force,
+          scale: 1.025,
+          duration: 0.18,
+          overwrite: 'auto'
+        });
+        p.group.style.zIndex = '10';
+      } else {
+        gsap.to(p.group, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          overwrite: 'auto'
+        });
+        p.group.style.zIndex = '1';
+      }
+    });
+  });
+
+  puzzleFrame.addEventListener('pointerleave', ()=>{
+    if(isAssembled){
+      pieceElements.forEach(p => {
+        if(p.isSnapped){
+          gsap.to(p.group, {
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.35,
+            overwrite: 'auto'
+          });
+        }
+      });
+    }
+  });
+
+  // SCROLLTRIGGER: FORMS WHEN COMING TO SECTION, DISPERSES WHEN MOVING DOWN AWAY
+  if(window.ScrollTrigger){
+    ScrollTrigger.create({
+      trigger:'#puzzle',
+      start:'top 80%',
+      end:'bottom 15%',
+      onEnter: () => assemblePuzzle(),
+      onEnterBack: () => assemblePuzzle(),
+      onLeave: () => dispersePuzzle(),
+      onLeaveBack: () => dispersePuzzle()
+    });
+  } else {
+    setTimeout(assemblePuzzle, 500);
+  }
+
+  // FAQs Accordion
+  const faqs = [
+    {q:'What is ZUNO?', a:'ZUNO helps people discover trusted opportunities and turn their skills into real-world experience and income.'},
+    {q:'Who can join ZUNO?', a:'Students, creators, builders, freelancers, and anyone looking to discover new opportunities can join.'},
+    {q:'Are ZUNO opportunities verified?', a:'Every opportunity and partner on ZUNO goes through a review step before it appears on the platform, so what you see is checked, not just listed.'},
+    {q:'How does the ZUNO Challenge work?', a:'Over the challenge period, participants take on real opportunities and earnings are tracked on a live leaderboard, with prizes for the top performers.'},
+    {q:'Can I become a ZUNO Ambassador?', a:'Yes — ambassadors represent ZUNO on their campus, run activities, and help other students find their path.'},
+    {q:'Can companies partner with ZUNO?', a:'Yes. Companies and organizations can partner with ZUNO to provide opportunities.'},
+    {q:'Can I work with ZUNO directly?', a:'Yes. Use the Work with ZUNO pathway to discover relevant openings or collaborations.'},
+    {q:'Does ZUNO cost anything?', a:'ZUNO is free to join and explore. Some premium opportunities and certifications may carry their own cost, always shown upfront.'},
+  ];
+  const faqList = document.getElementById('faqList');
+  faqList.innerHTML = faqs.map(f=>`
+    <div class="faq-item">
+      <div class="faq-q">${f.q}<span class="faq-plus">+</span></div>
+      <div class="faq-a">${f.a}</div>
+    </div>`).join('');
+  faqList.addEventListener('click', (e)=>{
+    const item = e.target.closest('.faq-item');
+    if(!item) return;
+    const open = item.classList.contains('open');
+    faqList.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+
+  // GSAP Animations & Card Stacks
+  if(window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+
+    const frames = gsap.utils.toArray('.stack-frame');
+    const dots = gsap.utils.toArray('#stackProgress .dot');
+    frames.forEach((f,i)=>{
+      const inner = f.querySelector('.stack-card');
+      gsap.set(f, { zIndex:i+1 });
+      gsap.set(inner, { yPercent: i===0?0:125, rotateX: i===0?0:12, scale: i===0?1:0.94, transformOrigin:'center bottom' });
+    });
+    const tl = gsap.timeline({
+      scrollTrigger:{
+        trigger:'#stackPin', start:'top top', end:'bottom bottom', scrub:0.7,
+        onUpdate:self=>{
+          const active = Math.min(frames.length-1, Math.round(self.progress*(frames.length-1)));
+          dots.forEach((d,i)=>d.classList.toggle('active', i===active));
+        }
+      }
+    });
+    for(let i=1;i<frames.length;i++){
+      const inner = frames[i].querySelector('.stack-card');
+      tl.to(inner, { yPercent:0, rotateX:0, scale:1, duration:1, ease:'power1.inOut' }, i-1);
+    }
+  }
+
+  // ============================================================
+  // FULL-SCREEN JOIN PORTAL (TWO CATEGORIES + TOP-LEFT BACK)
+  // ============================================================
+  const joinPortal = document.getElementById('joinPortal');
+  const portalBackBtn = document.getElementById('portalBackBtn');
+
+  function openJoinPortal(){
+    if(!joinPortal) return;
+    joinPortal.classList.add('active');
+    joinPortal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if(window.location.hash !== '#join-portal'){
+      history.pushState({portalOpen: true}, '', '#join-portal');
+    }
+  }
+
+  function closeJoinPortal(){
+    if(!joinPortal) return;
+    joinPortal.classList.remove('active');
+    joinPortal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if(window.location.hash === '#join-portal' || window.location.hash === '#join'){
+      history.pushState(null, '', window.location.pathname);
+    }
+  }
+
+  if(portalBackBtn){
+    portalBackBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      closeJoinPortal();
+    });
+  }
+
+  // Intercept all Join CTAs across navbar, hero, cards, and footer
+  document.querySelectorAll('a[href="#join"], a[href="#join-portal"], .btn-primary[href="#join"], .foot-col a[href*="Partner"], .foot-col a[href*="Work"]').forEach(el => {
+    el.addEventListener('click', (e)=>{
+      e.preventDefault();
+      openJoinPortal();
+    });
+  });
+
+  // Handle escape key
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && joinPortal && joinPortal.classList.contains('active')){
+      closeJoinPortal();
+    }
+  });
+
+  // Handle popstate for browser back button
+  window.addEventListener('popstate', (e)=>{
+    if(window.location.hash === '#join-portal' || window.location.hash === '#join'){
+      openJoinPortal();
+    } else {
+      closeJoinPortal();
+    }
+  });
+
+  // Check initial hash on page load
+  if(window.location.hash === '#join-portal' || window.location.hash === '#join'){
+    openJoinPortal();
+  }
+
+  // Action buttons inside category cards
+  const partnerBtn = document.getElementById('partnerActionBtn');
+  const workBtn = document.getElementById('workActionBtn');
+  const partnerCard = document.querySelector('.pcard-light');
+  const workCard = document.querySelector('.pcard-dark');
+
+  // DOMAIN-SPECIFIC AUTH CONTROLLERS
+  const partnerAuthView = document.getElementById('partnerAuthView');
+  const workAuthView = document.getElementById('workAuthView');
+  const partnerBackBtn = document.getElementById('partnerBackBtn');
+  const workBackBtn = document.getElementById('workBackBtn');
+
+  function openPartnerAuth(role){
+    if(!partnerAuthView) return;
+    if(role && document.getElementById('partnerOrgType')){
+      document.getElementById('partnerOrgType').value = role;
+    }
+    partnerAuthView.classList.add('active');
+    partnerAuthView.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    history.pushState({view: 'partner-auth'}, '', '#partner-auth');
+  }
+
+  function closePartnerAuth(){
+    if(!partnerAuthView) return;
+    partnerAuthView.classList.remove('active');
+    partnerAuthView.setAttribute('aria-hidden', 'true');
+    // return to join portal or clear
+    if(joinPortal && joinPortal.classList.contains('active')){
+      history.pushState({portalOpen: true}, '', '#join-portal');
+    } else {
+      document.body.style.overflow = '';
+      history.pushState(null, '', window.location.pathname);
+    }
+  }
+
+  function openWorkAuth(role){
+    if(!workAuthView) return;
+    if(role && document.getElementById('workSkillType')){
+      document.getElementById('workSkillType').value = role;
+    }
+    workAuthView.classList.add('active');
+    workAuthView.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    history.pushState({view: 'work-auth'}, '', '#work-auth');
+  }
+
+  function closeWorkAuth(){
+    if(!workAuthView) return;
+    workAuthView.classList.remove('active');
+    workAuthView.setAttribute('aria-hidden', 'true');
+    // return to join portal or clear
+    if(joinPortal && joinPortal.classList.contains('active')){
+      history.pushState({portalOpen: true}, '', '#join-portal');
+    } else {
+      document.body.style.overflow = '';
+      history.pushState(null, '', window.location.pathname);
+    }
+  }
+
+  // Connect Card / Button / Chip clicks to Auth Views across landing page and portal
+  if(partnerBtn) partnerBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openPartnerAuth(); });
+  if(partnerCard) partnerCard.addEventListener('click', ()=>{ openPartnerAuth(); });
+  if(partnerBackBtn) partnerBackBtn.addEventListener('click', (e)=>{ e.preventDefault(); closePartnerAuth(); });
+
+  if(workBtn) workBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openWorkAuth(); });
+  if(workCard) workCard.addEventListener('click', ()=>{ openWorkAuth(); });
+  if(workBackBtn) workBackBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeWorkAuth(); });
+
+  // Landing page two-paths section elements
+  const landingPartnerCard = document.getElementById('landingPartnerCard');
+  const landingPartnerBtn = document.getElementById('landingPartnerBtn');
+  const landingWorkCard = document.getElementById('landingWorkCard');
+  const landingWorkBtn = document.getElementById('landingWorkBtn');
+
+  if(landingPartnerCard) landingPartnerCard.addEventListener('click', ()=>{ openPartnerAuth(); });
+  if(landingPartnerBtn) landingPartnerBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openPartnerAuth(); });
+
+  if(landingWorkCard) landingWorkCard.addEventListener('click', ()=>{ openWorkAuth(); });
+  if(landingWorkBtn) landingWorkBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openWorkAuth(); });
+
+  // All Partner Role Chips ([data-org])
+  document.querySelectorAll('[data-org]').forEach(chip => {
+    chip.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openPartnerAuth(chip.getAttribute('data-org'));
+    });
+  });
+
+  // All Work Role Chips ([data-skill])
+  document.querySelectorAll('[data-skill]').forEach(chip => {
+    chip.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openWorkAuth(chip.getAttribute('data-skill'));
+    });
+  });
+
+  // ----------------------------------------------------
+  // PARTNER AUTH TABS (SIGN UP vs SIGN IN)
+  // ----------------------------------------------------
+  const pTabSignup = document.getElementById('partnerTabSignup');
+  const pTabLogin = document.getElementById('partnerTabLogin');
+  const pOrgField = document.getElementById('partnerOrgField');
+  const pNameField = document.getElementById('partnerNameField');
+  const pSubmitBtn = document.getElementById('partnerSubmitBtn');
+  const pForgotLink = document.getElementById('partnerForgotLink');
+  const pAlert = document.getElementById('partnerAlertBox');
+  const pGoogleText = document.getElementById('partnerGoogleBtnText');
+  let partnerMode = 'signup';
+
+  if(pTabSignup && pTabLogin){
+    pTabSignup.addEventListener('click', ()=>{
+      partnerMode = 'signup';
+      pTabSignup.classList.add('active');
+      pTabLogin.classList.remove('active');
+      pOrgField.style.display = 'flex';
+      pNameField.style.display = 'flex';
+      pSubmitBtn.innerText = 'Create Partner Account';
+      pForgotLink.style.display = 'none';
+      pGoogleText.innerText = 'Sign up with Google';
+      pAlert.style.display = 'none';
+    });
+
+    pTabLogin.addEventListener('click', ()=>{
+      partnerMode = 'login';
+      pTabLogin.classList.add('active');
+      pTabSignup.classList.remove('active');
+      pOrgField.style.display = 'none';
+      pNameField.style.display = 'none';
+      pSubmitBtn.innerText = 'Sign In to Partner Portal';
+      pForgotLink.style.display = 'inline';
+      pGoogleText.innerText = 'Sign in with Google';
+      pAlert.style.display = 'none';
+    });
+  }
+
+  // Partner Google OAuth Simulation
+  const partnerGoogleBtn = document.getElementById('partnerGoogleBtn');
+  if(partnerGoogleBtn){
+    partnerGoogleBtn.addEventListener('click', ()=>{
+      pAlert.className = 'auth-alert-box success';
+      pAlert.innerHTML = '<span>✓ Google Account Verified. Welcome to ZUNO Partner Workspace!</span>';
+      pAlert.style.display = 'flex';
+      setTimeout(()=>{
+        pAlert.innerHTML = '<span>🚀 Redirecting to Partner Dashboard...</span>';
+      }, 1500);
+    });
+  }
+
+  // Partner Form Submit Simulation
+  const partnerAuthForm = document.getElementById('partnerAuthForm');
+  if(partnerAuthForm){
+    partnerAuthForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const email = document.getElementById('partnerEmail').value;
+      pAlert.className = 'auth-alert-box success';
+      if(partnerMode === 'signup'){
+        pAlert.innerHTML = `<span>✓ Account created for <b>${email}</b>. Verification email sent!</span>`;
+      } else {
+        pAlert.innerHTML = `<span>✓ Welcome back! Signing in to Partner Dashboard...</span>`;
+      }
+      pAlert.style.display = 'flex';
+    });
+  }
+
+  // ----------------------------------------------------
+  // WORK / TALENT AUTH TABS (SIGN UP vs SIGN IN)
+  // ----------------------------------------------------
+  const wTabSignup = document.getElementById('workTabSignup');
+  const wTabLogin = document.getElementById('workTabLogin');
+  const wSkillField = document.getElementById('workSkillField');
+  const wNameField = document.getElementById('workNameField');
+  const wSubmitBtn = document.getElementById('workSubmitBtn');
+  const wForgotLink = document.getElementById('workForgotLink');
+  const wAlert = document.getElementById('workAlertBox');
+  const wGoogleText = document.getElementById('workGoogleBtnText');
+  let workMode = 'signup';
+
+  if(wTabSignup && wTabLogin){
+    wTabSignup.addEventListener('click', ()=>{
+      workMode = 'signup';
+      wTabSignup.classList.add('active');
+      wTabLogin.classList.remove('active');
+      wSkillField.style.display = 'flex';
+      wNameField.style.display = 'flex';
+      wSubmitBtn.innerText = 'Start Earning with ZUNO';
+      wForgotLink.style.display = 'none';
+      wGoogleText.innerText = 'Continue with Google';
+      wAlert.style.display = 'none';
+    });
+
+    wTabLogin.addEventListener('click', ()=>{
+      workMode = 'login';
+      wTabLogin.classList.add('active');
+      wTabSignup.classList.remove('active');
+      wSkillField.style.display = 'none';
+      wNameField.style.display = 'none';
+      wSubmitBtn.innerText = 'Log In to ZUNO';
+      wForgotLink.style.display = 'inline';
+      wGoogleText.innerText = 'Sign in with Google';
+      wAlert.style.display = 'none';
+    });
+  }
+
+  // Work Google OAuth Simulation
+  const workGoogleBtn = document.getElementById('workGoogleBtn');
+  if(workGoogleBtn){
+    workGoogleBtn.addEventListener('click', ()=>{
+      wAlert.className = 'auth-alert-box success';
+      wAlert.innerHTML = '<span>⚡ Google Account Connected. Welcome to ZUNO Talent Universe!</span>';
+      wAlert.style.display = 'flex';
+      try {
+        localStorage.setItem('zuno_user_name', 'Dileep Sai');
+        localStorage.setItem('zuno_user_email', 'dileep.sai@zuno.app');
+      } catch(e) {}
+      setTimeout(()=>{
+        wAlert.innerHTML = '<span>🚀 Launching your personalized Candidate Dashboard...</span>';
+        setTimeout(()=>{ window.location.href = 'dashboard.html'; }, 600);
+      }, 700);
+    });
+  }
+
+  // Work Form Submit & Button Click Handler
+  function handleWorkAuthSubmission(){
+    const nameInput = document.getElementById('workName');
+    const emailInput = document.getElementById('workEmail');
+    const passInput = document.getElementById('workPassword');
+    const skillInput = document.getElementById('workSkillType');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const pass = passInput ? passInput.value : '';
+    const skill = skillInput ? skillInput.options[skillInput.selectedIndex].text : '';
+
+    try {
+      if(name) localStorage.setItem('zuno_user_name', name);
+      if(email) localStorage.setItem('zuno_user_email', email);
+      if(pass) localStorage.setItem('zuno_user_password', pass);
+      if(skill) localStorage.setItem('zuno_user_skill', skill);
+    } catch(e) {}
+
+    wAlert.className = 'auth-alert-box success';
+    if(workMode === 'signup'){
+      wAlert.innerHTML = `<span>⚡ Welcome ${name || 'Builder'}! Opening your Opportunities Dashboard...</span>`;
+    } else {
+      wAlert.innerHTML = `<span>⚡ Welcome back! Loading your opportunities dashboard...</span>`;
+    }
+    wAlert.style.display = 'flex';
+    setTimeout(()=>{
+      window.location.href = 'dashboard.html';
+    }, 600);
+  }
+
+  const workAuthForm = document.getElementById('workAuthForm');
+  if(workAuthForm){
+    workAuthForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      handleWorkAuthSubmission();
+    });
+  }
+
+  if(wSubmitBtn){
+    wSubmitBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      handleWorkAuthSubmission();
+    });
+  }
+
+  // ============================================================
+  // UNIVERSAL RETURN TO HOME CONTROLLER
+  // ============================================================
+  function closeAllViewsAndGoHome(){
+    if(partnerAuthView) partnerAuthView.classList.remove('active');
+    if(workAuthView) workAuthView.classList.remove('active');
+    if(joinPortal) joinPortal.classList.remove('active');
+    if(communityView) communityView.classList.remove('active');
+    if(companyView) companyView.classList.remove('active');
+    if(legalModal) legalModal.classList.remove('active');
+    document.body.style.overflow = '';
+    history.pushState(null, '', window.location.pathname);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  document.querySelectorAll('.return-home-logo').forEach(logo => {
+    logo.addEventListener('click', (e)=>{
+      e.preventDefault();
+      closeAllViewsAndGoHome();
+    });
+  });
+
+  // ============================================================
+  // 3. COMMUNITY HUB VIEW CONTROLLER
+  // ============================================================
+  const communityView = document.getElementById('communityView');
+  const communityBackBtn = document.getElementById('communityBackBtn');
+
+  function openCommunityView(sectionId){
+    closeAllOverlaysExcept('community');
+    if(!communityView) return;
+    communityView.classList.add('active');
+    communityView.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    history.pushState({view: 'community-hub'}, '', '#community-hub');
+    if(sectionId){
+      setTimeout(()=>{
+        const target = document.getElementById('sec-' + sectionId);
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      }, 100);
+    }
+  }
+
+  function closeCommunityView(){
+    if(!communityView) return;
+    communityView.classList.remove('active');
+    communityView.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    history.pushState(null, '', window.location.pathname);
+  }
+
+  if(communityBackBtn) communityBackBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeCommunityView(); });
+
+  document.querySelectorAll('.community-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const sec = trigger.getAttribute('data-section');
+      openCommunityView(sec);
+    });
+  });
+
+  // ============================================================
+  // 4. COMPANY HUB VIEW CONTROLLER
+  // ============================================================
+  const companyView = document.getElementById('companyView');
+  const companyBackBtn = document.getElementById('companyBackBtn');
+
+  function openCompanyView(sectionId){
+    closeAllOverlaysExcept('company');
+    if(!companyView) return;
+    companyView.classList.add('active');
+    companyView.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    history.pushState({view: 'company-hub'}, '', '#company-hub');
+    if(sectionId){
+      setTimeout(()=>{
+        const target = document.getElementById('sec-' + sectionId);
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      }, 100);
+    }
+  }
+
+  function closeCompanyView(){
+    if(!companyView) return;
+    companyView.classList.remove('active');
+    companyView.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    history.pushState(null, '', window.location.pathname);
+  }
+
+  if(companyBackBtn) companyBackBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeCompanyView(); });
+
+  document.querySelectorAll('.company-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const sec = trigger.getAttribute('data-section');
+      openCompanyView(sec);
+    });
+  });
+
+  // Direct trigger helpers for Partner & Work in footer
+  document.querySelectorAll('.partner-trigger').forEach(el => {
+    el.addEventListener('click', (e)=>{ e.preventDefault(); openPartnerAuth(); });
+  });
+  document.querySelectorAll('.work-trigger').forEach(el => {
+    el.addEventListener('click', (e)=>{ e.preventDefault(); openWorkAuth(); });
+  });
+
+  function closeAllOverlaysExcept(keep){
+    if(keep !== 'partner' && partnerAuthView) partnerAuthView.classList.remove('active');
+    if(keep !== 'work' && workAuthView) workAuthView.classList.remove('active');
+    if(keep !== 'portal' && joinPortal) joinPortal.classList.remove('active');
+    if(keep !== 'community' && communityView) communityView.classList.remove('active');
+    if(keep !== 'company' && companyView) companyView.classList.remove('active');
+  }
+
+  // ============================================================
+  // 5. FLOATING LEGAL MODAL (TERMS, PRIVACY, TRUST & SAFETY)
+  // ============================================================
+  const legalModal = document.getElementById('legalFloatingModal');
+  const legalModalTitle = document.getElementById('legalModalTitle');
+  const legalBadge = document.getElementById('legalBadge');
+  const legalModalBody = document.getElementById('legalModalBody');
+  const legalCloseBtn = document.getElementById('legalCloseBtn');
+  const legalAcceptBtn = document.getElementById('legalAcceptBtn');
+
+  const legalContent = {
+    terms: {
+      title: 'Terms of Service',
+      badge: 'TERMS & CONDITIONS',
+      html: `
+        <h4>1. Platform Overview &amp; Ecosystem</h4>
+        <p>ZUNO operates a decentralized proof-of-work talent network connecting independent students, creators, and professionals ("Builders") with verified organizations, startups, and academic institutions ("Partners").</p>
+        
+        <h4>2. Milestone Deliveries &amp; Direct Payouts</h4>
+        <p>All project opportunities, bounties, and challenges on ZUNO are backed by verified payment terms. Payment milestone release occurs upon submission review and milestone approval without hidden commission deductions.</p>
+        
+        <h4>3. Code of Conduct &amp; Authentic Work</h4>
+        <p>Participants agree to submit only original, authentic work. Automated bot spam, fraudulent submission padding, or deceptive credentialing results in immediate account deactivation and forfeiture of platform privileges.</p>
+        
+        <h4>4. Intellectual Property Rights</h4>
+        <p>Unless mutually specified under a custom partnership agreement, all IP rights for completed and fully compensated deliverables transfer to the commissioning Partner upon final milestone payout.</p>
+
+        <h4>5. Milestone Escrow &amp; Dispute Protection</h4>
+        <p>ZUNO provides independent mediation support in the event of milestone delivery disputes to protect both creator effort and partner deliverables.</p>
+      `
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      badge: 'DATA PROTECTION & PRIVACY',
+      html: `
+        <h4>1. Information We Collect</h4>
+        <p>We collect information necessary to match your skill profile with relevant opportunities: your name, contact email, selected disciplines/skills, and proof-of-work portfolio links.</p>
+        
+        <h4>2. How Your Data Is Protected</h4>
+        <p>All platform communication, submission archives, and payout credentials are encrypted using industry-standard TLS 1.3 encryption. We never sell, rent, or trade your personal information to third-party ad networks.</p>
+        
+        <h4>3. Public vs. Private Profile Visibility</h4>
+        <p>Your verified proof-of-work badges, ratings, and skill showcases are visible to verified partners. Private financial details and contact credentials are strictly protected behind access controls.</p>
+        
+        <h4>4. Data Ownership &amp; Right to Deletion</h4>
+        <p>You own your profile data. You may request a full export or permanent deletion of your ZUNO account and associated data records at any time by contacting privacy@zuno.in.</p>
+      `
+    },
+    trust: {
+      title: 'Trust &amp; Safety Protocol',
+      badge: 'VERIFIED STANDARDS',
+      html: `
+        <h4>1. Mandatory Partner Verification</h4>
+        <p>Every company, college, and sponsor listing opportunities on ZUNO undergoes manual identity review and legal entity verification before their challenge goes live.</p>
+        
+        <h4>2. Guaranteed Payout Protection</h4>
+        <p>Funds for all verified challenges and gigs are pre-allocated so builders know their work is rewarded reliably upon approved completion.</p>
+        
+        <h4>3. Fair Competition &amp; Plagiarism Detection</h4>
+        <p>All challenge entries are scanned for authenticity to ensure true talent wins fair recognition on our public leaderboards.</p>
+        
+        <h4>4. 24/7 Creator Support</h4>
+        <p>Our dedicated trust team monitors ongoing collaborations to prevent payment delays and uphold professional integrity across all engagements.</p>
+      `
+    },
+    'partner-security': {
+      title: 'Partner Security Policy',
+      badge: 'ENTERPRISE COMPLIANCE',
+      html: `
+        <h4>1. Enterprise-Grade Data Governance</h4>
+        <p>Partner organizations maintain full confidentiality over their project requirements, proprietary datasets, and campus outreach initiatives.</p>
+        
+        <h4>2. Non-Disclosure &amp; Talent IP Binding</h4>
+        <p>Talent accessing confidential partner challenge briefs agree to binding NDA provisions safeguarding sensitive partner roadmap details.</p>
+        
+        <h4>3. Transparent Milestone Escrow</h4>
+        <p>Escrow balances remain strictly segregated and protected until project deliverables meet agreed acceptance criteria.</p>
+      `
+    }
+  };
+
+  function openLegalModal(type){
+    if(!legalModal) return;
+    const doc = legalContent[type] || legalContent.terms;
+    legalModalTitle.innerText = doc.title;
+    legalBadge.innerText = doc.badge;
+    legalModalBody.innerHTML = doc.html;
+    legalModal.classList.add('active');
+    legalModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLegalModal(){
+    if(!legalModal) return;
+    legalModal.classList.remove('active');
+    legalModal.setAttribute('aria-hidden', 'true');
+  }
+
+  if(legalCloseBtn) legalCloseBtn.addEventListener('click', closeLegalModal);
+  if(legalAcceptBtn) legalAcceptBtn.addEventListener('click', closeLegalModal);
+
+  // Close on backdrop click
+  if(legalModal){
+    legalModal.addEventListener('click', (e)=>{
+      if(e.target === legalModal){
+        closeLegalModal();
+      }
+    });
+  }
+
+  // Intercept all legal links
+  document.querySelectorAll('.legal-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const type = trigger.getAttribute('data-legal') || 'terms';
+      openLegalModal(type);
+    });
+  });
+
+  // Universal Keydown handler (Escape key)
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      if(legalModal && legalModal.classList.contains('active')) closeLegalModal();
+      else if(partnerAuthView && partnerAuthView.classList.contains('active')) closePartnerAuth();
+      else if(workAuthView && workAuthView.classList.contains('active')) closeWorkAuth();
+      else if(communityView && communityView.classList.contains('active')) closeCommunityView();
+      else if(companyView && companyView.classList.contains('active')) closeCompanyView();
+      else if(joinPortal && joinPortal.classList.contains('active')) closeJoinPortal();
+    }
+  });
+
+  // Hash & Popstate router
+  window.addEventListener('popstate', ()=>{
+    const hash = window.location.hash;
+    if(hash === '#partner-auth'){
+      openPartnerAuth();
+    } else if(hash === '#work-auth'){
+      openWorkAuth();
+    } else if(hash === '#community-hub'){
+      openCommunityView();
+    } else if(hash === '#company-hub'){
+      openCompanyView();
+    } else if(hash === '#terms'){
+      openLegalModal('terms');
+    } else if(hash === '#privacy'){
+      openLegalModal('privacy');
+    } else if(hash === '#trust'){
+      openLegalModal('trust');
+    } else if(hash === '#join-portal' || hash === '#join'){
+      closeAllOverlaysExcept('portal');
+      openJoinPortal();
+    } else {
+      closeAllOverlaysExcept(null);
+      closeLegalModal();
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Initial hash routing check on page load
+  if(window.location.hash === '#partner-auth') openPartnerAuth();
+  else if(window.location.hash === '#work-auth') openWorkAuth();
+  else if(window.location.hash === '#community-hub') openCommunityView();
+  else if(window.location.hash === '#company-hub') openCompanyView();
+  else if(window.location.hash === '#terms') openLegalModal('terms');
+  else if(window.location.hash === '#privacy') openLegalModal('privacy');
+  else if(window.location.hash === '#trust') openLegalModal('trust');
+  else if(window.location.hash === '#join-portal' || window.location.hash === '#join') openJoinPortal();
+})();
+</script>
+</body>
+</html>

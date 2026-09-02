@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zuno Partner Dashboard — Employer & Hiring Platform</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800;1,900&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/partner.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ==================== LEFT SIDEBAR NAVIGATION ==================== -->
+    <aside class="sidebar">
+      <!-- Brand Logo -->
+      <div class="sidebar-header">
+        <a href="index.html" class="zuno-brand">
+          <div class="zuno-logo-wrap">
+            <div class="zuno-text-row">
+              <span class="zuno-text-black">ZU</span><span class="zuno-text-coral">NO</span>
+              <span class="zuno-slash-accent"></span>
+            </div>
+          </div>
+        </a>
+        <span class="partner-tag">Partner</span>
+      </div>
+
+      <!-- Quick Switcher to Candidate Portal -->
+      <div style="padding: 0 16px 16px;">
+        <a href="dashboard.html" class="portal-switcher-btn" style="width: 100%; justify-content: center;">
+          <span>👤</span>
+          <span>Switch to Candidate Portal ↗</span>
+        </a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item active" data-tab="overview" onclick="PartnerApp.switchTab('overview')">
+          <span class="nav-dot"></span>
+          <span>Overview & Analytics</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="jobs" onclick="PartnerApp.switchTab('jobs')">
+          <span class="nav-dot"></span>
+          <span>Manage Opportunities</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="post" onclick="PartnerApp.switchTab('post')">
+          <span class="nav-dot"></span>
+          <span>+ Post Opportunity</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="shortlisted" onclick="PartnerApp.switchTab('shortlisted')">
+          <span class="nav-dot"></span>
+          <span>Shortlisted Candidates</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="rejected" onclick="PartnerApp.switchTab('rejected')">
+          <span class="nav-dot"></span>
+          <span>Rejected Candidates</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="hired" onclick="PartnerApp.switchTab('hired')">
+          <span class="nav-dot"></span>
+          <span>Hired Candidates</span>
+        </button>
+
+        <button type="button" class="nav-item" data-tab="company" onclick="PartnerApp.switchTab('company')">
+          <span class="nav-dot"></span>
+          <span>Company & Recruiter</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <main class="main-content">
+      
+      <!-- Top Bar with Header Actions -->
+      <header class="top-bar">
+        <div class="page-title-group">
+          <h1 id="topbar-title">Partner Overview & Hiring Analytics</h1>
+          <p id="topbar-subtitle">Monitor live job postings, candidate submissions, and active hiring pipelines.</p>
+        </div>
+        
+        <div class="top-actions">
+          <button class="btn-primary" onclick="PartnerApp.switchTab('post')">
+            + Post Opportunity
+          </button>
+
+          <!-- Recruiter Profile Badge -->
+          <div style="display: flex; align-items: center; gap: 10px; background: var(--paper-soft); padding: 6px 14px; border-radius: var(--radius-m); border: 1px solid var(--paper-line);">
+            <div style="text-align: right;">
+              <div style="font-weight: 800; font-size: 13px;" id="recruiter-display-name">Sarah Jenkins</div>
+              <div style="font-size: 11px; color: var(--partner-accent);" id="recruiter-display-company">Talent Lead at HyperGrowth</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==================== TAB 1: OVERVIEW & ANALYTICS ==================== -->
+      <section class="tab-section active" id="section-overview">
+        <!-- Section 1: Real-Time Recruiter Analytics (6 Dynamic Cards) -->
+        <div class="metrics-grid partner-analytics-grid">
+          <!-- 1. Active Postings -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Active Postings</span>
+            </div>
+            <div class="metric-value" id="metric-active-jobs">0</div>
+            <div class="metric-subtext">Live on Candidate Portal</div>
+          </div>
+
+          <!-- 2. Closed Posts -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Closed Posts</span>
+            </div>
+            <div class="metric-value" id="metric-closed-jobs">0</div>
+            <div class="metric-subtext">Applications Closed</div>
+          </div>
+
+          <!-- 3. Candidates Hired — Total -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Candidates Hired — Total</span>
+            </div>
+            <div class="metric-value" id="metric-hired-total">0</div>
+            <div class="metric-subtext">Across all postings</div>
+          </div>
+
+          <!-- 4. Shortlisted Candidates -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Shortlisted Candidates</span>
+            </div>
+            <div class="metric-value" id="metric-shortlisted">0</div>
+            <div class="metric-subtext">Under active evaluation</div>
+          </div>
+
+          <!-- 5. Hired Candidates -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Hired Candidates</span>
+            </div>
+            <div class="metric-value" id="metric-hired">0</div>
+            <div class="metric-subtext">Offers extended</div>
+          </div>
+
+          <!-- 6. Rejected Candidates -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Rejected Candidates</span>
+            </div>
+            <div class="metric-value" id="metric-rejected">0</div>
+            <div class="metric-subtext">Declined submissions</div>
+          </div>
+        </div>
+
+        <!-- Section 2: Job Postings Table directly below Analytics -->
+        <div style="background: var(--paper); border: 1.5px solid var(--paper-line); border-radius: var(--radius-m); padding: 24px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <h3 style="font-size: 18px; font-weight: 800;">Job Postings & Applications</h3>
+              <p style="font-size: 13px; color: var(--ink-soft); margin-top: 2px;">
+                Click any <strong>Applications</strong> count number to view candidates who applied for that specific job.
+              </p>
+            </div>
+            <button class="btn-outline" onclick="PartnerApp.switchTab('post')">+ Post New Role</button>
+          </div>
+
+          <div id="overview-jobs-table-container">
+            <!-- Dynamically populated via partner.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: MANAGE OPPORTUNITIES ==================== -->
+      <section class="tab-section" id="section-jobs">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800;">Your Posted Opportunities & Pipelines</h2>
+            <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 2px;">
+              Click the <strong>Applications</strong> count to view candidate submissions for that job. Click <strong>Close</strong> to conclude applications.
+            </p>
+          </div>
+          <button class="btn-primary" onclick="PartnerApp.switchTab('post')">
+            + Create New Role
+          </button>
+        </div>
+
+        <div id="partner-jobs-container">
+          <!-- Dynamically populated via partner.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: POST A NEW OPPORTUNITY ==================== -->
+      <section class="tab-section" id="section-post">
+        <div class="post-job-grid">
+          <!-- Job Creation Form -->
+          <div style="background: var(--paper); border: 1.5px solid var(--paper-line); border-radius: var(--radius-l); padding: 28px;">
+            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;">Create Job Opportunity</h2>
+            <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;">Publish an internship, project, or role directly to verified candidates.</p>
+
+            <form id="partner-post-job-form">
+              <div class="form-group">
+                <label class="form-label">Job Title *</label>
+                <input type="text" id="post-job-title" class="form-input" placeholder="e.g. AI/ML Engineer" required />
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Hiring Company Name</label>
+                  <input type="text" id="post-job-company" class="form-input" placeholder="e.g. HyperGrowth Media" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Role Category *</label>
+                  <select id="post-job-category" class="form-select" required>
+                    <option value="software">Software & Tech</option>
+                    <option value="video">Video Editing</option>
+                    <option value="content">Content & Copywriting</option>
+                    <option value="educator">STEM & Educator</option>
+                    <option value="freelancing">Freelancing & UI/UX</option>
+                    <option value="it">IT & Cloud Support</option>
+                    <option value="non-it">Non-IT & Operations</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Location *</label>
+                  <input type="text" id="post-job-location" class="form-input" placeholder="e.g. Bengaluru / Remote / Mumbai" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Duration</label>
+                  <input type="text" id="post-job-duration" class="form-input" placeholder="e.g. 3 Months / 6 Months / Flexible" value="3 Months" />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Monthly Stipend (₹ INR) *</label>
+                  <input type="number" id="post-job-stipend" class="form-input" placeholder="e.g. 35000" value="35000" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Application Deadline</label>
+                  <input type="date" id="post-job-deadline" class="form-input" value="2026-10-31" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Short Role Overview</label>
+                <textarea id="post-job-roles" class="form-textarea" placeholder="Brief 1-2 sentence executive summary of what the candidate will achieve..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Key Responsibilities (1 per line)</label>
+                <textarea id="post-job-responsibilities" class="form-textarea" rows="3" placeholder="Deliver weekly motion graphics assets&#10;Coordinate with founders on editorial scripts&#10;Analyze retention hooks"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Candidate Obligations & Expectations (1 per line)</label>
+                <textarea id="post-job-obligations" class="form-textarea" rows="3" placeholder="24-hour turnaround on first drafts&#10;Maintain strict non-disclosure compliance&#10;Attend weekly Monday 10 AM IST sprint"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Required Skill Tags (comma-separated)</label>
+                <input type="text" id="post-job-tags" class="form-input" placeholder="e.g. Python, PyTorch, LLMs, NLP, Docker" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">External Google Form Link (Optional / Leave empty for Direct Zuno 1-Click Apply)</label>
+                <input type="url" id="post-job-form-url" class="form-input" placeholder="https://forms.gle/..." />
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                <button type="button" class="btn-outline" onclick="PartnerApp.switchTab('jobs')">Cancel</button>
+                <button type="submit" class="btn-primary" style="padding: 12px 28px;">
+                  🚀 Publish Opportunity to Candidate Portal
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Sticky Live Candidate Card Preview -->
+          <div class="job-preview-sticky">
+            <div class="job-preview-header">
+              <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--partner-accent);">Candidate Card Preview</span>
+              <span class="status-pill applied" id="prev-job-category">software</span>
+            </div>
+
+            <h3 id="prev-job-title" style="font-size: 18px; font-weight: 800; color: var(--ink);">AI/ML Engineer</h3>
+            <div id="prev-job-company" style="font-weight: 700; font-size: 13.5px; color: var(--partner-accent); margin-top: 2px;">HyperGrowth Media</div>
+            <div id="prev-job-meta" style="font-size: 12.5px; color: var(--ink-soft); margin-top: 8px;">
+              📍 Bengaluru • ⏳ 3 Months • 💰 ₹35,000 / month
+            </div>
+
+            <div style="background: var(--paper-soft); padding: 12px; border-radius: var(--radius-s); margin-top: 16px; font-size: 12px; color: var(--ink-soft);">
+              ⚡ When published, candidates will immediately be able to apply. All submissions stream into your real-time candidate pipeline.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: SHORTLISTED CANDIDATES HUB ==================== -->
+      <section class="tab-section" id="section-shortlisted">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 20px; font-weight: 800;">Shortlisted Candidates Hub</h2>
+          <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 2px;">
+            Candidates shortlisted across your job postings. Click <strong>👁 View</strong> to inspect their latest resume profile, or extended hiring offers.
+          </p>
+        </div>
+
+        <div id="shortlisted-container">
+          <!-- Dynamically populated via partner.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: REJECTED CANDIDATES HUB ==================== -->
+      <section class="tab-section" id="section-rejected">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 20px; font-weight: 800;">Rejected Candidates Hub</h2>
+          <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 2px;">
+            Historical records of declined applications. Stored per specific job application.
+          </p>
+        </div>
+
+        <div id="rejected-container">
+          <!-- Dynamically populated via partner.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 6: HIRED CANDIDATES HUB ==================== -->
+      <section class="tab-section" id="section-hired">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 20px; font-weight: 800;">Hired & Selected Candidates</h2>
+          <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 2px;">
+            Candidates who have received and confirmed official offers through Zuno.
+          </p>
+        </div>
+
+        <div id="hired-container">
+          <!-- Dynamically populated via partner.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 7: COMPANY & RECRUITER PROFILE ==================== -->
+      <section class="tab-section" id="section-company">
+        <div style="background: var(--paper); border: 1.5px solid var(--paper-line); border-radius: var(--radius-l); padding: 28px; max-width: 720px;">
+          <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;">Recruiter & Partner Profile</h2>
+          <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;">
+            These details are shared with candidates when you toggle <em>"Share recruiter contact details"</em> upon shortlisting.
+          </p>
+
+          <form id="partner-profile-form">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Recruiter Full Name *</label>
+                <input type="text" id="recruiter-name-input" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Recruiter Title / Designation *</label>
+                <input type="text" id="recruiter-title-input" class="form-input" placeholder="e.g. Talent Acquisition Lead" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Company Name *</label>
+                <input type="text" id="recruiter-company-input" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Company Logo URL</label>
+                <input type="url" id="recruiter-logo-input" class="form-input" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Official Work Email *</label>
+                <input type="email" id="recruiter-email-input" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Phone / WhatsApp *</label>
+                <input type="tel" id="recruiter-phone-input" class="form-input" required />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Company Website URL</label>
+                <input type="url" id="recruiter-website-input" class="form-input" placeholder="https://..." />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Headquarters / Location</label>
+                <input type="text" id="recruiter-location-input" class="form-input" placeholder="Bengaluru, India" />
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+              <button type="submit" class="btn-primary">
+                Save Partner Profile
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       SECTION 3: APPLICANTS TABLE (FLOATING MODAL ON CLICKING APPLICATIONS NUMBER)
+       ========================================================================== -->
+  <div class="modal-overlay" id="job-applicants-floating-modal">
+    <div class="floating-pipeline-modal-box">
+      <span class="modal-close-btn" style="position: absolute; right: 24px; top: 24px; font-size: 26px; cursor: pointer; color: var(--ink-soft); line-height: 1;">&times;</span>
+      
+      <div class="floating-pipeline-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span class="status-pill applied" id="floating-job-category">Role Category</span>
+            <span class="status-pill open" id="floating-job-status">Active</span>
+          </div>
+          <h2 id="floating-job-title" style="font-size: 21px; font-weight: 800; color: var(--ink);">Opportunity Title</h2>
+          <p id="floating-job-subtitle" style="font-size: 13px; color: var(--ink-soft); margin-top: 3px;">
+            Candidate submissions fetched from actual application records. Click <strong>👁 View</strong> to fetch real-time profile and resume.
+          </p>
+        </div>
+      </div>
+
+      <div id="floating-pipeline-table-container">
+        <!-- Dynamically populated Applicants Table -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SECTIONS 4 & 5: REAL-TIME CANDIDATE RESUME / PDF VIEW (ON CLICKING 👁 VIEW)
+       ========================================================================== -->
+  <div class="modal-overlay" id="candidate-resume-modal">
+    <div class="resume-modal-box">
+      <span class="modal-close-btn" onclick="PartnerApp.closeCandidateResume()" style="position: absolute; right: 22px; top: 22px; font-size: 26px; cursor: pointer; color: #0E1114; z-index: 10; line-height: 1;">&times;</span>
+      
+      <!-- PDF Resume Header (Centered Candidate Name at Top Center) -->
+      <div class="pdf-resume-header-center">
+        <div class="pdf-center-avatar-wrap">
+          <img src="" id="resume-avatar-img" class="pdf-center-avatar" alt="Avatar" />
+        </div>
+        <h1 id="resume-candidate-name" class="pdf-center-name">CANDIDATE NAME</h1>
+        <div id="resume-candidate-title" class="pdf-center-title">Software Developer</div>
+        <div id="resume-candidate-location" class="pdf-center-meta">📍 Bengaluru, India • Applied for: Role Title</div>
+        
+        <!-- Directly Below: Contact Information Bar -->
+        <div class="pdf-contact-row" id="resume-contact-bar">
+          <!-- Dynamically injected: Email, Phone, LinkedIn, GitHub, Portfolio -->
+        </div>
+      </div>
+
+      <!-- Structured Resume Body (Sections 4 & 5) -->
+      <div class="pdf-resume-body">
+        
+        <!-- 1. Professional Summary -->
+        <div class="pdf-section" id="resume-section-summary">
+          <div class="pdf-section-heading">
+            <span>📝</span> Professional Summary
+          </div>
+          <p class="pdf-bio-text" id="resume-bio-text"></p>
+        </div>
+
+        <!-- 2. Education -->
+        <div class="pdf-section" id="resume-section-education">
+          <div class="pdf-section-heading">
+            <span>🎓</span> Education
+          </div>
+          <div class="pdf-edu-card">
+            <div class="pdf-edu-degree" id="resume-edu-degree"></div>
+            <div class="pdf-edu-college" id="resume-edu-college"></div>
+            <div class="pdf-edu-timeline" id="resume-edu-timeline"></div>
+          </div>
+        </div>
+
+        <!-- 3. Experience / Career Track -->
+        <div class="pdf-section" id="resume-section-experience">
+          <div class="pdf-section-heading">
+            <span>💼</span> Experience & Career Track
+          </div>
+          <div id="resume-experience-content">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- 4. Technical & Professional Skills -->
+        <div class="pdf-section" id="resume-section-skills">
+          <div class="pdf-section-heading">
+            <span>⚡</span> Technical & Professional Skills
+          </div>
+          <div class="pdf-tags-cloud" id="resume-tags-cloud"></div>
+        </div>
+
+        <!-- 5. Projects & Portfolios -->
+        <div class="pdf-section" id="resume-section-projects">
+          <div class="pdf-section-heading">
+            <span>🚀</span> Projects & Portfolios
+          </div>
+          <div id="resume-projects-content">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- 6. Certifications & Additional Details -->
+        <div class="pdf-section" id="resume-section-certifications">
+          <div class="pdf-section-heading">
+            <span>📜</span> Certifications & Credentials
+          </div>
+          <div id="resume-certifications-content">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Section 6: Candidate Actions Footer (Shortlist, Reject, Hire) -->
+      <div class="resume-modal-footer">
+        <!-- Recruiter Share Contact Toggle Box -->
+        <div class="recruiter-share-box">
+          <label>
+            <input type="checkbox" id="share-recruiter-details-toggle" checked />
+            <span>Share my Recruiter Contact details (Name, Email & Phone) with this candidate upon Shortlisting</span>
+          </label>
+          <div id="shared-recruiter-summary-preview" style="font-size: 11.5px; color: var(--ink-soft); margin-top: 6px; padding-left: 28px;">
+            <!-- Recruiter contact preview -->
+          </div>
+        </div>
+
+        <div class="resume-modal-footer-btns">
+          <div>
+            <span id="resume-modal-current-status" style="font-size: 12.5px; color: var(--ink-soft); font-weight: 700;"></span>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <!-- Reject Button (Red) -->
+            <button type="button" class="btn-reject-red" id="resume-modal-reject-btn" title="Reject candidate for this specific job">
+              ✕ Reject Candidate
+            </button>
+            <!-- Shortlist Button (Green) -->
+            <button type="button" class="btn-shortlist-green" id="resume-modal-shortlist-btn" title="Shortlist candidate for this specific job">
+              ✓ Shortlist Candidate
+            </button>
+            <!-- Hire Button (Lime) -->
+            <button type="button" class="btn-hire" id="resume-modal-hire-btn" title="Confirm hiring offer for candidate">
+              ⚡ Hire / Select
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/partner.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zuno Dashboard — Opportunities, Earnings & Growth</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800;1,900&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="src/main/resources/static/css/dashboard.css" />
+  <link rel="stylesheet" href="src/main/resources/static/css/components.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ==================== LEFT SIDEBAR NAVIGATION ==================== -->
+    <aside class="sidebar">
+      <!-- Brand Logo -->
+      <div class="sidebar-header">
+        <a href="index.html" class="zuno-brand">
+          <div class="zuno-logo-wrap">
+            <div class="zuno-text-row">
+              <span class="zuno-text-black">ZU</span><span class="zuno-text-coral">NO</span>
+              <span class="zuno-slash-accent"></span>
+            </div>
+          </div>
+        </a>
+        <span class="candidate-tag">Candidate</span>
+      </div>
+
+      <!-- Quick Switcher to Partner Portal -->
+      <div style="padding: 0 16px 16px;">
+        <a href="partner.html" style="width: 100%; justify-content: center; display: inline-flex; align-items: center; gap: 8px; background: var(--paper-muted); border: 1.5px solid var(--paper-line); color: var(--ink); font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: var(--radius-m); text-decoration: none;">
+          <span>💼</span>
+          <span>Partner Platform ↗</span>
+        </a>
+      </div>
+
+      <!-- Clean Minimalist Navigation Menu -->
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="overview">
+          <span class="nav-dot"></span>
+          <span>Overview & Leaderboard</span>
+        </button>
+
+        <button class="nav-item" data-tab="explore">
+          <span class="nav-dot"></span>
+          <span>Opportunities</span>
+        </button>
+
+        <button class="nav-item" data-tab="profile">
+          <span class="nav-dot"></span>
+          <span>Profile & Goals</span>
+        </button>
+
+        <button class="nav-item" data-tab="applied">
+          <span class="nav-dot"></span>
+          <span>Applied Jobs</span>
+        </button>
+
+        <button class="nav-item" data-tab="payments">
+          <span class="nav-dot"></span>
+          <span>Earnings & Payments</span>
+        </button>
+
+        <button class="nav-item" data-tab="reviews">
+          <span class="nav-dot"></span>
+          <span>Reviews & Spotlight</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <main class="main-content">
+      
+      <!-- Top Bar with Header Action Dock (Bell, Settings, Profile & Logout) -->
+      <header class="top-bar">
+        <div class="page-title-group">
+          <h1 id="topbar-title">Welcome back, <span class="user-name-display">Candidate</span>! 🔥</h1>
+          <p id="topbar-subtitle">Explore verified opportunities and build your personal income stream.</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn-outline" onclick="document.querySelector('[data-tab=explore]').click()">
+            Browse Gigs
+          </button>
+          <button class="btn-primary" onclick="document.getElementById('export-stats-modal').classList.add('open')">
+            Export Report
+          </button>
+
+          <!-- 1. Notification Bell Button (Crisp Vector SVG) -->
+          <button type="button" class="header-action-btn" id="dock-bell-btn" title="Recent Notifications" aria-label="Notifications">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="header-badge-dot"></span>
+          </button>
+
+          <!-- 2. Settings Button (Crisp Vector SVG) -->
+          <button type="button" class="header-action-btn" id="dock-settings-btn" title="Settings & Preferences" aria-label="Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+
+          <!-- 3. Profile & Logout Dropdown Menu (Crisp Vector SVG) -->
+          <div style="position: relative;">
+            <button type="button" class="header-action-btn" id="dock-profile-btn" title="Candidate Profile & Actions" aria-label="Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </button>
+            
+            <div class="dock-dropdown" id="dock-profile-dropdown">
+              <div style="padding: 6px 12px 10px; border-bottom: 1px solid var(--paper-line);">
+                <div style="font-weight: 800; font-size: 13px;" class="user-name-display">Candidate</div>
+                <div style="font-size: 11px; color: var(--coral);" class="user-role-display">Candidate Profile</div>
+              </div>
+              <button type="button" class="dock-dropdown-item" onclick="document.querySelector('[data-tab=profile]').click(); document.getElementById('dock-profile-dropdown').classList.remove('open');">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile & Goals
+              </button>
+              <button type="button" class="dock-dropdown-item" onclick="document.getElementById('export-stats-modal').classList.add('open'); document.getElementById('dock-profile-dropdown').classList.remove('open');">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg> Export Stats
+              </button>
+              <button type="button" class="dock-dropdown-item" onclick="document.getElementById('settings-modal').classList.add('open'); document.getElementById('dock-profile-dropdown').classList.remove('open');">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Preferences
+              </button>
+              <div style="height: 1px; background: var(--paper-line); margin: 4px 0;"></div>
+              <button type="button" class="dock-dropdown-item logout-danger" id="dock-logout-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==================== TAB 1: OVERVIEW & LEADERBOARD ==================== -->
+      <section class="tab-section active" id="section-overview">
+        <!-- Earnings Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card highlight-dark">
+            <div class="metric-header">
+              <span class="metric-title">This Week Earnings</span>
+              <span class="metric-icon-badge">⚡</span>
+            </div>
+            <div class="metric-value weekly-earnings-display">₹0</div>
+            <div class="metric-subtext">Start exploring open opportunities</div>
+          </div>
+
+          <div class="metric-card highlight-coral">
+            <div class="metric-header">
+              <span class="metric-title">This Month Earnings</span>
+              <span class="metric-icon-badge">💰</span>
+            </div>
+            <div class="metric-value monthly-earnings-display">₹0</div>
+            <div class="metric-subtext">Ready for month-end payout</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Domain Leaderboard Rank</span>
+              <span class="metric-icon-badge">🏆</span>
+            </div>
+            <div class="metric-value current-rank-display" style="color: var(--blue);">-</div>
+            <div class="metric-subtext" style="color: var(--ink-soft);">Apply to land your first gig rank</div>
+          </div>
+        </div>
+
+        <!-- Leaderboard by Profession -->
+        <div class="leaderboard-section">
+          <div class="section-header-flex">
+            <div>
+              <h2>Domain Leaderboard Standings</h2>
+              <p style="font-size: 13.5px; color: var(--ink-soft); margin-top: 4px;">Compare verified earnings with top talent across your chosen industry.</p>
+            </div>
+
+            <!-- Domain Switcher -->
+            <div class="domain-filter-tabs">
+              <button class="domain-tab active" data-profession="content">Content Creator</button>
+              <button class="domain-tab" data-profession="software">Software Dev</button>
+              <button class="domain-tab" data-profession="video">Video Editing</button>
+              <button class="domain-tab" data-profession="educator">STEM / Educator</button>
+              <button class="domain-tab" data-profession="freelancing">Freelance</button>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div style="overflow-x: auto;">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Rank</th>
+                  <th>Candidate</th>
+                  <th>Domain</th>
+                  <th>Monthly</th>
+                  <th>Total Earned</th>
+                  <th>Performance</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-tbody">
+                <!-- Dynamically populated via dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: EXPLORE OPPORTUNITIES ==================== -->
+      <section class="tab-section" id="section-explore">
+        <!-- Hero Banner with Illustrative Image -->
+        <div class="hero-banner">
+          <div class="hero-content">
+            <span class="hero-badge">Curated Opportunities</span>
+            <h2>Find Your Next High-Impact Role</h2>
+            <p>Direct internships, freelance gigs, and project contracts from high-growth tech firms and media companies.</p>
+          </div>
+        </div>
+
+        <!-- Search Bar and Complete A-Z India Cities Filter -->
+        <div class="search-filter-panel">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="opp-search-input" placeholder="Search by role, company, skill (e.g. Video, Spring Boot, Figma)..." />
+          </div>
+
+          <!-- A-Z Indian Cities Searchable Filter -->
+          <div class="city-search-wrap">
+            <span class="city-search-icon">📍</span>
+            <input type="text" id="city-search-input" list="indian-cities-list" placeholder="All Cities / Type city..." autocomplete="off" />
+            <datalist id="indian-cities-list">
+              <option value="All Cities / Remote">
+              <!-- A -->
+              <option value="Ahmedabad">
+              <option value="Agra">
+              <option value="Amritsar">
+              <option value="Aurangabad">
+              <option value="Ajmer">
+              <option value="Allahabad (Prayagraj)">
+              <!-- B -->
+              <option value="Bengaluru">
+              <option value="Bhopal">
+              <option value="Bhubaneswar">
+              <option value="Bareilly">
+              <option value="Bathinda">
+              <!-- C -->
+              <option value="Chandigarh">
+              <option value="Chennai">
+              <option value="Coimbatore">
+              <option value="Cuttack">
+              <!-- D -->
+              <option value="Delhi">
+              <option value="Dehradun">
+              <option value="Dhanbad">
+              <option value="Durgapur">
+              <!-- E -->
+              <option value="Erode">
+              <option value="Eluru">
+              <!-- F -->
+              <option value="Faridabad">
+              <option value="Firozabad">
+              <option value="Fatehpur">
+              <!-- G -->
+              <option value="Gurugram">
+              <option value="Guwahati">
+              <option value="Gwalior">
+              <option value="Gandhinagar">
+              <option value="Ghaziabad">
+              <option value="Goa (Panaji)">
+              <!-- H -->
+              <option value="Hyderabad">
+              <option value="Haridwar">
+              <option value="Hisar">
+              <option value="Hubballi">
+              <!-- I -->
+              <option value="Indore">
+              <option value="Imphal">
+              <option value="Itanagar">
+              <!-- J -->
+              <option value="Jaipur">
+              <option value="Jodhpur">
+              <option value="Jammu">
+              <option value="Jalandhar">
+              <option value="Jamshedpur">
+              <!-- K -->
+              <option value="Kolkata">
+              <option value="Kochi">
+              <option value="Kanpur">
+              <option value="Kota">
+              <option value="Kozhikode">
+              <option value="Kanyakumari">
+              <!-- L -->
+              <option value="Lucknow">
+              <option value="Ludhiana">
+              <option value="Leh">
+              <!-- M -->
+              <option value="Mumbai">
+              <option value="Madurai">
+              <option value="Mysuru">
+              <option value="Meerut">
+              <option value="Mangaluru">
+              <option value="Mohali">
+              <!-- N -->
+              <option value="New Delhi">
+              <option value="Nagpur">
+              <option value="Nashik">
+              <option value="Noida">
+              <option value="Nellore">
+              <!-- O -->
+              <option value="Ooty">
+              <option value="Ongole">
+              <!-- P -->
+              <option value="Pune">
+              <option value="Patna">
+              <option value="Panaji">
+              <option value="Puducherry">
+              <option value="Prayagraj">
+              <!-- R -->
+              <option value="Ranchi">
+              <option value="Raipur">
+              <option value="Rajkot">
+              <option value="Rishikesh">
+              <option value="Rohtak">
+              <!-- S -->
+              <option value="Surat">
+              <option value="Srinagar">
+              <option value="Shimla">
+              <option value="Salem">
+              <option value="Solapur">
+              <option value="Siliguri">
+              <option value="Shillong">
+              <!-- T -->
+              <option value="Thiruvananthapuram">
+              <option value="Thane">
+              <option value="Tirupati">
+              <option value="Tiruchirappalli">
+              <option value="Tiruppur">
+              <!-- U -->
+              <option value="Udaipur">
+              <option value="Ujjain">
+              <option value="Ulhasnagar">
+              <!-- V -->
+              <option value="Vadodara">
+              <option value="Varanasi">
+              <option value="Vijayawada">
+              <option value="Visakhapatnam">
+              <option value="Vellore">
+              <!-- W -->
+              <option value="Warangal">
+              <option value="Wayanad">
+              <!-- Y -->
+              <option value="Yamunanagar">
+              <option value="Yavatmal">
+              <!-- Z -->
+              <option value="Zirakpur">
+              <option value="Zunheboto">
+              <option value="Remote">
+            </datalist>
+          </div>
+        </div>
+
+        <!-- Category Pill Buttons (Clean, No Icons, No Horizontal Scroll) -->
+        <div class="category-cards-wrap">
+          <div class="category-pill-card active" data-category="all">
+            <span class="cat-title">All Roles</span>
+          </div>
+          <div class="category-pill-card" data-category="content">
+            <span class="cat-title">Content & Copy</span>
+          </div>
+          <div class="category-pill-card" data-category="video">
+            <span class="cat-title">Video Editing</span>
+          </div>
+          <div class="category-pill-card" data-category="software">
+            <span class="cat-title">Software & Tech</span>
+          </div>
+          <div class="category-pill-card" data-category="it">
+            <span class="cat-title">IT Support</span>
+          </div>
+          <div class="category-pill-card" data-category="non-it">
+            <span class="cat-title">Non-IT & Ops</span>
+          </div>
+          <div class="category-pill-card" data-category="educator">
+            <span class="cat-title">Educator & Tutor</span>
+          </div>
+          <div class="category-pill-card" data-category="freelancing">
+            <span class="cat-title">Freelancing</span>
+          </div>
+          <div class="category-pill-card" data-category="other">
+            <span class="cat-title">Other Fields</span>
+          </div>
+        </div>
+
+        <!-- Opportunities Grid -->
+        <div class="opportunities-grid" id="opportunities-container">
+          <!-- Dynamically populated via dashboard.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: PROFILE & CAREER GOALS ==================== -->
+      <section class="tab-section" id="section-profile">
+        <div class="profile-card-container">
+          <h2 style="margin-bottom: 8px;">Candidate Profile & Preferences</h2>
+          <p style="color: var(--ink-soft); font-size: 13.5px; margin-bottom: 24px;">Manage your login credentials, academic background, career roles, and coding portfolios.</p>
+
+          <!-- Candidate Header Preview -->
+          <div class="profile-header-edit" style="margin-bottom: 24px;">
+            <div class="avatar-upload-wrap">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" id="profile-avatar-preview" class="avatar-large" alt="Profile Avatar" />
+              <label for="avatar-file-input" class="avatar-upload-btn" title="Change Photo">📷</label>
+              <input type="file" id="avatar-file-input" accept="image/*" style="display: none;" />
+            </div>
+            <div>
+              <h3 class="user-name-display" style="font-size: 19px; font-weight: 800;">Candidate</h3>
+              <span class="user-role-display" style="font-size: 13px; color: var(--coral); font-weight: 700;">Candidate Account</span>
+            </div>
+          </div>
+
+          <!-- ================= SECTION 1: PERSONAL DETAILS ================= -->
+          <div class="profile-accordion-card readonly-mode" id="accordion-personal">
+            <div class="profile-accordion-header">
+              <div class="profile-accordion-title">
+                <span>👤</span>
+                <span>Personal Details</span>
+              </div>
+              <div class="profile-accordion-actions">
+                <button type="button" class="btn-section-edit" data-section="personal">
+                  <span class="edit-icon">✏️</span> <span class="edit-text">Edit Details</span>
+                </button>
+                <button type="button" class="accordion-chevron-btn" data-target="accordion-personal" title="Fold / Unfold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+              </div>
+            </div>
+            <div class="profile-accordion-body">
+              <!-- Summary / Bio with 300-char limit -->
+              <div class="form-group">
+                <label class="form-label">Professional Summary (Bio)</label>
+                <textarea id="profile-about-input" class="form-textarea" maxlength="300" placeholder="Describe your background, what drives you, and key achievements (maximum 300 characters)..."></textarea>
+                <div class="char-count-wrap">
+                  <span>Keep it crisp & impactful</span>
+                  <span id="bio-char-count">0 / 300 characters</span>
+                </div>
+              </div>
+
+              <!-- Full Name & Username -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="profile-name-input" class="form-input" placeholder="Your full name" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input type="text" id="profile-username-input" class="form-input" placeholder="Username" required />
+                </div>
+              </div>
+
+              <!-- Email & Password with View Toggle -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" id="profile-email-input" class="form-input" placeholder="Email" readonly style="opacity: 0.85;" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <div class="pwd-input-wrap">
+                    <input type="password" id="profile-password-input" class="form-input" placeholder="Enter password" />
+                    <button type="button" class="pwd-toggle-btn" id="toggle-password-btn" title="Toggle password visibility">
+                      👁️
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Phone, Location & Profession (Domain) -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Mobile Number</label>
+                  <input type="tel" id="profile-phone-input" class="form-input" placeholder="+91 98765 43210" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Current Location / City</label>
+                  <input type="text" id="profile-city-input" class="form-input" placeholder="e.g. Bengaluru, Mumbai, Delhi" />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Date of Birth (DOB)</label>
+                  <input type="date" id="profile-dob-input" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Profession / Title (Domain on Leaderboard)</label>
+                  <input type="text" id="profile-profession-input" class="form-input" placeholder="e.g. Full Stack Developer, Video Strategist" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= SECTION 2: EDUCATION DETAILS ================= -->
+          <div class="profile-accordion-card readonly-mode" id="accordion-education">
+            <div class="profile-accordion-header">
+              <div class="profile-accordion-title">
+                <span>🎓</span>
+                <span>Education Details</span>
+              </div>
+              <div class="profile-accordion-actions">
+                <button type="button" class="btn-section-edit" data-section="education">
+                  <span class="edit-icon">✏️</span> <span class="edit-text">Edit Education</span>
+                </button>
+                <button type="button" class="accordion-chevron-btn" data-target="accordion-education" title="Fold / Unfold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+              </div>
+            </div>
+            <div class="profile-accordion-body">
+              <!-- College / University -->
+              <div class="form-group">
+                <label class="form-label">College / University Name</label>
+                <input type="text" id="profile-college-input" class="form-input" placeholder="e.g. IIT Bombay, Delhi University, BITS Pilani" />
+              </div>
+
+              <!-- Degree (30+ Degrees Searchable) & Branch (100+ Branches Searchable) -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Degree (30+ Options / Searchable)</label>
+                  <input type="text" id="profile-degree-input" class="form-input" list="degrees-datalist" placeholder="Select or type degree..." />
+                  <datalist id="degrees-datalist">
+                    <option value="B.Tech - Bachelor of Technology">
+                    <option value="B.E. - Bachelor of Engineering">
+                    <option value="B.Sc - Bachelor of Science">
+                    <option value="B.Sc (Hons) - Bachelor of Science (Honours)">
+                    <option value="B.Com - Bachelor of Commerce">
+                    <option value="B.Com (Hons) - Bachelor of Commerce (Honours)">
+                    <option value="BBA - Bachelor of Business Administration">
+                    <option value="BCA - Bachelor of Computer Applications">
+                    <option value="BA - Bachelor of Arts">
+                    <option value="BA (Hons) - Bachelor of Arts (Honours)">
+                    <option value="B.Arch - Bachelor of Architecture">
+                    <option value="B.Des - Bachelor of Design">
+                    <option value="B.Pharm - Bachelor of Pharmacy">
+                    <option value="LLB - Bachelor of Legislative Law">
+                    <option value="B.Voc - Bachelor of Vocation">
+                    <option value="BHM - Bachelor of Hotel Management">
+                    <option value="B.Ed - Bachelor of Education">
+                    <option value="MBBS - Bachelor of Medicine">
+                    <option value="BDS - Bachelor of Dental Surgery">
+                    <option value="BAMS - Bachelor of Ayurvedic Medicine">
+                    <option value="M.Tech - Master of Technology">
+                    <option value="M.E. - Master of Engineering">
+                    <option value="M.Sc - Master of Science">
+                    <option value="M.Com - Master of Commerce">
+                    <option value="MBA - Master of Business Administration">
+                    <option value="MCA - Master of Computer Applications">
+                    <option value="MA - Master of Arts">
+                    <option value="LLM - Master of Laws">
+                    <option value="M.Pharm - Master of Pharmacy">
+                    <option value="M.Des - Master of Design">
+                    <option value="MS - Master of Science (Global)">
+                    <option value="Ph.D - Doctor of Philosophy">
+                    <option value="Integrated M.Tech (5 Years)">
+                    <option value="Integrated M.Sc (5 Years)">
+                    <option value="Diploma in Engineering">
+                    <option value="Polytechnic Diploma">
+                    <option value="CA - Chartered Accountancy">
+                    <option value="CS - Company Secretary">
+                    <option value="Other">
+                  </datalist>
+                  <div id="specify-degree-wrapper" style="display: none; margin-top: 8px;">
+                    <input type="text" id="profile-degree-other" class="form-input" placeholder="Specify your custom degree..." />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Branch (100+ Options / Searchable)</label>
+                  <input type="text" id="profile-branch-input" class="form-input" list="branches-datalist" placeholder="Select or type branch..." />
+                  <datalist id="branches-datalist">
+                    <option value="Computer Science & Engineering (CSE)">
+                    <option value="Artificial Intelligence & Machine Learning (AI & ML)">
+                    <option value="Data Science & Big Data Analytics">
+                    <option value="Information Technology (IT)">
+                    <option value="Cyber Security & Digital Forensics">
+                    <option value="Cloud Computing & DevOps Engineering">
+                    <option value="Software Engineering & Systems">
+                    <option value="Internet of Things (IoT) & Smart Sensors">
+                    <option value="Blockchain Technology & Web3">
+                    <option value="Electronics & Communication Engineering (ECE)">
+                    <option value="Electrical & Electronics Engineering (EEE)">
+                    <option value="Mechanical Engineering">
+                    <option value="Civil & Structural Engineering">
+                    <option value="Chemical Engineering">
+                    <option value="Aerospace & Aeronautical Engineering">
+                    <option value="Robotics & Automation Engineering">
+                    <option value="Mechatronics Engineering">
+                    <option value="Biotechnology & Bioinformatics">
+                    <option value="Biomedical Engineering & Medical Devices">
+                    <option value="Automobile & Electric Vehicle Engineering">
+                    <option value="Industrial & Production Engineering">
+                    <option value="Petroleum & Petrochemical Engineering">
+                    <option value="Mining Engineering">
+                    <option value="Metallurgical & Materials Engineering">
+                    <option value="Textile & Fashion Technology">
+                    <option value="Marine & Naval Architecture">
+                    <option value="Environmental Engineering & Sustainability">
+                    <option value="Food Technology & Processing">
+                    <option value="Agricultural & Farming Engineering">
+                    <option value="Genetic Engineering & Genomics">
+                    <option value="Nanotechnology & Advanced Materials">
+                    <option value="Nuclear Engineering">
+                    <option value="Renewable Energy & Solar Systems">
+                    <option value="Physics & Theoretical Physics">
+                    <option value="Applied Mathematics & Statistics">
+                    <option value="Pure Chemistry & Organic Chemistry">
+                    <option value="Economics, Econometrics & Data">
+                    <option value="Finance, Banking & FinTech">
+                    <option value="Marketing Management & Growth">
+                    <option value="Human Resource Management (HRM)">
+                    <option value="Supply Chain, Logistics & Operations">
+                    <option value="Business Analytics & Intelligence">
+                    <option value="International Business & Trade">
+                    <option value="Corporate & Commercial Law">
+                    <option value="Cyber Law & Intellectual Property (IPR)">
+                    <option value="Criminal Law & Constitutional Law">
+                    <option value="Clinical Psychology & Counseling">
+                    <option value="Journalism, Mass Media & PR">
+                    <option value="Digital Media & Visual Communication">
+                    <option value="English Literature & Linguistics">
+                    <option value="Animation, 3D Modeling & VFX">
+                    <option value="Game Design & Game Development">
+                    <option value="Graphic & UI/UX Product Design">
+                    <option value="Architecture & Interior Design">
+                    <option value="Pharmacy & Pharmaceutical Science">
+                    <option value="Commerce, Accounting & Taxation">
+                    <option value="General Management & Strategy">
+                    <option value="Other">
+                  </datalist>
+                  <div id="specify-branch-wrapper" style="display: none; margin-top: 8px;">
+                    <input type="text" id="profile-branch-other" class="form-input" placeholder="Specify your custom branch..." />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Specialization & Timeline -->
+              <div class="form-group">
+                <label class="form-label">Specialization / Focus Track (Optional)</label>
+                <input type="text" id="profile-specialization-input" class="form-input" placeholder="e.g. Distributed Systems, Product Marketing, Deep Learning" />
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">From (Start Month & Year)</label>
+                  <div style="display: flex; gap: 8px;">
+                    <select id="profile-from-month" class="form-select" style="flex: 1;">
+                      <option value="">Month</option>
+                      <option value="Jan">January</option>
+                      <option value="Feb">February</option>
+                      <option value="Mar">March</option>
+                      <option value="Apr">April</option>
+                      <option value="May">May</option>
+                      <option value="Jun">June</option>
+                      <option value="Jul">July</option>
+                      <option value="Aug" selected>August</option>
+                      <option value="Sep">September</option>
+                      <option value="Oct">October</option>
+                      <option value="Nov">November</option>
+                      <option value="Dec">December</option>
+                    </select>
+                    <select id="profile-from-year" class="form-select" style="flex: 1;">
+                      <option value="">Year</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023" selected>2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">To / Expected Graduation (Month & Year)</label>
+                  <div style="display: flex; gap: 8px;">
+                    <select id="profile-to-month" class="form-select" style="flex: 1;">
+                      <option value="">Month</option>
+                      <option value="Jan">January</option>
+                      <option value="Feb">February</option>
+                      <option value="Mar">March</option>
+                      <option value="Apr">April</option>
+                      <option value="May" selected>May</option>
+                      <option value="Jun">June</option>
+                      <option value="Jul">July</option>
+                      <option value="Aug">August</option>
+                      <option value="Sep">September</option>
+                      <option value="Oct">October</option>
+                      <option value="Nov">November</option>
+                      <option value="Dec">December</option>
+                    </select>
+                    <select id="profile-to-year" class="form-select" style="flex: 1;">
+                      <option value="">Year</option>
+                      <option value="2028">2028</option>
+                      <option value="2027" selected>2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= SECTION 3: INTERESTS & CAREER PREFERENCES ================= -->
+          <div class="profile-accordion-card readonly-mode" id="accordion-interests">
+            <div class="profile-accordion-header">
+              <div class="profile-accordion-title">
+                <span>🎯</span>
+                <span>Interests, Roles & Portfolios</span>
+              </div>
+              <div class="profile-accordion-actions">
+                <button type="button" class="btn-section-edit" data-section="interests">
+                  <span class="edit-icon">✏️</span> <span class="edit-text">Edit Preferences</span>
+                </button>
+                <button type="button" class="accordion-chevron-btn" data-target="accordion-interests" title="Fold / Unfold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+              </div>
+            </div>
+            <div class="profile-accordion-body">
+              <!-- Preferred Role (200+ Roles) & Desired Designation -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Role Preferences (200+ Searchable Roles)</label>
+                  <input type="text" id="profile-role-input" class="form-input" list="roles-datalist" placeholder="Type letter (e.g. 'v' for Video Editor)..." />
+                  <datalist id="roles-datalist">
+                    <!-- A -->
+                    <option value="AI Engineer">
+                    <option value="Android Developer">
+                    <option value="Animation Artist">
+                    <option value="API Developer">
+                    <option value="AR/VR Developer">
+                    <option value="Audio Engineer">
+                    <option value="Automation Engineer">
+                    <!-- B -->
+                    <option value="Backend Developer (Java/Spring Boot)">
+                    <option value="Backend Developer (Node.js/Python)">
+                    <option value="Big Data Engineer">
+                    <option value="Blockchain Developer">
+                    <option value="Brand Designer">
+                    <option value="Business Analyst">
+                    <!-- C -->
+                    <option value="C++ Systems Developer">
+                    <option value="Cloud Architect (AWS/GCP/Azure)">
+                    <option value="Content Creator">
+                    <option value="Content Strategist">
+                    <option value="Copywriter">
+                    <option value="Cybersecurity Analyst">
+                    <!-- D -->
+                    <option value="Data Analyst">
+                    <option value="Data Engineer">
+                    <option value="Data Scientist">
+                    <option value="Database Administrator">
+                    <option value="DevOps Engineer">
+                    <option value="Digital Marketing Specialist">
+                    <!-- E -->
+                    <option value="E-Commerce Manager">
+                    <option value="Embedded Systems Engineer">
+                    <option value="Ethereum/Solidity Developer">
+                    <option value="Event Coordinator">
+                    <!-- F -->
+                    <option value="Finance Analyst">
+                    <option value="Flutter Developer">
+                    <option value="Frontend Developer (React/Vue)">
+                    <option value="Full Stack Developer">
+                    <!-- G -->
+                    <option value="Game Developer (Unity/Unreal)">
+                    <option value="Go Developer">
+                    <option value="Graphic Designer">
+                    <option value="Growth Marketer">
+                    <!-- H -->
+                    <option value="Hardware Design Engineer">
+                    <option value="HR Specialist">
+                    <!-- I -->
+                    <option value="Illustrator">
+                    <option value="Information Security Engineer">
+                    <option value="iOS Developer (Swift)">
+                    <option value="IoT Solutions Engineer">
+                    <!-- J -->
+                    <option value="Java Enterprise Developer">
+                    <option value="JavaScript/TypeScript Specialist">
+                    <option value="Journalist & Content Writer">
+                    <!-- L -->
+                    <option value="Lead Software Architect">
+                    <option value="Linux System Administrator">
+                    <option value="LLM & Prompt Engineer">
+                    <!-- M -->
+                    <option value="Machine Learning Engineer">
+                    <option value="Marketing Automation Specialist">
+                    <option value="Mobile App Developer">
+                    <option value="Motion Graphics Designer">
+                    <!-- N -->
+                    <option value="Network Engineer">
+                    <option value="NLP Engineer">
+                    <option value="Node.js Microservices Engineer">
+                    <!-- P -->
+                    <option value="Penetration Tester / Ethical Hacker">
+                    <option value="Performance Marketing Executive">
+                    <option value="Product Designer">
+                    <option value="Product Manager">
+                    <option value="Python Automation Developer">
+                    <!-- Q -->
+                    <option value="QA Automation Tester">
+                    <option value="Quantum Computing Researcher">
+                    <!-- R -->
+                    <option value="React Native Developer">
+                    <option value="Reels & TikTok Video Specialist">
+                    <option value="Robotics Engineer">
+                    <option value="Rust Developer">
+                    <!-- S -->
+                    <option value="Sales & Business Development">
+                    <option value="Security Operations Analyst">
+                    <option value="SEO Specialist">
+                    <option value="Site Reliability Engineer (SRE)">
+                    <option value="Social Media Strategist">
+                    <option value="Software Quality Engineer">
+                    <option value="Solutions Architect">
+                    <option value="Sound Designer">
+                    <option value="Spring Boot Backend Specialist">
+                    <option value="SQL / Database Specialist">
+                    <!-- T -->
+                    <option value="Technical Product Manager">
+                    <option value="Technical Writer">
+                    <!-- U -->
+                    <option value="UI/UX Designer">
+                    <option value="Unity 3D Developer">
+                    <!-- V -->
+                    <option value="VFX Artist & Compositor">
+                    <option value="Video Editor (Premiere/After Effects)">
+                    <option value="Video Producer">
+                    <option value="Visual Designer">
+                    <option value="Voiceover Artist">
+                    <option value="Vue.js Frontend Engineer">
+                    <!-- W -->
+                    <option value="Web3 Smart Contract Engineer">
+                    <option value="Wordpress Developer">
+                  </datalist>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Desired Designation</label>
+                  <input type="text" id="profile-designation-input" class="form-input" list="designations-datalist" placeholder="e.g. SDE-1, Lead Video Editor, Creative Director" />
+                  <datalist id="designations-datalist">
+                    <option value="Intern / Trainee">
+                    <option value="Junior Associate">
+                    <option value="Associate Engineer">
+                    <option value="SDE-1 (Software Development Engineer I)">
+                    <option value="SDE-2 (Software Development Engineer II)">
+                    <option value="Senior Developer / Specialist">
+                    <option value="Technical Team Lead">
+                    <option value="Engineering Manager">
+                    <option value="Principal Architect">
+                    <option value="Creative Director">
+                    <option value="Lead Strategist">
+                    <option value="Senior Video Producer">
+                    <option value="Product Lead">
+                  </datalist>
+                </div>
+              </div>
+
+              <!-- Salary (Per Annum) & Location Preference -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Expected Salary / CTC (Per Annum)</label>
+                  <input type="text" id="profile-salary-input" class="form-input" placeholder="e.g. ₹6,00,000 / annum (₹6 LPA)" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Location Preference</label>
+                  <input type="text" id="profile-location-pref-input" class="form-input" placeholder="e.g. Bengaluru / Remote / Hybrid / Mumbai" />
+                </div>
+              </div>
+
+              <!-- Core Skills -->
+              <div class="form-group">
+                <label class="form-label">Core Skills & Tags</label>
+                <div id="skills-tags-container"></div>
+              </div>
+
+              <!-- Coding Profiles & Professional Links -->
+              <div style="background: var(--paper-soft); border: 1.5px solid var(--paper-line); border-radius: var(--radius-m); padding: 20px; margin-top: 20px;">
+                <h4 style="font-size: 14.5px; font-weight: 800; margin-bottom: 16px; color: var(--ink);">🔗 Portfolio & Coding Profiles Links</h4>
+                
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Portfolio Website URL</label>
+                    <input type="url" id="profile-portfolio-input" class="form-input" placeholder="https://yourportfolio.com" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">LinkedIn Profile URL</label>
+                    <input type="url" id="profile-linkedin-input" class="form-input" placeholder="https://linkedin.com/in/username" />
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">GitHub Profile URL</label>
+                    <input type="url" id="profile-github-input" class="form-input" placeholder="https://github.com/username" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">LeetCode Profile URL</label>
+                    <input type="url" id="profile-leetcode-input" class="form-input" placeholder="https://leetcode.com/username" />
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">CodeChef Profile URL</label>
+                    <input type="url" id="profile-codechef-input" class="form-input" placeholder="https://codechef.com/users/username" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">HackerRank Profile URL</label>
+                    <input type="url" id="profile-hackerrank-input" class="form-input" placeholder="https://hackerrank.com/username" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">HackerEarth Profile URL</label>
+                  <input type="url" id="profile-hackerearth-input" class="form-input" placeholder="https://hackerearth.com/@username" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone: Delete Profile -->
+          <div class="danger-zone-box">
+            <div class="danger-info">
+              <h4>Delete Candidate Profile</h4>
+              <p>Permanently remove your account, active applications, and verified history from Zuno.</p>
+            </div>
+            <button type="button" class="btn-outline" id="btn-delete-profile" style="border-color: #FFA3A3; color: #D32F2F;">
+              Delete Profile
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: APPLIED JOBS & STATUS ==================== -->
+      <section class="tab-section" id="section-applied">
+        <!-- Applied Jobs Dynamic Container (Shows empty state or list with header) -->
+        <div id="applied-jobs-container">
+          <!-- Dynamically populated via dashboard.js -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: PAYMENTS & WALLET ==================== -->
+      <section class="tab-section" id="section-payments">
+        <!-- Wallet Hero Box -->
+        <div class="wallet-hero-card">
+          <div>
+            <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint);">
+              Total Earned in Zuno Account
+            </div>
+            <div class="wallet-balance-num" id="wallet-balance-display">₹0</div>
+            <div style="font-size: 13px; color: rgba(255, 255, 255, 0.8); margin-top: 6px;">
+              Available for Instant UPI / Bank Transfer
+            </div>
+          </div>
+          <div>
+            <button class="btn-primary" style="background: var(--lime); color: var(--ink); font-weight: 900;" onclick="UIComponents.showToast('💸 Payout transfer request initiated to your registered bank account!')">
+              Withdraw Funds ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Month-End Employer Verification Banner -->
+        <div class="month-end-badge-banner">
+          <div class="icon">🛡️</div>
+          <div>
+            <div style="font-weight: 800; font-size: 14.5px;">Month-End Employer Payment Verification Status</div>
+            <div style="font-size: 13px; color: var(--ink-soft); margin-top: 2px;">
+              When an employer confirms and disburses your stipend at month-end, it is automatically credited to your Zuno Account.
+              Pending employer confirmations: <strong id="pending-verification-display">₹0</strong>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction Table -->
+        <div class="table-container">
+          <h3 style="margin-bottom: 16px;">Payout & Transaction Ledger</h3>
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Company & Role</th>
+                <th>Period</th>
+                <th>Stipend Amount</th>
+                <th>Settlement Status</th>
+                <th>Transaction Ref</th>
+              </tr>
+            </thead>
+            <tbody id="payments-tbody">
+              <!-- Dynamically populated via dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 6: REVIEWS & SPOTLIGHT ==================== -->
+      <section class="tab-section" id="section-reviews">
+        <div class="reviews-grid-layout">
+          <!-- Review Form -->
+          <div class="review-form-card">
+            <h3 style="margin-bottom: 6px;" id="review-form-heading">Leave a Verified Review</h3>
+            <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 20px;">
+              Share your experience or review your completed opportunities. Reviews record the exact submission timestamp down to the second.
+            </p>
+
+            <form id="zuno-review-form">
+              <input type="hidden" id="editing-review-id" value="" />
+              
+              <div class="form-group">
+                <label class="form-label">Rating</label>
+                <div class="rating-stars-picker">
+                  <span class="star-pick-btn" data-rating="1">★</span>
+                  <span class="star-pick-btn" data-rating="2">★</span>
+                  <span class="star-pick-btn" data-rating="3">★</span>
+                  <span class="star-pick-btn" data-rating="4">★</span>
+                  <span class="star-pick-btn" data-rating="5">★</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Your Review & Testimonial</label>
+                <textarea id="review-text-input" class="form-textarea" placeholder="How was your experience landing opportunities and receiving payouts through Zuno?" required></textarea>
+              </div>
+
+              <div class="form-group" style="display: flex; align-items: center; gap: 10px; background: var(--paper-soft); padding: 12px; border-radius: var(--radius-s);">
+                <input type="checkbox" id="highlight-toggle-input" checked style="width: 18px; height: 18px; accent-color: var(--ink);" />
+                <label for="highlight-toggle-input" style="font-size: 13px; font-weight: 700; cursor: pointer;">
+                  Highlight on Zuno Main Page Spotlight
+                </label>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button type="button" id="btn-cancel-review-edit" class="btn-outline" style="display: none; flex: 1; justify-content: center;">
+                  Cancel Edit
+                </button>
+                <button type="submit" id="btn-submit-review" class="btn-primary" style="flex: 2; justify-content: center;">
+                  Publish Verified Review
+                </button>
+              </div>
+            </form>
+
+            <!-- User's Existing Reviews List (Editable / Deletable) -->
+            <div style="margin-top: 32px;">
+              <h4 style="font-size: 14px; margin-bottom: 12px; font-weight: 800;">Your Published Reviews (<span id="user-review-count">0</span>)</h4>
+              <div id="user-reviews-list">
+                <!-- Dynamically populated via dashboard.js with exact seconds & edit/delete buttons -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlight Preview -->
+          <div class="highlight-preview-card">
+            <h3 style="margin-bottom: 6px;">Live Main Page Spotlight Preview</h3>
+            <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 16px;">
+              This card is prominently showcased to new candidates and partners on the Zuno homepage with exact publication timestamps:
+            </p>
+
+            <div id="featured-highlight-box">
+              <!-- Dynamically populated via dashboard.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Notifications Drawer / Popover Modal -->
+  <div class="modal-overlay" id="notifications-modal">
+    <div class="modal-box" style="max-width: 480px;">
+      <span class="modal-close-btn">&times;</span>
+      <h3 style="margin-bottom: 6px;">Notifications & Alerts</h3>
+      <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 20px;">Stay updated on your applied opportunities and verified partner drops.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: var(--paper-soft); padding: 14px; border-radius: var(--radius-s); border-left: 3px solid var(--lime);">
+          <div style="font-weight: 700; font-size: 13px;">⚡ New Opportunities in Bengaluru</div>
+          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 3px;">HyperGrowth Media and NeuraScale AI just posted 2 new openings matching your profile.</p>
+          <span style="font-size: 10.5px; color: var(--ink-faint); margin-top: 6px; display: block; font-family: monospace;">Just now</span>
+        </div>
+        <div style="background: var(--paper-soft); padding: 14px; border-radius: var(--radius-s); border-left: 3px solid var(--blue);">
+          <div style="font-weight: 700; font-size: 13px;">🛡️ Profile Verification Active</div>
+          <p style="font-size: 12px; color: var(--ink-soft); margin-top: 3px;">Your candidate profile is verified for direct applications without upfront agency fees.</p>
+          <span style="font-size: 10.5px; color: var(--ink-faint); margin-top: 6px; display: block; font-family: monospace;">2 hours ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings & Preferences Modal -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-box" style="max-width: 500px;">
+      <span class="modal-close-btn">&times;</span>
+      <h3 style="margin-bottom: 6px;">Dashboard Preferences</h3>
+      <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 20px;">Manage your display options and notification settings.</p>
+
+      <div class="form-group">
+        <label class="form-label">Preferred Currency</label>
+        <select class="form-select" id="pref-currency-select">
+          <option value="INR" selected>INR (₹) — Indian Rupee</option>
+          <option value="USD">USD ($) — US Dollar</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; background: var(--paper-soft); padding: 14px; border-radius: var(--radius-s);">
+        <div>
+          <div style="font-weight: 700; font-size: 13.5px;">Email Notifications</div>
+          <div style="font-size: 12px; color: var(--ink-soft);">Receive updates when an employer reviews your application</div>
+        </div>
+        <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--ink);" />
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+        <button type="button" class="btn-primary" onclick="UIComponents.showToast('✅ Preferences saved!'); document.getElementById('settings-modal').classList.remove('open');">
+          Save Preferences
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Full Job Details Slide-over Modal -->
+  <div class="modal-overlay" id="job-details-modal">
+    <div class="modal-box">
+      <span class="modal-close-btn">&times;</span>
+      
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <img src="" id="modal-job-company-logo" style="width: 56px; height: 56px; border-radius: var(--radius-s); object-fit: cover;" alt="Logo" />
+        <div>
+          <h3 id="modal-job-title" style="font-size: 20px; font-weight: 800;"></h3>
+          <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+            <span id="modal-job-company-name" style="font-weight: 700; font-size: 13.5px;"></span>
+            <span style="color: var(--ink-faint);">•</span>
+            <a href="#" id="modal-job-website-url" target="_blank" style="color: var(--blue); font-size: 12.5px; font-weight: 600;"></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--paper-soft); padding: 16px; border-radius: var(--radius-m); margin-bottom: 24px;">
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-faint);">Stipend</span>
+          <div id="modal-job-stipend" style="font-size: 16px; font-weight: 900; color: var(--coral);"></div>
+        </div>
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-faint);">Duration</span>
+          <div id="modal-job-duration" style="font-size: 14px; font-weight: 700;"></div>
+        </div>
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-faint);">Location</span>
+          <div id="modal-job-location" style="font-size: 14px; font-weight: 700;"></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <h4 style="font-size: 14.5px; margin-bottom: 8px;">Roles & Responsibilities</h4>
+        <ul id="modal-job-responsibilities" style="padding-left: 20px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;"></ul>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h4 style="font-size: 14.5px; margin-bottom: 8px;">Candidate Obligations & Requirements</h4>
+        <ul id="modal-job-obligations" style="padding-left: 20px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;"></ul>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--paper-line);">
+        <span style="font-size: 12px; color: var(--ink-faint);">Deadline: <strong id="modal-job-deadline"></strong></span>
+        <button class="btn-primary" id="modal-job-apply-btn">Apply Directly on Zuno 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Export Stats Customization Modal -->
+  <div class="modal-overlay" id="export-stats-modal">
+    <div class="modal-box" style="max-width: 500px;">
+      <span class="modal-close-btn">&times;</span>
+      <h3 style="margin-bottom: 8px;">Export Your Performance Stats</h3>
+      <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 20px;">Download your earnings metrics, application history, or domain report.</p>
+
+      <div class="form-group">
+        <label class="form-label">Export Category</label>
+        <select class="form-select" id="export-type-select">
+          <option value="FULL_REPORT">Complete Candidate Portfolio & Earnings</option>
+          <option value="EARNINGS">Verified Payout Ledger & Invoices</option>
+          <option value="APPLICATIONS">Job Application Status Timeline</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Time Period</label>
+        <select class="form-select" id="export-range-select">
+          <option value="ALL">All Time</option>
+          <option value="THIS_MONTH">This Month (August 2026)</option>
+          <option value="LAST_3_MONTHS">Last 3 Months</option>
+          <option value="THIS_YEAR">Year to Date (2026)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">File Format</label>
+        <select class="form-select" id="export-format-select">
+          <option value="CSV">CSV Spreadsheet (.csv)</option>
+          <option value="JSON">JSON Data Object (.json)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+        <button type="button" class="btn-outline" onclick="document.getElementById('export-stats-modal').classList.remove('open')">Cancel</button>
+        <button type="button" class="btn-primary" id="btn-confirm-export">Download Stats File 📥</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Delete Profile Confirmation Modal -->
+  <div class="modal-overlay" id="delete-profile-modal">
+    <div class="modal-box" style="max-width: 440px; text-align: center;">
+      <span class="modal-close-btn">&times;</span>
+      <div style="font-size: 36px; margin-bottom: 12px;">⚠️</div>
+      <h3 style="color: #D32F2F; margin-bottom: 8px;">Delete Account?</h3>
+      <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;">
+        Are you sure you want to delete your Zuno profile? This action will permanently wipe your application pipeline and earnings history.
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button type="button" class="btn-outline" onclick="document.getElementById('delete-profile-modal').classList.remove('open')">Cancel</button>
+        <button type="button" class="btn-primary" id="btn-confirm-delete" style="background: #D32F2F; color: #FFF;">Yes, Delete Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Application Detailed Status Modal -->
+  <div class="modal-overlay" id="application-status-modal">
+    <div class="modal-box" style="max-width: 520px;">
+      <span class="modal-close-btn" onclick="document.getElementById('application-status-modal').classList.remove('open')">&times;</span>
+      
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+        <img src="" id="app-modal-company-logo" style="width: 52px; height: 52px; border-radius: var(--radius-s); object-fit: cover; border: 1px solid var(--paper-line);" alt="Logo" />
+        <div>
+          <h3 id="app-modal-job-title" style="font-size: 18px; font-weight: 800; color: var(--ink);"></h3>
+          <p id="app-modal-company-meta" style="font-size: 13px; color: var(--ink-soft); margin-top: 2px;"></p>
+        </div>
+      </div>
+
+      <!-- Live Dynamic Status Callout Banner -->
+      <div id="app-modal-status-banner" style="padding: 16px; border-radius: var(--radius-m); margin-bottom: 20px;"></div>
+
+      <!-- Timeline Comparison -->
+      <div style="background: var(--paper-soft); border: 1px solid var(--paper-line); border-radius: var(--radius-m); padding: 18px; margin-bottom: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--ink-soft);">Opportunity Posted:</span>
+            <strong id="app-modal-posted-date" style="color: var(--ink);"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--ink-soft);">You Applied:</span>
+            <strong id="app-modal-applied-date" style="color: var(--ink);"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--ink-soft);">Employer Profile Review:</span>
+            <strong id="app-modal-viewed-status"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--ink-soft);">Monthly Stipend:</span>
+            <strong id="app-modal-stipend" style="color: var(--coral); font-weight: 900;"></strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper with checkmarks & active pulse -->
+      <div id="app-modal-stepper-wrap" style="margin-bottom: 24px;"></div>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <button type="button" class="btn-primary" onclick="document.getElementById('application-status-modal').classList.remove('open')" style="padding: 10px 24px;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="src/main/resources/static/js/api.js"></script>
+  <script src="src/main/resources/static/js/components.js"></script>
+  <script src="src/main/resources/static/js/dashboard.js"></script>
+
+</body>
+</html>
